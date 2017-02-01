@@ -9,6 +9,7 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
     $http.get(Backand.getApiUrl()+'/1/query/data/getTeacher'+'?parameters={ "email" : \"'+email+'\" , "password" : \"'+password+'\"}')
         .then(function (response) {
           if (response.data.length > 0) {
+            $cookies.put('teacher', response.data[0]);
             $cookies.put('teacherId', response.data[0].id);
             $cookies.put('teacherName', response.data[0].name);
             $cookies.put('teacherSurname', response.data[0].surname);
