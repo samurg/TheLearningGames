@@ -1,19 +1,18 @@
-angular.module('app.controllers', ['pascalprecht.translate','ui.router'])
+angular.module('app.controllers', ['pascalprecht.translate'])
      
-.controller('loginCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand','$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('loginCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $cookies, $http, Backand,$state) {
+function ($scope, $stateParams, $cookies, $http, Backand) {
 
   $scope.teacher = {};
 
-  $scope.getTeacher = function(email, password) {
-    $http.get(Backand.getApiUrl()+'/1/query/data/getTeacher'+'?parameters={ "email" : \"'+email+'\" , "password" : \"'+password+'\"}')
+  $scope.getTeacherId = function(email, password) {
+    $http.get(Backand.getApiUrl()+'/1/query/data/getTeacherId'+'?parameters={ "email" : \"'+email+'\" , "password" : \"'+password+'\"}')
         .then(function (response) {
           if (response.data.length > 0) {
             $scope.teacher = response.data[0];
             $cookies.put('teacher', $scope.teacher)
-            $state.go('teacherHome'); //change view
           } else {
             alert('Wrong credentials');
           }
@@ -30,10 +29,10 @@ function ($scope, $stateParams, $cookies) {
 
 }])
    
-.controller('teacherHomeCtrl', ['$scope', '$stateParams', '$ionicModal', '$http', 'Backand', '$cookies','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('teacherHomeCtrl', ['$scope', '$stateParams', '$ionicModal', '$http', 'Backand', '$cookies', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies,$state) {
+function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
     $scope.newClassModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
     '<h3 style="color:#FFFFFF;text-align:center;">{{ \'NEW_CLASS\' | translate }}</h3>'+
@@ -79,8 +78,8 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies,$state) {
       $http.get(Backand.getApiUrl()+'/1/objects/'+'classrooms')
         .then(function (response) {
           $scope.classrooms = response.data.data;
+          $scope.$apply();
         });
-
     }
 
     $scope.createClassroom = function(name) {
