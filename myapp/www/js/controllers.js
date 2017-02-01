@@ -5,14 +5,14 @@ angular.module('app.controllers', ['pascalprecht.translate'])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cookies, $http, Backand) {
 
-  $scope.teacher = {};
-
-  $scope.getTeacherId = function(email, password) {
-    $http.get(Backand.getApiUrl()+'/1/query/data/getTeacherId'+'?parameters={ "email" : \"'+email+'\" , "password" : \"'+password+'\"}')
+  $scope.getTeacher = function(email, password) {
+    $http.get(Backand.getApiUrl()+'/1/query/data/getTeacher'+'?parameters={ "email" : \"'+email+'\" , "password" : \"'+password+'\"}')
         .then(function (response) {
-          if (response.data.length > 0) {
-            $scope.teacher = response.data[0];
-            $cookies.put('teacher', $scope.teacher)
+          if (response.data.length > 0) { 
+            $cookies.put('teacherId', response.data[0].id);
+            $cookies.put('teacherName', response.data[0].name);
+            $cookies.put('teacherSurname', response.data[0].surname);
+            $cookies.put('teacherAvatar', response.data[0].avatar);
           } else {
             alert('Wrong credentials');
           }
@@ -71,14 +71,14 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
     $scope.closeModal = function(){
         $scope.newClassModal.hide();
     }
-    
+
+    $scope.teacherId = $cookies.get('teacherId');
     $scope.classrooms = [];
     
-    $scope.getAllClassrooms = function() {
-      $http.get(Backand.getApiUrl()+'/1/objects/'+'classrooms')
+    $scope.getClassrooms = function() {
+      $http.get(Backand.getApiUrl()+'/1/query/data/getClassrooms'+'?parameters={ "teacher" : \"'+$scope.teacherId+'\"}')
         .then(function (response) {
-          $scope.classrooms = response.data.data;
-          $scope.$apply();
+          $scope.classrooms = response.data;
         });
     }
 
@@ -87,7 +87,7 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
       var classroom = {
         "name" : name,
         "description" : " ",
-        "teacher" : "1"
+        "teacher" : $scope.teacherId
       }
 
       $http.post(Backand.getApiUrl()+'/1/objects/'+'classrooms', classroom)
@@ -95,7 +95,7 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
 
         });
 
-      $scope.getAllClassrooms();
+      $scope.getClassrooms();
     }
 
     var classroomId;
@@ -106,13 +106,23 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
 
     }
 
+    var classroomName;
+
+    $scope.setClassroom = function(value) {
+
+      $cookies.put('classroomId', value.id);
+      $cookies.put('classroomName', value.name);
+      $cookies.put('classroomTeacher', value.teacher);
+
+    }
+
     $scope.deleteClassroom = function() {
       $http.delete(Backand.getApiUrl()+'/1/objects/'+'classrooms/'+classroomId)
         .then(function (response) {
 
         });
 
-      $scope.getAllClassrooms();
+      $scope.getClassrooms();
 
     }
 
@@ -257,7 +267,7 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     }
     
     $scope.closeModalStudentDialog = function(){
-        $scope.studentDialogModal.hide();
+      $scope.studentDialogModal.hide();
     }
     
     $scope.newStudentModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
@@ -309,6 +319,10 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     $scope.closeModalNewStudentDialog = function(){
         $scope.newStudentModal.hide();
     }
+
+    $scope.classroomId = $cookies.get('classroomId');
+    $scope.classroomName = $cookies.get('classroomName');
+    $scope.classroomTeacher = $cookies.get('classroomTeacher');
     
 }])
    
