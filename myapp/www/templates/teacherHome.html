@@ -12,7 +12,7 @@
     </div>
     <h3 id="teacherHome-heading1" style="color:#FFFFFF;text-align:center;" class="margin-top-null">{{ 'SELECT_YOUR_CLASS' | translate }}</h3>
     <ion-list id="teacherHome-list16" class="list-elements align-text-center">
-      <ion-item id="teacherHome-list-item47" ui-sref="class" ng-repeat="class in classrooms" on-swipe-left="setClassroomId({{class.id}})">{{class.name}}
+      <ion-item id="teacherHome-list-item47" ui-sref="class" ng-repeat="class in classrooms" on-swipe-left="setClassroomId({{class.id}})" ng-click="setClassroom({{class}})">{{class.name}}
         <ion-option-button class="button-assertive" ng-click="deleteClassroom()">{{ 'DELETE' | translate }}</ion-option-button>
         <ion-option-button class="button-calm">{{ 'EXPORT' | translate }}</ion-option-button>
         <ion-option-button class="button-calm">{{ 'IMPORT' | translate }}</ion-option-button>

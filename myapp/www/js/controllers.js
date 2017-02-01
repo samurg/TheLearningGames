@@ -8,8 +8,7 @@ function ($scope, $stateParams, $cookies, $http, Backand) {
   $scope.getTeacher = function(email, password) {
     $http.get(Backand.getApiUrl()+'/1/query/data/getTeacher'+'?parameters={ "email" : \"'+email+'\" , "password" : \"'+password+'\"}')
         .then(function (response) {
-          if (response.data.length > 0) {
-            $cookies.put('teacher', response.data[0]);
+          if (response.data.length > 0) { 
             $cookies.put('teacherId', response.data[0].id);
             $cookies.put('teacherName', response.data[0].name);
             $cookies.put('teacherSurname', response.data[0].surname);
@@ -80,7 +79,6 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
       $http.get(Backand.getApiUrl()+'/1/query/data/getClassrooms'+'?parameters={ "teacher" : \"'+$scope.teacherId+'\"}')
         .then(function (response) {
           $scope.classrooms = response.data;
-          $scope.$apply();
         });
     }
 
@@ -105,6 +103,16 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
     $scope.setClassroomId = function(value) {
 
       classroomId = value;
+
+    }
+
+    var classroomName;
+
+    $scope.setClassroom = function(value) {
+
+      $cookies.put('classroomId', value.id);
+      $cookies.put('classroomName', value.name);
+      $cookies.put('classroomTeacher', value.teacher);
 
     }
 
@@ -259,7 +267,7 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     }
     
     $scope.closeModalStudentDialog = function(){
-        $scope.studentDialogModal.hide();
+      $scope.studentDialogModal.hide();
     }
     
     $scope.newStudentModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
@@ -311,6 +319,10 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     $scope.closeModalNewStudentDialog = function(){
         $scope.newStudentModal.hide();
     }
+
+    $scope.classroomId = $cookies.get('classroomId');
+    $scope.classroomName = $cookies.get('classroomName');
+    $scope.classroomTeacher = $cookies.get('classroomTeacher');
     
 }])
    
