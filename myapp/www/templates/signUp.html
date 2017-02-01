@@ -1,0 +1,33 @@
+<ion-view title="Sign up" hide-nav-bar="true" id="page6">
+  <ion-content padding="false" class="manual-ios-statusbar-padding">
+    <form id="signUp-form2" class="list">
+      <div>
+        <img src="img/JOKiWwG0RpmqQmRNuC0l_ownLogo.png" style="display: block; width: 20%; height: auto; margin-left: auto; margin-right: auto;">
+      </div>
+      <ion-list id="signUp-list2">
+        <label class="item item-input list-elements" id="signUp-input3">
+          <span class="input-label">
+            <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'FULL_NAME' | translate }}</span>
+          <input type="text" placeholder="" ng-model="fullName">
+        </label>
+        <label class="item item-input list-elements" id="signUp-input5">
+          <span class="input-label">
+            <i class="icon ion-at"></i>&nbsp;&nbsp;{{ 'EMAIL' | translate }}</span>
+          <input type="email" placeholder="" ng-model="email">
+        </label>
+        <label class="item item-input list-elements" id="signUp-input6">
+          <span class="input-label">
+            <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'PASSWORD' | translate }}</span>
+          <input type="password" placeholder="" ng-model="password" ng-minlenght="3">
+        </label>
+        <label class="item item-input list-elements" id="signUp-input7">
+          <span class="input-label">
+            <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'CONFIRM_PASSWORD' | translate }}</span>
+          <input type="password" placeholder="" ng-model="passwordRepeat" ng-minlenght="3">
+        </label>
+      </ion-list>
+      <button id="signUp-button9" ng-disabled="!fullName || !email || !password || !passwordRepeat" style="font-weight:500;" class="button button-calm button-large button-block">{{ 'SIGN_UP' | translate }}</button>
+      <a ui-sref="login" id="signUp-button11" class="button button-light  button-block button-clear icon ion-chevron-right">{{ 'ALREADY_HAVE_AN_ACCOUNT' | translate }}</a>
+    </form>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,21 @@
+<ion-view title="Team Dialog" hide-nav-bar="true" id="page14" style="background-color:#387EF5;">
+  <ion-content padding="false" class="manual-ios-statusbar-padding">
+    <h3 id="teamDialog-heading6" style="color:#FFFFFF;text-align:center;">{team.name}</h3>
+    <div id="teamDialog-container32" class="list-student">
+      <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
+        <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+      </div>
+      <button id="teamDialog-button118" style="font-weight:500;" class="button button-light  button-block button-outline">{{ 'CHANGE_AVATAR' | translate }}</button>
+      <button id="teamDialog-button122" style="font-weight:500;" class="button button-light  button-block button-outline">{{ 'EDIT_TEAM' | translate }}</button>
+      <button id="teamDialog-button117" style="color:#FFFFFF;" class="button button-positive  button-block button-clear icon ion-arrow-return-left"></button>
+    </div>
+    <div id="teamDialog-container33" class="list-team">
+      <ion-list id="teamDialog-list26">
+        <ion-checkbox id="teamDialog-checkbox7" class="list-student-team">{student.name}</ion-checkbox>
+        <ion-checkbox id="teamDialog-checkbox8" class="list-student-team">{student.name}</ion-checkbox>
+        <ion-checkbox id="teamDialog-checkbox9" class="list-student-team">{student.name}</ion-checkbox>
+      </ion-list>
+      <button id="teamDialog-button124" class="button button-calm  button-block">{{ 'ADD_STUDENT' | translate }}</button>
+    </div>
+  </ion-content>
+</ion-view>

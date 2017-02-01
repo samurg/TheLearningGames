@@ -1,0 +1,30 @@
+<ion-view title="New Mission" hide-nav-bar="true" id="page27" style="background-color:#387EF5;">
+  <ion-content padding="false" class="manual-ios-statusbar-padding">
+    <form id="newMission-form9" class="list">
+      <h3 id="newMission-heading21" style="color:#FFFFFF;text-align:center;">{{ 'NEW_MISSION' | translate }}</h3>
+      <ion-list id="newMission-list12">
+        <label class="item item-input list-elements" id="newMission-input19">
+          <span class="input-label">{{ 'NAME' | translate }}</span>
+          <input type="text" placeholder="{{ 'NAME' | translate }}">
+        </label>
+        <label class="item item-input list-elements" id="newMission-input20">
+          <span class="input-label">{{ 'DESCRIPTION' | translate }}</span>
+          <input type="text" placeholder="{{ 'DESCRIPTION' | translate }}">
+        </label>
+        <label class="item item-input list-elements" id="newMission-input21">
+          <span class="input-label">{{ 'PHASES' | translate }}</span>
+          <input type="text" placeholder="{{ 'NUMBER_OF_PHASES' | translate }}">
+        </label>
+        <label class="item item-input list-elements" id="newMission-input22">
+          <span class="input-label">{{ 'SCORES' | translate }}</span>
+          <input type="text" placeholder="{{ 'SCORES_DESCRIPTION' | translate }}">
+        </label>
+      </ion-list>
+    </form>
+    <div id="newMission-button-bar26" class="button-bar">
+      <a ui-sref="teams" id="newMission-button114" class="button button-calm  button-block">{{ 'CANCEL' | translate }}</a>
+      <button id="newMission-button115" ng-disabled="true" class="button button-positive  button-block"></button>
+      <button id="newMission-button116" class="button button-calm  button-block">{{ 'ACCEPT' | translate }}</button>
+    </div>
+  </ion-content>
+</ion-view>

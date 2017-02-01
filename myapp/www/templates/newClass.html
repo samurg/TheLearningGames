@@ -1,0 +1,27 @@
+<ion-view title="New Class" hide-nav-bar="true" id="page10" style="background-color:#387EF5;">
+  <ion-content padding="false" class="manual-ios-statusbar-padding">
+    <h3 id="newClass-heading10" style="color:#FFFFFF;text-align:center;">{{ 'NEW_CLASS' | translate }}</h3>
+    <form id="newClass-form4" class="list">
+      <label class="item item-input" id="newClass-input10">
+        <span class="input-label">{{ 'CLASS_NAME' | translate }}</span>
+        <input type="text" placeholder="">
+      </label>
+    </form>
+    <div id="newClass-container11">
+      <form id="newClass-form5" class="list">
+        <label class="item item-select" id="newClass-select1">
+          <span class="input-label">{{ 'IMPORT_PREFERENCES_FROM' | translate }}</span>
+          <select>
+            <option>{{ 'NONE' | translate }}</option>
+            <option>{classroom.name}</option>
+          </select>
+        </label>
+        <div id="newClass-button-bar6" class="button-bar">
+          <a ui-sref="teacherHome" id="newClass-button19" class="button button-calm  button-block">{{ 'CANCEL' | translate }}</a>
+          <button id="newClass-button23" class="button button-positive  button-block"></button>
+          <button id="newClass-button24" class="button button-calm  button-block">{{ 'CREATE' | translate }}</button>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

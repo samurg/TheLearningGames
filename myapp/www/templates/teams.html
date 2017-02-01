@@ -1,0 +1,28 @@
+<ion-view title="Teams" hide-nav-bar="true" id="page13">
+  <ion-content padding="false" class="manual-ios-statusbar-padding">
+    <div id="teams-container14">
+      <div id="teams-button-bar9" class="button-bar margin-null">
+        <a ui-sref="teacherHome" id="teams-button36" style="font-weight:500;color:#FFFFFF;font-size:20px;border-radius:0px 0px 0px 0px;" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
+        <a ui-sref="teacherProfile" id="teams-button37" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</a>
+        <a ui-sref="teacherSettings" id="teams-button38" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
+      </div>
+    </div>
+    <div id="teams-button-bar10" class="button-bar">
+      <a ui-sref="class" id="teams-button39" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'CLASS' | translate }}</a>
+      <a ui-sref="attendance" id="teams-button40" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'ATTENDANCE' | translate }}</a>
+      <button id="teams-button41" style="font-weight:500;color:#FFFFFF;font-size:14px;" class="button button-light  button-outline">{{ 'TEAMS' | translate }}</button>
+      <a ui-sref="rules" id="teams-button42" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'RULES' | translate }}</a>
+      <a ui-sref="missions" id="teams-button43" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
+    </div>
+    <h3 id="teams-heading5" style="color:#FFFFFF;text-align:center;">{classroom.name}</h3>
+    <ion-list id="teams-list10" class="list-elements">
+      <ion-item class="item-thumbnail-left  list-student" id="teams-list-item21" ng-click="showModalTeamDialog()">
+        <h2>{{ 'ITEM' | translate }}</h2>
+      </ion-item>
+      <ion-item class="item-thumbnail-left  list-student" id="teams-list-item14" ng-click="showModalTeamDialog()">
+        <h2>{{ 'ITEM' | translate }}</h2>
+      </ion-item>
+    </ion-list>
+    <button id="teams-button44" ng-click="showModalNewTeamDialog()" style="font-weight:500;" class="button button-calm  button-block">{{ 'ADD_TEAM' | translate }}</button>
+  </ion-content>
+</ion-view>

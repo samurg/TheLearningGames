@@ -1,0 +1,39 @@
+<ion-view title="New Student Dialog" hide-nav-bar="true" id="page15" style="background-color:#387EF5;">
+  <ion-content padding="false" class="manual-ios-statusbar-padding">
+    <h3 id="newStudentDialog-heading9" style="color:#FFFFFF;text-align:center;">{{ 'NEW_STUDENT' | translate }}</h3>
+    <div id="newStudentDialog-container41" class="list-student list-elements">
+      <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
+        <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+      </div>
+      <button id="newStudentDialog-button135" style="font-weight:500;" class="button button-light  button-block button-outline">{{ 'TAKE_PICTURE' | translate }}</button>
+      <form id="newStudentDialog-form15" class="list">
+        <div id="newStudentDialog-button-bar31" class="button-bar">
+          <button id="newStudentDialog-button136" class="button button-calm  button-block">{{ 'CANCEL' | translate }}</button>
+          <button id="newStudentDialog-button137" class="button button-calm  button-block">{{ 'GENERATE' | translate }}</button>
+        </div>
+      </form>
+    </div>
+    <div id="newStudentDialog-container42" class="list-team list-elements">
+      <ion-list id="newStudentDialog-list31">
+        <form id="newStudentDialog-form17" class="list">
+          <label class="item item-input" id="newStudentDialog-input31">
+            <input type="text" placeholder="{{ 'NAME' | translate }}">
+          </label>
+          <label class="item item-input" id="newStudentDialog-input32">
+            <input type="text" placeholder="{{ 'SURNAME' | translate }}">
+          </label>
+          <label class="item item-input" id="newStudentDialog-input33">
+            <input type="text" placeholder="{{ 'STREET' | translate }}">
+          </label>
+          <label class="item item-input" id="newStudentDialog-input34">
+            <input type="email" placeholder="{{ 'EMAIL' | translate }}" ng-model="email">
+          </label>
+          <label class="item item-input" id="newStudentDialog-input35">
+            <input type="password" placeholder="{{ 'PASSWORD' | translate }}" ng-model="password" ng-minlenght="3">
+          </label>
+        </form>
+      </ion-list>
+      <a ui-sref="secundaryMenu" id="newStudentDialog-button138" class="button button-positive  button-block icon ion-android-more-horizontal"></a>
+    </div>
+  </ion-content>
+</ion-view>

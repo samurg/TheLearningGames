@@ -1,0 +1,35 @@
+<ion-view title="Missions" hide-nav-bar="true" id="page26">
+  <ion-content padding="false" class="manual-ios-statusbar-padding">
+    <div id="missions-container24">
+      <div id="missions-button-bar24" class="button-bar margin-null">
+        <a ui-sref="teacherHome" id="missions-button105" style="font-weight:500;color:#FFFFFF;font-size:20px;border-radius:0px 0px 0px 0px;" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
+        <a ui-sref="teacherProfile" id="missions-button106" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</a>
+        <a ui-sref="teacherSettings" id="missions-button107" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
+      </div>
+    </div>
+    <div id="missions-button-bar25" class="button-bar">
+      <a ui-sref="class" id="missions-button108" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'CLASS' | translate }}</a>
+      <a ui-sref="attendance" id="missions-button109" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'ATTENDANCE' | translate }}</a>
+      <a ui-sref="teams" id="missions-button110" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'TEAMS' | translate }}</a>
+      <a ui-sref="rules" id="missions-button111" style="font-weight:500;color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'RULES' | translate }}</a>
+      <button id="missions-button112" style="color:#FFFFFF;font-size:14px;" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</button>
+    </div>
+    <h3 id="missions-heading17" style="color:#FFFFFF;text-align:center;">{classroom.name}</h3>
+    <ion-list id="missions-list24" class="list-mission align-text-center list-elements">
+      <ion-item class="light  list-mission-header" id="missions-list-item54">{mission.name}</ion-item>
+      <ion-item id="missions-list-item55">{mission.description}</ion-item>
+      <ion-item id="missions-list-item56">phase1 {score}</ion-item>
+    </ion-list>
+    <ion-list id="missions-list23" class="list-mission align-text-center list-elements">
+      <ion-item class="light  list-mission-header" id="missions-list-item51">{mission.name}</ion-item>
+      <ion-item id="missions-list-item52">{mission.description}</ion-item>
+      <ion-item id="missions-list-item53">phase1 {score}</ion-item>
+    </ion-list>
+    <ion-list id="missions-list22" class="list-mission align-text-center list-elements">
+      <ion-item class="light  list-mission-header" id="missions-list-item48">{mission.name}</ion-item>
+      <ion-item id="missions-list-item49">{mission.description}</ion-item>
+      <ion-item id="missions-list-item50">phase1 {score}</ion-item>
+    </ion-list>
+    <button id="missions-button113" ng-click="showModalNewMission()" class="button button-calm  button-block">{{ 'ADD_MISSION' | translate }}</button>
+  </ion-content>
+</ion-view>

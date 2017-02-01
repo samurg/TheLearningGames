@@ -1,0 +1,74 @@
+<ion-view title="Student Home" hide-nav-bar="true" id="page31">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon icon No Icon"></button>
+  </ion-nav-buttons>
+  <ion-content padding="false" class="manual-ios-statusbar-padding">
+    <div id="studentHome-container29">
+      <div id="studentHome-button-bar12" class="button-bar">
+        <button id="studentHome-button131" style="font-weight:500;color:#FFFFFF;font-size:20px;border-radius:0px 0px 0px 0px;" class="button button-light  button-outline">{{ 'HOME' | translate }}</button>
+        <a ui-sref="studentAchievements" id="studentHome-button133" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'ACHIEVEMENTS' | translate }}</a>
+        <a ui-sref="studentBadges" id="studentHome-button134" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'BADGES' | translate }}</a>
+      </div>
+    </div>
+    <h3 id="studentHome-heading25" style="color:#FFFFFF;text-align:center;">{student.name}</h3>
+    <div id="studentHome-container28" class="list-student">
+      <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
+        <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+      </div>
+    </div>
+    <ion-list id="studentHome-list34" class="list-elements list-student">
+      <ion-item id="studentHome-list-item60">
+        <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'NAME' | translate }}</ion-item>
+      <ion-item id="studentHome-list-item61">
+        <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'SURNAME' | translate }}</ion-item>
+      <ion-item id="studentHome-list-item62">
+        <i class="icon ion-home"></i>&nbsp;&nbsp;{{ 'ADRESS' | translate }}</ion-item>
+      <ion-item id="studentHome-list-item63">
+        <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'PASSWORD' | translate }}</ion-item>
+      <ion-item id="studentHome-list-item64">
+        <i class="icon ion-at"></i>&nbsp;&nbsp;{{ 'EMAIL' | translate }}</ion-item>
+      <ion-item id="studentHome-list-item65">
+        <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'CONFIRM' | translate }}</ion-item>
+    </ion-list>
+    <ion-list id="studentHome-list33">
+      <ion-item id="studentHome-list-item46" class="list-student-dialog">
+        <i class="icon ion-clipboard"></i>&nbsp;&nbsp;{{ 'ATTENDANCE' | translate }}
+        <span class="item-note">{??}%</span>
+        <ion-option-button class="button-assertive">
+          <i class="icon ion-minus-round"></i>
+        </ion-option-button>
+        <ion-option-button class="button-calm">
+          <i class="icon ion-plus-round"></i>
+        </ion-option-button>
+      </ion-item>
+      <ion-item id="studentHome-list-item57" class="list-student-dialog">
+        <i class="icon ion-help"></i>&nbsp;&nbsp;??????:
+        <ion-option-button class="button-assertive">
+          <i class="icon ion-minus-round"></i>
+        </ion-option-button>
+        <ion-option-button class="button-calm">
+          <i class="icon ion-plus-round"></i>
+        </ion-option-button>
+      </ion-item>
+      <ion-item id="studentHome-list-item58" class="list-student-dialog">
+        <i class="icon ion-help"></i>&nbsp;&nbsp;??????:
+        <ion-option-button class="button-assertive">
+          <i class="icon ion-minus-round"></i>
+        </ion-option-button>
+        <ion-option-button class="button-calm">
+          <i class="icon ion-plus-round"></i>
+        </ion-option-button>
+      </ion-item>
+      <ion-item id="studentHome-list-item59" class="list-student-dialog">
+        <i class="icon ion-help"></i>&nbsp;&nbsp;??????:
+        <ion-option-button class="button-assertive">
+          <i class="icon ion-minus-round"></i>
+        </ion-option-button>
+        <ion-option-button class="button-calm">
+          <i class="icon ion-plus-round"></i>
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+    <a ui-sref="login" id="studentHome-button162" style="font-weight:500;font-size:20px;" class="button button-assertive  button-block button-clear icon ion-chevron-right">{{ 'LOG_OUT' | translate }} </a>
+  </ion-content>
+</ion-view>

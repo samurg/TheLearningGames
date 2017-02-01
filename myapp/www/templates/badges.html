@@ -1,0 +1,30 @@
+<ion-view title="Badges" hide-nav-bar="true" id="page24">
+  <ion-content padding="false" class="manual-ios-statusbar-padding">
+    <div id="badges-container22">
+      <div id="badges-button-bar22" class="button-bar margin-null">
+        <a ui-sref="teacherHome" id="badges-button94" style="font-weight:500;color:#FFFFFF;font-size:20px;border-radius:0px 0px 0px 0px;" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
+        <a ui-sref="teacherProfile" id="badges-button95" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</a>
+        <a ui-sref="teacherSettings" id="badges-button96" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
+      </div>
+    </div>
+    <div id="badges-button-bar23" class="button-bar">
+      <a ui-sref="class" id="badges-button97" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'CLASS' | translate }}</a>
+      <a ui-sref="attendance" id="badges-button98" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'ATTENDANCE' | translate }}</a>
+      <a ui-sref="teams" id="badges-button99" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'TEAMS' | translate }}</a>
+      <a ui-sref="rules" id="badges-button100" style="font-weight:500;color:#FFFFFF;font-size:14px;" class="button button-light  button-outline">{{ 'RULES' | translate }}</a>
+      <a ui-sref="missions" id="badges-button101" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
+    </div>
+    <h3 id="badges-heading14" style="color:#FFFFFF;text-align:center;">{classroom.name}</h3>
+    <ion-list id="badges-list19" class="list-elements align-text-center">
+      <ion-item class="light  list-item-header" id="badges-list-item34">{{ 'BADGE_NAME' | translate }}</ion-item>
+      <ion-item class="light  list-item-header" id="badges-list-item35">{{ 'BADGE_DESCRIPTION' | translate }}</ion-item>
+      <ion-item class="light  list-item-header" id="badges-list-item36">{{ 'REQUIREMENTS' | translate }}</ion-item>
+    </ion-list>
+    <ion-list id="badges-list20" class="list-elements align-text-center">
+      <ion-item id="badges-list-item37" class="list-item">???</ion-item>
+      <ion-item id="badges-list-item38" class="list-item">???</ion-item>
+      <ion-item id="badges-list-item39" class="list-item">???</ion-item>
+    </ion-list>
+    <button id="badges-button102" ng-click="showModalNewBadge()" class="button button-calm  button-block">{{ 'ADD_BADGE' | translate }}</button>
+  </ion-content>
+</ion-view>

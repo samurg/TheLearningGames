@@ -1,0 +1,30 @@
+<ion-view title="Items" hide-nav-bar="true" id="page20">
+  <ion-content padding="false" class="manual-ios-statusbar-padding">
+    <div id="items-container13">
+      <div id="items-button-bar11" class="button-bar margin-null">
+        <a ui-sref="teacherHome" id="items-button45" style="font-weight:500;color:#FFFFFF;font-size:20px;border-radius:0px 0px 0px 0px;" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
+        <a ui-sref="teacherProfile" id="items-button46" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</a>
+        <a ui-sref="teacherSettings" id="items-button47" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
+      </div>
+    </div>
+    <div id="items-button-bar16" class="button-bar">
+      <a ui-sref="class" id="items-button48" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'CLASS' | translate }}</a>
+      <a ui-sref="attendance" id="items-button49" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'ATTENDANCE' | translate }}</a>
+      <a ui-sref="teams" id="items-button50" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'TEAMS' | translate }}</a>
+      <a ui-sref="rules" id="items-button65" style="font-weight:500;color:#FFFFFF;font-size:14px;" class="button button-light  button-outline">{{ 'RULES' | translate }}</a>
+      <a ui-sref="missions" id="items-button66" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
+    </div>
+    <h3 id="items-heading12" style="color:#FFFFFF;text-align:center;">{classroom.name}</h3>
+    <ion-list id="items-list8" class="list-elements align-text-center">
+      <ion-item class="light  list-item-header" id="items-list-item11">{{ 'ITEM_NAME' | translate }}</ion-item>
+      <ion-item class="light  list-item-header" id="items-list-item12">{{ 'ITEM_DESCRIPTION' | translate }}</ion-item>
+      <ion-item class="light  list-item-header" id="items-list-item13">{{ 'REQUIREMENTS' | translate }}</ion-item>
+    </ion-list>
+    <ion-list id="items-list9" class="list-elements align-text-center">
+      <ion-item id="items-list-item15" class="list-item">???</ion-item>
+      <ion-item id="items-list-item23" class="list-item">???</ion-item>
+      <ion-item id="items-list-item24" class="list-item">???</ion-item>
+    </ion-list>
+    <button id="items-button67" ng-click="showModalNewItem()" class="button button-calm  button-block">{{ 'ADD_ITEM' | translate }}</button>
+  </ion-content>
+</ion-view>
