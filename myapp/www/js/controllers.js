@@ -1,10 +1,23 @@
 angular.module('app.controllers', ['pascalprecht.translate'])
      
-.controller('loginCtrl', ['$scope', '$stateParams', '$cookies', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('loginCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $cookies) {
+function ($scope, $stateParams, $cookies, $http, Backand) {
 
+  $scope.teacher = {};
+
+  $scope.getTeacherId = function(email, password) {
+    $http.get(Backand.getApiUrl()+'/1/query/data/getTeacherId'+'?parameters={ "email" : \"'+email+'\" , "password" : \"'+password+'\"}')
+        .then(function (response) {
+          if (response.data.length > 0) {
+            $scope.teacher = response.data[0];
+            $cookies.put('teacher', $scope.teacher)
+          } else {
+            alert('Wrong credentials');
+          }
+        });
+  }
 
 }])
    
