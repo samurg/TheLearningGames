@@ -14,7 +14,7 @@ myApp.config(function (BackandProvider) {
       BackandProvider.setAnonymousToken('8c25f926-034e-49f8-b84f-db5ff66a24ba');
   })
 
-angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives','app.services', 'thelearninggames', 'ngCookies','pascalprecht.translate'])
+angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives','app.services', 'thelearninggames', 'ngCookies','pascalprecht.translate','ui.router'])
 
 .config(function($ionicConfigProvider, $sceDelegateProvider, $translateProvider){
   
