@@ -1,18 +1,18 @@
 angular.module('app.controllers', ['pascalprecht.translate'])
      
-.controller('loginCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('loginCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $cookies, $http, Backand,$state) {
+function ($scope, $stateParams, $cookies, $http, Backand) {
+
+  $scope.teacher = {};
 
   $scope.getTeacherId = function(email, password) {
     $http.get(Backand.getApiUrl()+'/1/query/data/getTeacherId'+'?parameters={ "email" : \"'+email+'\" , "password" : \"'+password+'\"}')
         .then(function (response) {
-         if (response.data.length > 0) { 
-              $cookies.put('teacherId', response.data[0].id);
-              $cookies.put('teacherName', response.data[0].name);
-              $cookies.put('teacherSurname', response.data[0].surname);
-              $state.go('teacherHome');
+          if (response.data.length > 0) {
+            $scope.teacher = response.data[0];
+            $cookies.put('teacher', $scope.teacher)
           } else {
             alert('Wrong credentials');
           }
@@ -77,8 +77,8 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
     $scope.getAllClassrooms = function() {
       $http.get(Backand.getApiUrl()+'/1/objects/'+'classrooms')
         .then(function (response) {
-          $scope.classrooms = response.data;
-          
+          $scope.classrooms = response.data.data;
+          $scope.$apply();
         });
     }
 
