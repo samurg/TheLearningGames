@@ -2,19 +2,19 @@
   <ion-content padding="false" class="manual-ios-statusbar-padding">
     <div id="class-container10">
       <div id="class-button-bar4" class="button-bar margin-null">
-        <a ui-sref="teacherHome" id="class-button20" style="font-weight:500;color:#FFFFFF;font-size:20px;border-radius:0px 0px 0px 0px;" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
-        <a ui-sref="teacherProfile" id="class-button21" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</a>
-        <a ui-sref="teacherSettings" id="class-button22" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
+        <a ui-sref="teacherHome" id="class-button20" id="class-btn20" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
+        <a ui-sref="teacherProfile" id="class-button21" id="class-btn21" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</a>
+        <a ui-sref="teacherSettings" id="class-button22" id="class-btn22" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
       </div>
     </div>
     <div id="class-button-bar5" class="button-bar">
-      <button id="class-button26" style="color:#FFFFFF;font-size:15px;" class="button button-light  button-outline">{{ 'CLASS' | translate }}</button>
-      <a ui-sref="attendance" id="class-button30" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'ATTENDANCE' | translate }}</a>
-      <a ui-sref="teams" id="class-button29" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'TEAMS' | translate }}</a>
-      <a ui-sref="rules" id="class-button27" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'RULES' | translate }}</a>
-      <a ui-sref="missions" id="class-button28" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
+      <button id="class-button26" id="class-btn26" class="button button-light  button-outline">{{ 'CLASS' | translate }}</button>
+      <a ui-sref="attendance" id="class-button30" id="class-btn30" class="button button-light  button-outline">{{ 'ATTENDANCE' | translate }}</a>
+      <a ui-sref="teams" id="class-button29" id="class-btn29" class="button button-light  button-outline">{{ 'TEAMS' | translate }}</a>
+      <a ui-sref="rules" id="class-button27" id="class-btn27" class="button button-light  button-outline">{{ 'RULES' | translate }}</a>
+      <a ui-sref="missions" id="class-button28" id="class-btn28" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
     </div>
-    <h3 id="class-heading2" style="color:#FFFFFF;text-align:center;">{classroom.name}</h3>
+    <h3 id="class-heading2" class="class-hdg2">{classroom.name}</h3>
     <ion-list id="class-list5" class="list-elements">
       <ion-item class="item-avatar  list-student" id="class-list-item7" ng-click="showModalStudentDialog()">
         <h2>{student.name}</h2>
@@ -27,6 +27,6 @@
         <ion-option-button class="button-assertive">{{ 'DELETE' | translate }}</ion-option-button>
       </ion-item>
     </ion-list>
-    <button id="class-button31" ng-click="showModalNewStudentDialog()" style="font-weight:500;" class="button button-calm  button-block">{{ 'ADD_STUDENT' | translate }}</button>
+    <button id="class-button31" ng-click="showModalNewStudentDialog()" id="class-btn31" class="button button-calm  button-block">{{ 'ADD_STUDENT' | translate }}</button>
   </ion-content>
 </ion-view>

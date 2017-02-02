@@ -5,12 +5,12 @@
   <ion-content padding="false" class="manual-ios-statusbar-padding">
     <div id="teacherHome-container9">
       <div id="teacherHome-button-bar2" class="button-bar">
-        <button id="teacherHome-button16" style="font-weight:500;color:#FFFFFF;font-size:20px;border-radius:0px 0px 0px 0px;" class="button button-light  button-outline">{{ 'HOME' | translate }}</button>
-        <a ui-sref="teacherProfile" id="teacherHome-button17" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</a>
-        <a ui-sref="teacherSettings" id="teacherHome-button18" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
+        <button id="teacherHome-button16" id="teacherHome-btn16" class="button button-light  button-outline">{{ 'HOME' | translate }}</button>
+        <a ui-sref="teacherProfile" id="teacherHome-button17" id="teacherHome-btn17" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</a>
+        <a ui-sref="teacherSettings" id="teacherHome-button18" id="teacherHome-btn18" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
       </div>
     </div>
-    <h3 id="teacherHome-heading1" style="color:#FFFFFF;text-align:center;" class="margin-top-null">{{ 'SELECT_YOUR_CLASS' | translate }}</h3>
+    <h3 id="teacherHome-heading1" class="teacherHome-hdg1" class="margin-top-null">{{ 'SELECT_YOUR_CLASS' | translate }}</h3>
     <ion-list id="teacherHome-list16" class="list-elements align-text-center">
       <ion-item id="teacherHome-list-item47" ui-sref="class" ng-repeat="class in classrooms" ng-if="class.teacher==='1'" on-swipe-left="setClassroomId({{class.id}})">{{class.name}}
         <ion-option-button class="button-assertive" ng-click="deleteClassroom()">{{ 'DELETE' | translate }}</ion-option-button>
@@ -19,6 +19,6 @@
         <ion-option-button class="button-calm">{{ 'ARCHIVE' | translate }}</ion-option-button>
       </ion-item>
     </ion-list>
-    <button id="teacherHome-button12" ng-click="showModal()" style="font-weight:500;" class="button button-calm  button-block bold-font">{{ 'ADD_CLASS' | translate }}</button>
+    <button id="teacherHome-button12" ng-click="showModal()" id="teacherHome-btn12" class="button button-calm  button-block bold-font">{{ 'ADD_CLASS' | translate }}</button>
   </ion-content>
 </ion-view>

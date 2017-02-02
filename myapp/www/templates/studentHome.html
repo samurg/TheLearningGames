@@ -5,15 +5,15 @@
   <ion-content padding="false" class="manual-ios-statusbar-padding">
     <div id="studentHome-container29">
       <div id="studentHome-button-bar12" class="button-bar">
-        <button id="studentHome-button131" style="font-weight:500;color:#FFFFFF;font-size:20px;border-radius:0px 0px 0px 0px;" class="button button-light  button-outline">{{ 'HOME' | translate }}</button>
-        <a ui-sref="studentAchievements" id="studentHome-button133" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'ACHIEVEMENTS' | translate }}</a>
-        <a ui-sref="studentBadges" id="studentHome-button134" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'BADGES' | translate }}</a>
+        <button id="studentHome-button131" id="studentHome-btn131" class="button button-light  button-outline">{{ 'HOME' | translate }}</button>
+        <a ui-sref="studentAchievements" id="studentHome-button133" id="studentHome-btn133" class="button button-light  button-outline">{{ 'ACHIEVEMENTS' | translate }}</a>
+        <a ui-sref="studentBadges" id="studentHome-button134" id="studentHome-btn134" class="button button-light  button-outline">{{ 'BADGES' | translate }}</a>
       </div>
     </div>
-    <h3 id="studentHome-heading25" style="color:#FFFFFF;text-align:center;">{student.name}</h3>
+    <h3 id="studentHome-heading25" class="studentHome-hdg25">{student.name}</h3>
     <div id="studentHome-container28" class="list-student">
-      <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
-        <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+      <div class="divStudentHome">
+        <i class="icon ion-image" class="iconImage5"></i>
       </div>
     </div>
     <ion-list id="studentHome-list34" class="list-elements list-student">
@@ -69,6 +69,6 @@
         </ion-option-button>
       </ion-item>
     </ion-list>
-    <a ui-sref="login" id="studentHome-button162" style="font-weight:500;font-size:20px;" class="button button-assertive  button-block button-clear icon ion-chevron-right">{{ 'LOG_OUT' | translate }} </a>
+    <a ui-sref="login" id="studentHome-button162" id="studentHome-btn162" class="button button-assertive  button-block button-clear icon ion-chevron-right">{{ 'LOG_OUT' | translate }} </a>
   </ion-content>
 </ion-view>

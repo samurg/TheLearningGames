@@ -2,7 +2,7 @@
   <ion-content padding="false" class="manual-ios-statusbar-padding">
     <form id="signUp-form2" class="list">
       <div>
-        <img src="img/JOKiWwG0RpmqQmRNuC0l_ownLogo.png" style="display: block; width: 20%; height: auto; margin-left: auto; margin-right: auto;">
+        <img src="img/JOKiWwG0RpmqQmRNuC0l_ownLogo.png" class="logoOwn">
       </div>
       <ion-list id="signUp-list2">
         <label class="item item-input list-elements" id="signUp-input3">
@@ -26,7 +26,7 @@
           <input type="password" placeholder="" ng-model="passwordRepeat" ng-minlenght="3">
         </label>
       </ion-list>
-      <button id="signUp-button9" ng-disabled="!fullName || !email || !password || !passwordRepeat" style="font-weight:500;" class="button button-calm button-large button-block">{{ 'SIGN_UP' | translate }}</button>
+      <button id="signUp-button9" ng-disabled="!fullName || !email || !password || !passwordRepeat" id="signUp-btn9" class="button button-calm button-large button-block">{{ 'SIGN_UP' | translate }}</button>
       <a ui-sref="login" id="signUp-button11" class="button button-light  button-block button-clear icon ion-chevron-right">{{ 'ALREADY_HAVE_AN_ACCOUNT' | translate }}</a>
     </form>
   </ion-content>
