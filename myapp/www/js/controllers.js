@@ -30,7 +30,7 @@ function ($scope, $stateParams, $cookies) {
 
 }])
    
-.controller('teacherHomeCtrl', ['$scope', '$stateParams', '$ionicModal', '$http', 'Backand', '$cookies', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('teacherHomeCtrl', ['$scope', '$stateParams', '$ionicModal', '$http', 'Backand', '$cookies',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
@@ -71,6 +71,7 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
     
     $scope.closeModal = function(){
         $scope.newClassModal.hide();
+        
     }
 
     $scope.teacherId = $cookies.get('teacherId');
@@ -80,7 +81,6 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
       $http.get(Backand.getApiUrl()+'/1/query/data/getClassrooms'+'?parameters={ "teacher" : \"'+$scope.teacherId+'\"}')
         .then(function (response) {
           $scope.classrooms = response.data;
-          $scope.$apply();
         });
     }
 
@@ -93,11 +93,9 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
       }
 
       $http.post(Backand.getApiUrl()+'/1/objects/'+'classrooms', classroom)
-        .then(function (response) {
-
-        });
-
-      $scope.getClassrooms();
+        .success(function(response){
+          $scope.getClassrooms();
+        })
     }
 
     var classroomId;
@@ -110,12 +108,9 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
 
     $scope.deleteClassroom = function() {
       $http.delete(Backand.getApiUrl()+'/1/objects/'+'classrooms/'+classroomId)
-        .then(function (response) {
-
-        });
-
-      $scope.getClassrooms();
-
+        .success(function(response){
+          $scope.getClassrooms();
+        })
     }
 
 }])
