@@ -181,6 +181,7 @@ var translationsEN = {
   ITEM:'Item',
   LANGUAGES:'Languages',
   NEW_STUDENT:'New Student',
+  AVATAR:'Avatar',
 };
  
 var translationsES= {
@@ -268,4 +269,5 @@ var translationsES= {
   ITEM:'Item',
   LANGUAGES:'Idiomas',
   NEW_STUDENT:'Nuevo Estudiante',
+  AVATAR:'Avatar',
 };
