@@ -26,7 +26,7 @@
           <input type="password" placeholder="" ng-model="passwordRepeat" ng-minlenght="3">
         </label>
       </ion-list>
-      <button id="signUp-button9" ng-disabled="!fullName || !email || !password || !passwordRepeat" id="signUp-btn9" class="button button-calm button-large button-block">{{ 'SIGN_UP' | translate }}</button>
+      <button id="signUp-button9" ng-disabled="!name || !surname || !email || !password || !passwordRepeat" id="signUp-btn9" class="button button-calm button-large button-block" ng-click="createTeacher(name, surname, email, password, avatar)">{{ 'SIGN_UP' | translate }}</button>
       <a ui-sref="login" id="signUp-button11" class="button button-light  button-block button-clear icon ion-chevron-right">{{ 'ALREADY_HAVE_AN_ACCOUNT' | translate }}</a>
     </form>
   </ion-content>
