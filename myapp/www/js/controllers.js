@@ -211,7 +211,7 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     
     $scope.studentDialogModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
-    '<h3 style="color:#FFFFFF;text-align:center;">{student.name}</h3>'+
+    '<h3 style="color:#FFFFFF;text-align:center;">{{studentName}}</h3>'+
     '<div class="list-student">'+
       '<div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">'+
         '<i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>'+
@@ -287,7 +287,7 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
       '<form class="list">'+
         '<div class="button-bar">'+
           '<button class="button button-calm  button-block" ng-click="closeModalNewStudentDialog()">{{ \'CANCEL\' | translate }}</button>'+
-          '<button class="button button-calm  button-block" ng-click="closeModalNewStudentDialog()">{{ \'GENERATE\' | translate }}</button>'+
+          '<button class="button button-calm  button-block" ng-click="createStudent(name); closeModalNewStudentDialog()">{{ \'GENERATE\' | translate }}</button>'+
         '</div>'+
       '</form>'+
     '</div>'+
@@ -295,19 +295,7 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
       '<ion-list>'+
         '<form class="list">'+
           '<label class="item item-input">'+
-            '<input type="text" placeholder="{{ \'NAME\' | translate }}">'+
-          '</label>'+
-          '<label class="item item-input">'+
-            '<input type="text" placeholder="{{ \'SURNAME\' | translate }}">'+
-          '</label>'+
-          '<label class="item item-input">'+
-            '<input type="text" placeholder="{{ \'STREET\' | translate }}">'+
-          '</label>'+
-          '<label class="item item-input">'+
-            '<input type="email" placeholder="{{ \'EMAIL\' | translate }}" ng-model="email">'+
-          '</label>'+
-          '<label class="item item-input">'+
-            '<input type="password" placeholder="{{ \'PASSWORD\' | translate }}" ng-model="password" ng-minlenght="3">'+
+            '<input type="text" ng-model="name" placeholder="{{ \'NAME\' | translate }}">'+
           '</label>'+
         '</form>'+
       '</ion-list>'+
@@ -327,6 +315,49 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     }
 
     $scope.classroomName = $cookies.get('classroomName');
+
+    $scope.classroomId = $cookies.get('classroomId');
+    $scope.students = [];
+    
+    $scope.getStudents = function() {
+      $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
+        .then(function (response) {
+          $scope.students = response.data;
+        });
+    }
+
+    $scope.createStudent = function(name) {
+
+      var student = {
+        "name" : name,
+        "classroom" : $scope.classroomId
+      }
+
+      $http.post(Backand.getApiUrl()+'/1/objects/'+'teacherStudents', student)
+        .success(function(response){
+          $scope.getStudents();
+      })
+    }
+
+    $scope.studentId;
+    $scope.studentName;
+
+    $scope.setStudentId = function(value) {
+      $scope.studentId = value;
+      $cookies.put('studentId', value);
+    }
+
+    $scope.setStudentName = function(value) {
+      $scope.studentName = value;
+      $cookies.put('studentName', value);
+    }
+
+    $scope.deleteStudent = function() {
+      $http.delete(Backand.getApiUrl()+'/1/objects/'+'teacherStudents/'+$scope.studentId)
+        .success(function(response){
+          $scope.getStudents();
+        })
+    }
     
 }])
    
