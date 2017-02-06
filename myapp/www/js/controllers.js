@@ -4,6 +4,8 @@ angular.module('app.controllers', ['pascalprecht.translate'])
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cookies, $http, Backand,$state) {
+	
+	var form = document.getElementById("login-form1");
 
   $scope.getTeacher = function(email, password) {
     $http.get(Backand.getApiUrl()+'/1/query/data/getTeacher'+'?parameters={ "email" : \"'+email+'\" , "password" : \"'+password+'\"}')
@@ -15,6 +17,7 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
             $cookies.put('teacherAvatar', response.data[0].avatar);
             $scope.teacherId = $cookies.get('teacherId');
             $state.go('teacherHome', {teacherId: $scope.teacherId});
+			form.reset();
           } else {
             alert('Wrong credentials');
           }
@@ -28,6 +31,8 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cookies, $http, Backand, $state) {
 
+	var form = document.getElementById("signUp-form2");
+
   $scope.createTeacher = function(name, surname, email, password, avatar) {
 
     var teacher = {
@@ -40,6 +45,7 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
 
     $http.post(Backand.getApiUrl()+'/1/objects/'+'teachers', teacher)
       .success(function(response){
+		form.reset();
         $state.go('login');
       })
   }
