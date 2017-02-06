@@ -4,7 +4,6 @@ angular.module('app.controllers', ['pascalprecht.translate'])
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cookies, $http, Backand,$state) {
-
   $scope.getTeacher = function(email, password) {
     $http.get(Backand.getApiUrl()+'/1/query/data/getTeacher'+'?parameters={ "email" : \"'+email+'\" , "password" : \"'+password+'\"}')
         .then(function (response) {
@@ -19,15 +18,12 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
           }
         });
   }
-
 }])
    
 .controller('signUpCtrl', ['$scope', '$stateParams', '$cookies',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cookies) {
-
-
 }])
    
 .controller('teacherHomeCtrl', ['$scope', '$stateParams', '$ionicModal', '$http', 'Backand', '$cookies', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
@@ -36,7 +32,7 @@ function ($scope, $stateParams, $cookies) {
 function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
     $scope.newClassModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
-    '<h3 style="color:#FFFFFF;text-align:center;">{{ \'NEW_CLASS\' | translate }}</h3>'+
+    '<h3 class="teacherHomeH3">{{ \'NEW_CLASS\' | translate }}</h3>'+
     '<form class="list">'+
       '<label class="item item-input">'+
         '<span class="input-label">{{ \'CLASS_NAME\' | translate }}</span>'+
@@ -152,13 +148,13 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     
       $scope.secundaryMenuModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
-    '<h3 style="color:#FFFFFF;text-align:center;">{{ \'ASSIGN_STUDENT_TO_TEAM\' | translate }}</h3>'+
+    '<h3 class="classH3">{{ \'ASSIGN_STUDENT_TO_TEAM\' | translate }}</h3>'+
     '<form class="list">'+
       '<label class="item item-select">'+
         '<span class="input-label">{{ \'SELECT\' | translate }}</span>'+
         '<select></select>'+
       '</label>'+
-      '<h3 style="color:#FFFFFF;text-align:center;">{{ \'COPY_STUDENT_TO_ANOTHER_CLASS\' | translate }}</h3>'+
+      '<h3 class="classH3">{{ \'COPY_STUDENT_TO_ANOTHER_CLASS\' | translate }}</h3>'+
       '<label class="item item-select">'+
         '<span class="input-label">{{ \'SELECT\' | translate }}</span>'+
         '<select></select>'+
@@ -197,13 +193,13 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     
     $scope.studentDialogModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
-    '<h3 style="color:#FFFFFF;text-align:center;">{student.name}</h3>'+
+    '<h3 class="studentDialogH3">{student.name}</h3>'+
     '<div class="list-student">'+
-      '<div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">'+
-        '<i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>'+
+      '<div class="divstudentDialog">'+
+        '<i class="icon ion-image" class="studentDialogIcon"></i>'+
       '</div>'+
-      '<button style="font-weight:500;" class="button button-light  button-block button-outline">{{ \'TAKE_PICTURE\' | translate }}</button>'+
-      '<button style="font-weight:500;" class="button button-light  button-block button-outline">{{ \'VIEW_PROFILE\' | translate }}</button>'+
+      '<button id="studentDialog-btn001" class="button button-light  button-block button-outline">{{ \'TAKE_PICTURE\' | translate }}</button>'+
+      '<button id="studentDialog-btn002" class="button button-light  button-block button-outline">{{ \'VIEW_PROFILE\' | translate }}</button>'+
       '<button ng-click="closeModalStudentDialog()" class="button button-positive  button-block icon ion-arrow-return-left"></button>'+
     '</div>'+
     '<div class="list-student list-elements">'+
@@ -264,12 +260,12 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     
     $scope.newStudentModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
-    '<h3 style="color:#FFFFFF;text-align:center;">{{ \'NEW_STUDENT\' | translate }}</h3>'+
+    '<h3 class="newStudentH3">{{ \'NEW_STUDENT\' | translate }}</h3>'+
     '<div class="list-student list-elements">'+
       '<div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">'+
-        '<i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>'+
+        '<i class="icon ion-image" class="imageNewStudent"></i>'+
       '</div>'+
-      '<button style="font-weight:500;" class="button button-light  button-block button-outline">{{ \'TAKE_PICTURE\' | translate }}</button>'+
+      '<button id="newStudent-btn003" class="button button-light  button-block button-outline">{{ \'TAKE_PICTURE\' | translate }}</button>'+
       '<form class="list">'+
         '<div class="button-bar">'+
           '<button class="button button-calm  button-block" ng-click="closeModalNewStudentDialog()">{{ \'CANCEL\' | translate }}</button>'+
@@ -345,11 +341,11 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
     '<h3 style="color:#FFFFFF;text-align:center;">{team.name}</h3>'+
     '<div class="list-student">'+
-      '<div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">'+
-        '<i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>'+
+      '<div class="divteamDialog">'+
+        '<i class="icon ion-image" class="imageteamDialog"></i>'+
       '</div>'+
-      '<button style="font-weight:500;" class="button button-light  button-block button-outline">{{ \'CHANGE_AVATAR\' | translate }}</button>'+
-      '<button style="font-weight:500;" class="button button-light  button-block button-outline" ng-click="showModalEditTeam()">{{ \'EDIT_TEAM\' | translate }}</button>'+
+      '<button id="teamDialog-btn005" class="button button-light  button-block button-outline">{{ \'CHANGE_AVATAR\' | translate }}</button>'+
+      '<button id="teamDialog-btn006" class="button button-light  button-block button-outline" ng-click="showModalEditTeam()">{{ \'EDIT_TEAM\' | translate }}</button>'+
       '<button ng-click="closeModalTeamDialog()" class="button button-positive  button-block icon ion-arrow-return-left"></button>'+
     '</div>'+
     '<div class="list-team">'+
@@ -375,12 +371,12 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     
     $scope.newTeamDialogModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
-    '<h3 style="color:#FFFFFF;text-align:center;">New Team</h3>'+
+    '<h3 class="newTeamDialogH3">New Team</h3>'+
     '<div class="list-student">'+
-      '<div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">'+
-        '<i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>'+
+      '<div class="newTeamDialogDiv">'+
+        '<i class="icon ion-image" class="imageNewTeamDialog"></i>'+
       '</div>'+
-      '<button style="font-weight:500;" class="button button-light  button-block button-outline">{{ \'UPLOAD_AVATAR\' | translate }}</button>'+
+      '<button id="newTeamDialog-btn007" class="button button-light  button-block button-outline">{{ \'UPLOAD_AVATAR\' | translate }}</button>'+
       '<form class="list">'+
         '<label class="item item-input list-elements">'+
           '<input type="text" placeholder="{{ \'NAME\' | translate }}">'+
@@ -414,7 +410,7 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     
     $scope.addStudentModal = $ionicModal.fromTemplate('<ion-modal-view title="Add Student" hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="true" class="manual-ios-statusbar-padding">'+
-    '<h3 style="color:#FFFFFF;text-align:center;">Add Students</h3>'+
+    '<h3 class="addStudentH3">Add Students</h3>'+
     '<ion-list>'+
       '<ion-checkbox class="list-student-team">{student.name}</ion-checkbox>'+
       '<ion-checkbox class="list-student-team">{student.name}</ion-checkbox>'+
@@ -435,14 +431,14 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
         $scope.addStudentModal.hide();
     }
     
-    $scope.editTeamModal = $ionicModal.fromTemplate('<ion-modal-view title="Edit Team" hide-nav-bar="true" style="background-color:#387EF5;">'+
+    $scope.editTeamModal = $ionicModal.fromTemplate('<ion-modal-view title="Edit Team" hide-nav-bar="true" class="editTeamBack">'+
   '<ion-content padding="true" class="manual-ios-statusbar-padding">'+
-    '<h3 style="color:#FFFFFF;text-align:center;">{team.name}</h3>'+
+    '<h3 class="editTeamH3">{team.name}</h3>'+
     '<div class="list-student">'+
-      '<div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">'+
-        '<i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>'+
+      '<div class="editTeamDiv">'+
+        '<i class="icon ion-image" class="editTeamImage"></i>'+
       '</div>'+
-      '<button style="font-weight:500;" class="button button-light  button-block button-outline">{{ \'UPLOAD_AVATAR\' | translate }}</button>'+
+      '<button id="editTeam-btn011" class="button button-light  button-block button-outline">{{ \'UPLOAD_AVATAR\' | translate }}</button>'+
       '<form class="list">'+
         '<label class="item item-input list-elements">'+
           '<input type="text" placeholder="{{ \'NAME\' | translate }}">'+
@@ -530,7 +526,7 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     
     $scope.newItemModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
-   '<h3 style="color:#FFFFFF;text-align:center;">{{ \'NEW_ITEM\' | translate }}</h3>'+
+   '<h3 class="newItemH3">{{ \'NEW_ITEM\' | translate }}</h3>'+
     '<form class="list list-student">'+
       '<ion-list>'+
         '<label class="item item-input list-elements">'+
@@ -582,7 +578,7 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     
     $scope.newAchievementModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
-    '<h3 style="color:#FFFFFF;text-align:center;">{{ \'NEW_ACHIEVEMENT\' | translate }}</h3>'+
+    '<h3 class="newAchievementH3">{{ \'NEW_ACHIEVEMENT\' | translate }}</h3>'+
     '<form class="list list-student">'+
       '<ion-list>'+
         '<label class="item item-input list-elements">'+
@@ -634,7 +630,7 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     
     $scope.newBadgeModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
-    '<h3 style="color:#FFFFFF;text-align:center;">{{ \'NEW_BADGE\' | translate }}</h3>'+
+    '<h3 class="newBadgeH3">{{ \'NEW_BADGE\' | translate }}</h3>'+
     '<form class="list list-student">'+
       '<ion-list>'+
         '<label class="item item-input list-elements">'+
@@ -684,10 +680,10 @@ function ($scope, $stateParams, $cookies) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $ionicModal, $cookies) {
     
-    $scope.newMissionModal = $ionicModal.fromTemplate('<ion-modal-view title="New Mission" hide-nav-bar="true" style="background-color:#387EF5;">'+
+    $scope.newMissionModal = $ionicModal.fromTemplate('<ion-modal-view title="New Mission" hide-nav-bar="true" class="newMissionBack">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
     '<form class="list">'+
-      '<h3 style="color:#FFFFFF;text-align:center;">{{ \'NEW_MISSION\' | translate }}</h3>'+
+      '<h3 class="newMissionH3">{{ \'NEW_MISSION\' | translate }}</h3>'+
       '<ion-list>'+
         '<label class="item item-input list-elements">'+
           '<span class="input-label">{{ \'NAME\' | translate }} </span>'+
