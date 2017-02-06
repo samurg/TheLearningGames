@@ -1,18 +1,20 @@
 angular.module('app.controllers', ['pascalprecht.translate'])
      
-.controller('loginCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('loginCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', '$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $cookies, $http, Backand) {
+function ($scope, $stateParams, $cookies, $http, Backand,$state) {
 
-  $scope.teacher = {};
-
-  $scope.getTeacherId = function(email, password) {
-    $http.get(Backand.getApiUrl()+'/1/query/data/getTeacherId'+'?parameters={ "email" : \"'+email+'\" , "password" : \"'+password+'\"}')
+  $scope.getTeacher = function(email, password) {
+    $http.get(Backand.getApiUrl()+'/1/query/data/getTeacher'+'?parameters={ "email" : \"'+email+'\" , "password" : \"'+password+'\"}')
         .then(function (response) {
           if (response.data.length > 0) {
-            $scope.teacher = response.data[0];
-            $cookies.put('teacher', $scope.teacher)
+            $cookies.put('teacherId', response.data[0].id);
+            $cookies.put('teacherName', response.data[0].name);
+            $cookies.put('teacherSurname', response.data[0].surname);
+            $cookies.put('teacherAvatar', response.data[0].avatar);
+            $scope.teacherId = $cookies.get('teacherId');
+            $state.go('teacherHome', {teacherId: $scope.teacherId});
           } else {
             alert('Wrong credentials');
           }
@@ -21,15 +23,30 @@ function ($scope, $stateParams, $cookies, $http, Backand) {
 
 }])
    
-.controller('signUpCtrl', ['$scope', '$stateParams', '$cookies',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('signUpCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', '$state',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $cookies) {
+function ($scope, $stateParams, $cookies, $http, Backand, $state) {
 
+  $scope.createTeacher = function(name, surname, email, password, avatar) {
+
+    var teacher = {
+      "name" : name,
+      "surname" : surname,
+      "email" : email,
+      "password" : password,
+      "avatar" : avatar
+    }
+
+    $http.post(Backand.getApiUrl()+'/1/objects/'+'teachers', teacher)
+      .success(function(response){
+        $state.go('login');
+      })
+  }
 
 }])
    
-.controller('teacherHomeCtrl', ['$scope', '$stateParams', '$ionicModal', '$http', 'Backand', '$cookies', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('teacherHomeCtrl', ['$scope', '$stateParams', '$ionicModal', '$http', 'Backand', '$cookies',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
@@ -69,16 +86,17 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
     }
     
     $scope.closeModal = function(){
-        $scope.newClassModal.hide();
+      $scope.newClassModal.hide();
+        
     }
-    
+
+    $scope.teacherId = $cookies.get('teacherId');
     $scope.classrooms = [];
     
-    $scope.getAllClassrooms = function() {
-      $http.get(Backand.getApiUrl()+'/1/objects/'+'classrooms')
+    $scope.getClassrooms = function() {
+      $http.get(Backand.getApiUrl()+'/1/query/data/getClassrooms'+'?parameters={ "teacher" : \"'+$scope.teacherId+'\"}')
         .then(function (response) {
-          $scope.classrooms = response.data.data;
-          $scope.$apply();
+          $scope.classrooms = response.data;
         });
     }
 
@@ -87,33 +105,31 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
       var classroom = {
         "name" : name,
         "description" : " ",
-        "teacher" : "1"
+        "teacher" : $scope.teacherId
       }
 
       $http.post(Backand.getApiUrl()+'/1/objects/'+'classrooms', classroom)
-        .then(function (response) {
-
-        });
-
-      $scope.getAllClassrooms();
+        .success(function(response){
+          $scope.getClassrooms();
+        })
     }
 
-    var classroomId;
+    $scope.classroomId;
 
     $scope.setClassroomId = function(value) {
+      $scope.classroomId = value;
+      $cookies.put('classroomId', value);
+    }
 
-      classroomId = value;
-
+    $scope.setClassroomName = function(value) {
+      $cookies.put('classroomName', value);
     }
 
     $scope.deleteClassroom = function() {
       $http.delete(Backand.getApiUrl()+'/1/objects/'+'classrooms/'+classroomId)
-        .then(function (response) {
-
-        });
-
-      $scope.getAllClassrooms();
-
+        .success(function(response){
+          $scope.getClassrooms();
+        })
     }
 
 }])
@@ -142,10 +158,10 @@ function ($scope, $stateParams, $cookies) {
 
 }])
    
-.controller('classCtrl', ['$scope', '$stateParams', '$ionicModal', '$cookies', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('classCtrl', ['$scope', '$stateParams', '$ionicModal', '$cookies', '$http', 'Backand', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $ionicModal, $cookies) {
+function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     var modalFirst;
     
       $scope.secundaryMenuModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
@@ -307,8 +323,10 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     }
     
     $scope.closeModalNewStudentDialog = function(){
-        $scope.newStudentModal.hide();
+      $scope.newStudentModal.hide();
     }
+
+    $scope.classroomName = $cookies.get('classroomName');
     
 }])
    
