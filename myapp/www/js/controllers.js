@@ -13,7 +13,8 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
             $cookies.put('teacherName', response.data[0].name);
             $cookies.put('teacherSurname', response.data[0].surname);
             $cookies.put('teacherAvatar', response.data[0].avatar);
-            $state.go('teacherHome');
+            $scope.teacherId = $cookies.get('teacherId');
+            $state.go('teacherHome', {teacherId: $scope.teacherId});
           } else {
             alert('Wrong credentials');
           }
