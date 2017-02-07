@@ -14,7 +14,7 @@ myApp.config(function (BackandProvider) {
       BackandProvider.setAnonymousToken('8c25f926-034e-49f8-b84f-db5ff66a24ba');
   })
 
-angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives','app.services', 'thelearninggames', 'ngCookies','pascalprecht.translate'])
+angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives','app.services', 'thelearninggames', 'ngCookies','pascalprecht.translate','ui.router'])
 
 .config(function($ionicConfigProvider, $sceDelegateProvider, $translateProvider){
   
@@ -25,6 +25,17 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
   $translateProvider.fallbackLanguage('en');
   $translateProvider.useLocalStorage();
   $translateProvider.useSanitizeValueStrategy('escape');
+
+  /*
+  console.log('Encriptando: Hola y adios con contraseña 1234');
+  var  a = CryptoJS.AES.encrypt("Hola y adios", "1234").toString();
+  console.log(a);
+  console.log(CryptoJS.AES.decrypt(a, "1234").toString(CryptoJS.enc.Utf8));
+  console.log("\n")
+  var b = CryptoJS.SHA256("contraseñaEnSHA256").toString();
+  console.log("contraseña: contraseñaEnSHA256, encriptada con sha256")
+  console.log(b);
+  */
 })
 
 .run(function($ionicPlatform) {
@@ -181,6 +192,7 @@ var translationsEN = {
   ITEM:'Item',
   LANGUAGES:'Languages',
   NEW_STUDENT:'New Student',
+  AVATAR:'Avatar',
 };
  
 var translationsES= {
@@ -268,4 +280,5 @@ var translationsES= {
   ITEM:'Item',
   LANGUAGES:'Idiomas',
   NEW_STUDENT:'Nuevo Estudiante',
+  AVATAR:'Avatar',
 };
