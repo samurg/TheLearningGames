@@ -2,23 +2,23 @@
   <ion-content padding="false" class="manual-ios-statusbar-padding">
     <div id="attendance-container12">
       <div id="attendance-button-bar8" class="button-bar margin-null">
-        <a ui-sref="teacherHome" id="attendance-button33" style="font-weight:500;color:#FFFFFF;font-size:20px;border-radius:0px 0px 0px 0px;" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
-        <a ui-sref="teacherProfile" id="attendance-button34" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</a>
-        <a ui-sref="teacherSettings" id="attendance-button35" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
+        <a ui-sref="teacherHome" id="attendance-button33" id="attendance-btn33" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
+        <a ui-sref="teacherProfile" id="attendance-button34" id="attendance-btn34" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</a>
+        <a ui-sref="teacherSettings" id="attendance-button35" id="attendance-btn35" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
       </div>
     </div>
     <div id="attendance-button-bar7" class="button-bar">
-      <a ui-sref="class" id="attendance-button13" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'CLASS' | translate }}</a>
-      <button id="attendance-button14" style="font-weight:500;color:#FFFFFF;font-size:14px;" class="button button-light  button-outline">{{ 'ATTENDANCE' | translate }}</button>
-      <a ui-sref="teams" id="attendance-button15" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'TEAMS' | translate }}</a>
-      <a ui-sref="rules" id="attendance-button25" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'RULES' | translate }}</a>
-      <a ui-sref="missions" id="attendance-button32" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
+      <a ui-sref="class" id="attendance-button13" id="attendance-btn13" class="button button-light  button-outline">{{ 'CLASS' | translate }}</a>
+      <button id="attendance-button14" id="attendance-btn14" class="button button-light  button-outline">{{ 'ATTENDANCE' | translate }}</button>
+      <a ui-sref="teams" id="attendance-button15" id="attendance-btn15" class="button button-light  button-outline">{{ 'TEAMS' | translate }}</a>
+      <a ui-sref="rules" id="attendance-button25" id="attendance-btn25" class="button button-light  button-outline">{{ 'RULES' | translate }}</a>
+      <a ui-sref="missions" id="attendance-button32" id="attendance-btn32" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
     </div>
-    <h3 id="attendance-heading3" style="color:#FFFFFF;text-align:center;">{classroom.name}</h3>
+    <h3 id="attendance-heading3" class="attendance-hdg3">{classroom.name}</h3>
     <ion-list id="attendance-list7" class="list-elements">
       <ion-checkbox id="attendance-checkbox2" name="checkStudent" ng-checked="true" class="list-student">{students.name}</ion-checkbox>
       <ion-checkbox id="attendance-checkbox3" name="checkStudent" ng-checked="true" class="list-student">{students.name}</ion-checkbox>
     </ion-list>
-    <button id="attendance-button123" style="font-weight:500;" class="button button-calm  button-block">{{ 'SET_ATTENDANCE_FOR_TODAY' | translate }}</button>
+    <button id="attendance-button123" id="attendance-btn123" class="button button-calm  button-block">{{ 'SET_ATTENDANCE_FOR_TODAY' | translate }}</button>
   </ion-content>
 </ion-view>
