@@ -132,7 +132,7 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
     }
 
     $scope.deleteClassroom = function() {
-      $http.delete(Backand.getApiUrl()+'/1/objects/'+'classrooms/'+classroomId)
+      $http.delete(Backand.getApiUrl()+'/1/objects/'+'classrooms/'+$scope.classroomId)
         .success(function(response){
           $scope.getClassrooms();
         })
