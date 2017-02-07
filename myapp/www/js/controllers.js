@@ -11,11 +11,12 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
     $http.get(Backand.getApiUrl()+'/1/query/data/getTeacher'+'?parameters={ "email" : \"'+CryptoJS.SHA256(email).toString()+'\" , "password" : \"'+CryptoJS.SHA256(password).toString()+'\"}')
         .then(function (response) {
           if (response.data.length > 0) {
-            console.log(CryptoJS.AES.decrypt(response.data[0].name, password).toString(CryptoJS.enc.Utf8));
             $cookies.put('teacherId', response.data[0].id);
             $cookies.put('teacherName', CryptoJS.AES.decrypt(response.data[0].name, password).toString(CryptoJS.enc.Utf8));
             $cookies.put('teacherSurname', CryptoJS.AES.decrypt(response.data[0].surname, password).toString(CryptoJS.enc.Utf8));
             $cookies.put('teacherAvatar', response.data[0].avatar);
+            $cookies.put('teacherEmail', email);
+            $cookies.put('teacherPassword', password);
             $scope.teacherId = $cookies.get('teacherId');
             $state.go('teacherHome', {teacherId: $scope.teacherId});
 			form.reset();
