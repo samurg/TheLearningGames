@@ -11,9 +11,10 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
     $http.get(Backand.getApiUrl()+'/1/query/data/getTeacher'+'?parameters={ "email" : \"'+CryptoJS.SHA256(email).toString()+'\" , "password" : \"'+CryptoJS.SHA256(password).toString()+'\"}')
         .then(function (response) {
           if (response.data.length > 0) {
+            console.log(CryptoJS.AES.decrypt(response.data[0].name, password).toString(CryptoJS.enc.Utf8));
             $cookies.put('teacherId', response.data[0].id);
-            $cookies.put('teacherName', response.data[0].name);
-            $cookies.put('teacherSurname', response.data[0].surname);
+            $cookies.put('teacherName', CryptoJS.AES.decrypt(response.data[0].name, password).toString(CryptoJS.enc.Utf8));
+            $cookies.put('teacherSurname', CryptoJS.AES.decrypt(response.data[0].surname, password).toString(CryptoJS.enc.Utf8));
             $cookies.put('teacherAvatar', response.data[0].avatar);
             $scope.teacherId = $cookies.get('teacherId');
             $state.go('teacherHome', {teacherId: $scope.teacherId});
@@ -36,8 +37,8 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
   $scope.createTeacher = function(name, surname, email, password, avatar) {
 
     var teacher = {
-      "name" : name,
-      "surname" : surname,
+      "name" : CryptoJS.AES.encrypt(name,password).toString(),
+      "surname" : CryptoJS.AES.encrypt(surname,password).toString(),
       "email" : CryptoJS.SHA256(email).toString(),
       "password" : CryptoJS.SHA256(password).toString(),
       "avatar" : avatar
