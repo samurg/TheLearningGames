@@ -105,6 +105,7 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
       $http.get(Backand.getApiUrl()+'/1/query/data/getClassrooms'+'?parameters={ "teacher" : \"'+$scope.teacherId+'\"}')
         .then(function (response) {
           $scope.classrooms = response.data;
+          $cookies.put('classrooms', response.data);
         });
     }
 
@@ -183,7 +184,7 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
       '<h3 style="color:#FFFFFF;text-align:center;">{{ \'COPY_STUDENT_TO_ANOTHER_CLASS\' | translate }}</h3>'+
       '<label class="item item-select">'+
         '<span class="input-label">{{ \'SELECT\' | translate }}</span>'+
-        '<select></select>'+
+        '<select ng-repeat="class in classrooms">{{class.name}}</select>'+
       '</label>'+
     '</form>'+
     '<div class="button-bar">'+
@@ -321,6 +322,8 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     $scope.closeModalNewStudentDialog = function(){
       $scope.newStudentModal.hide();
     }
+
+    $scope.classrooms = $cookies.get('classrooms');
 
     $scope.classroomName = $cookies.get('classroomName');
 
@@ -569,6 +572,17 @@ function ($scope, $stateParams, $cookies) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cookies) {
 
+  $scope.teacherAvatar = $cookies.get('teacherAvatar');
+  $scope.teacherName = $cookies.get('teacherName');
+  $scope.teacherSurname = $cookies.get('teacherSurname');
+  $scope.teacherEmail = $cookies.get('teacherEmail');
+  $scope.teacherPassword = $cookies.get('teacherPassword');
+
+  $scope.editTeacher = function(name, surname, email, password, avatar) {
+
+
+
+  }
 
 }])
    
