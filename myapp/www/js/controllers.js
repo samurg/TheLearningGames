@@ -8,7 +8,7 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
 	var form = document.getElementById("login-form1");
 
   $scope.getTeacher = function(email, password) {
-    $http.get(Backand.getApiUrl()+'/1/query/data/getTeacher'+'?parameters={ "email" : \"'+email+'\" , "password" : \"'+password+'\"}')
+    $http.get(Backand.getApiUrl()+'/1/query/data/getTeacher'+'?parameters={ "email" : \"'+CryptoJS.SHA256(email).toString()+'\" , "password" : \"'+CryptoJS.SHA256(password).toString()+'\"}')
         .then(function (response) {
           if (response.data.length > 0) {
             $cookies.put('teacherId', response.data[0].id);
@@ -38,8 +38,8 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
     var teacher = {
       "name" : name,
       "surname" : surname,
-      "email" : email,
-      "password" : password,
+      "email" : CryptoJS.SHA256(email).toString(),
+      "password" : CryptoJS.SHA256(password).toString(),
       "avatar" : avatar
     }
 
