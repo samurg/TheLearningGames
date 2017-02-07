@@ -333,10 +333,12 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     }
 
     $scope.createStudent = function(name) {
-
+      var a = CryptoJS.SHA1($scope.studentName + $scope.classroomId + Date.now().toString()).toString();
+      var hash = a.substr(0, 10);
       var student = {
         "name" : name,
-        "classroom" : $scope.classroomId
+        "classroom" : $scope.classroomId,
+        "hashCode" : hash
       }
 
       $http.post(Backand.getApiUrl()+'/1/objects/'+'teacherStudents', student)
