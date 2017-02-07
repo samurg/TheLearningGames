@@ -2,26 +2,49 @@
   <ion-content padding="false" class="manual-ios-statusbar-padding">
     <div id="teacherProfile-container17">
       <div id="teacherProfile-button-bar18" class="button-bar margin-null">
-        <a ui-sref="teacherHome" id="teacherProfile-button74" style="color:#FFFFFF;border-radius:0px 0px 0px 0px;" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
-        <button id="teacherProfile-button75" style="font-weight:500;color:#FFFFFF;font-size:20px;" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</button>
-        <a ui-sref="teacherSettings" id="teacherProfile-button76" style="color:#FFFFFF;" class="button button-light  button-outline">{{'SETTINGS' | translate }}</a>
+        <a ui-sref="teacherHome" id="teacherProfile-button74" id="teacherProfile-btn74" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
+        <button id="teacherProfile-button75" id="teacherProfile-btn75" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</button>
+        <a ui-sref="teacherSettings" id="teacherProfile-button76" id="teacherProfile-btn76" class="button button-light  button-outline">{{'SETTINGS' | translate }}</a>
       </div>
-      <div class="spacer" style="width: 300px; height: 10px;"></div>
+      <div class="spacer" class="spacer"></div>
     </div>
-    <ion-list id="teacherProfile-list11" class="list-elements">
-      <ion-item id="teacherProfile-list-item16">
-        <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'NAME' | translate }}</ion-item>
-      <ion-item id="teacherProfile-list-item17">
-        <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'SURNAME' | translate }}</ion-item>
-      <ion-item id="teacherProfile-list-item18">
-        <i class="icon ion-home"></i>&nbsp;&nbsp;{{ 'ADRESS' | translate }}</ion-item>
-      <ion-item id="teacherProfile-list-item20">
-        <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'PASSWORD' | translate }}</ion-item>
-      <ion-item id="teacherProfile-list-item19">
-        <i class="icon ion-at"></i>&nbsp;&nbsp;{{ 'EMAIL' | translate }}</ion-item>
-      <ion-item id="teacherProfile-list-item22">
-        <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'CONFIRM_PASSWORD' | translate }}</ion-item>
-    </ion-list>
-    <button id="teacherProfile-button77" style="font-weight:500;" class="button button-calm  button-block">{{ 'SAVE_CHANGES' | translate }}</button>
+    <form id="teacherProfile-form1" class="list">
+      <ion-list id="signUp-list2">
+        <ion-item class ="teacherAvatar">
+          <img src={{teacherAvatar}} class="avatar">
+        </ion-item>
+        <label class="item item-input list-elements" id="signUp-input3">
+          <span class="inputLabelProfile">
+            <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'NAME'  | translate }}
+            <input type="text" placeholder="{{teacherName}}" ng-model="name"></span>
+        </label>
+        <label class="item item-input list-elements" id="signUp-input3">
+          <span class="inputLabelProfile">
+            <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'SURNAME' | translate }}
+            <input type="text" placeholder="{{teacherSurname}}" ng-model="surname"></span>
+        </label>
+        <label class="item item-input list-elements" id="signUp-input5">
+          <span class="inputLabelProfile">
+            <i class="icon ion-at"></i>&nbsp;&nbsp;{{ 'EMAIL' | translate }}
+            <input type="email" placeholder="{{teacherEmail}}" ng-model="email"></span>
+        </label>
+        <label class="item item-input list-elements" id="signUp-input6">
+          <span class="inputLabelProfile">
+            <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'PASSWORD' | translate }}
+            <input type="password" placeholder="{{teacherPassword}}" ng-model="password" ng-minlenght="3"></span>
+        </label>
+        <label class="item item-input list-elements" id="signUp-input7">
+          <span class="inputLabelProfile">
+            <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'CONFIRM_PASSWORD' | translate }}
+            <input type="password" placeholder="{{teacherPassword}}" ng-model="passwordRepeat" ng-minlenght="3"></span>
+        </label>
+        <label class="item item-input list-elements" id="signUp-input3">
+          <span class="inputLabelProfile">
+            <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'AVATAR' | translate }}
+            <input type="text" placeholder="{{teacherAvatar}}" ng-model="avatar"></span>
+        </label>
+      </ion-list>
+      <button id="signUp-button9" ng-disabled="!name || !surname || !email || !password || !passwordRepeat" id="signUp-btn9" class="button button-calm button-large button-block" ng-click="editTeacher(name, surname, email, password, avatar)">{{ 'SAVE_CHANGES' | translate }}</button>
+    </form>
   </ion-content>
 </ion-view>

@@ -4,16 +4,22 @@ angular.module('app.controllers', ['pascalprecht.translate'])
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cookies, $http, Backand,$state) {
+	
+	var form = document.getElementById("login-form1");
 
   $scope.getTeacher = function(email, password) {
-    $http.get(Backand.getApiUrl()+'/1/query/data/getTeacher'+'?parameters={ "email" : \"'+email+'\" , "password" : \"'+password+'\"}')
+    $http.get(Backand.getApiUrl()+'/1/query/data/getTeacher'+'?parameters={ "email" : \"'+CryptoJS.SHA256(email).toString()+'\" , "password" : \"'+CryptoJS.SHA256(password).toString()+'\"}')
         .then(function (response) {
           if (response.data.length > 0) {
             $cookies.put('teacherId', response.data[0].id);
+            $cookies.put('teacherAvatar', response.data[0].avatar);
             $cookies.put('teacherName', response.data[0].name);
             $cookies.put('teacherSurname', response.data[0].surname);
-            $cookies.put('teacherAvatar', response.data[0].avatar);
-            $state.go('teacherHome');
+            $cookies.put('teacherEmail', email);
+            $cookies.put('teacherPassword', password);
+            $scope.teacherId = $cookies.get('teacherId');
+            $state.go('teacherHome', {teacherId: $scope.teacherId});
+			form.reset();
           } else {
             alert('Wrong credentials');
           }
@@ -22,11 +28,29 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
 
 }])
    
-.controller('signUpCtrl', ['$scope', '$stateParams', '$cookies',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('signUpCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', '$state',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $cookies) {
+function ($scope, $stateParams, $cookies, $http, Backand, $state) {
 
+	var form = document.getElementById("signUp-form2");
+
+  $scope.createTeacher = function(name, surname, email, password, avatar) {
+
+    var teacher = {
+      "name" : name,
+      "surname" : surname,
+      "email" : CryptoJS.SHA256(email).toString(),
+      "password" : CryptoJS.SHA256(password).toString(),
+      "avatar" : avatar
+    }
+
+    $http.post(Backand.getApiUrl()+'/1/objects/'+'teachers', teacher)
+      .success(function(response){
+		form.reset();
+        $state.go('login');
+      })
+  }
 
 }])
    
@@ -70,7 +94,7 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
     }
     
     $scope.closeModal = function(){
-        $scope.newClassModal.hide();
+      $scope.newClassModal.hide();
         
     }
 
@@ -81,6 +105,7 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
       $http.get(Backand.getApiUrl()+'/1/query/data/getClassrooms'+'?parameters={ "teacher" : \"'+$scope.teacherId+'\"}')
         .then(function (response) {
           $scope.classrooms = response.data;
+          $cookies.put('classrooms', response.data);
         });
     }
 
@@ -98,16 +123,19 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
         })
     }
 
-    var classroomId;
+    $scope.classroomId;
 
     $scope.setClassroomId = function(value) {
+      $scope.classroomId = value;
+      $cookies.put('classroomId', value);
+    }
 
-      classroomId = value;
-
+    $scope.setClassroomName = function(value) {
+      $cookies.put('classroomName', value);
     }
 
     $scope.deleteClassroom = function() {
-      $http.delete(Backand.getApiUrl()+'/1/objects/'+'classrooms/'+classroomId)
+      $http.delete(Backand.getApiUrl()+'/1/objects/'+'classrooms/'+$scope.classroomId)
         .success(function(response){
           $scope.getClassrooms();
         })
@@ -139,10 +167,10 @@ function ($scope, $stateParams, $cookies) {
 
 }])
    
-.controller('classCtrl', ['$scope', '$stateParams', '$ionicModal', '$cookies', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('classCtrl', ['$scope', '$stateParams', '$ionicModal', '$cookies', '$http', 'Backand', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $ionicModal, $cookies) {
+function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     var modalFirst;
     
       $scope.secundaryMenuModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
@@ -156,7 +184,7 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
       '<h3 style="color:#FFFFFF;text-align:center;">{{ \'COPY_STUDENT_TO_ANOTHER_CLASS\' | translate }}</h3>'+
       '<label class="item item-select">'+
         '<span class="input-label">{{ \'SELECT\' | translate }}</span>'+
-        '<select></select>'+
+        '<select ng-repeat="class in classrooms">{{class.name}}</select>'+
       '</label>'+
     '</form>'+
     '<div class="button-bar">'+
@@ -192,7 +220,7 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     
     $scope.studentDialogModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
-    '<h3 style="color:#FFFFFF;text-align:center;">{student.name}</h3>'+
+    '<h3 style="color:#FFFFFF;text-align:center;">{{studentName}}</h3>'+
     '<div class="list-student">'+
       '<div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">'+
         '<i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>'+
@@ -268,7 +296,7 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
       '<form class="list">'+
         '<div class="button-bar">'+
           '<button class="button button-calm  button-block" ng-click="closeModalNewStudentDialog()">{{ \'CANCEL\' | translate }}</button>'+
-          '<button class="button button-calm  button-block" ng-click="closeModalNewStudentDialog()">{{ \'GENERATE\' | translate }}</button>'+
+          '<button class="button button-calm  button-block" ng-click="createStudent(name); closeModalNewStudentDialog()">{{ \'GENERATE\' | translate }}</button>'+
         '</div>'+
       '</form>'+
     '</div>'+
@@ -276,19 +304,7 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
       '<ion-list>'+
         '<form class="list">'+
           '<label class="item item-input">'+
-            '<input type="text" placeholder="{{ \'NAME\' | translate }}">'+
-          '</label>'+
-          '<label class="item item-input">'+
-            '<input type="text" placeholder="{{ \'SURNAME\' | translate }}">'+
-          '</label>'+
-          '<label class="item item-input">'+
-            '<input type="text" placeholder="{{ \'STREET\' | translate }}">'+
-          '</label>'+
-          '<label class="item item-input">'+
-            '<input type="email" placeholder="{{ \'EMAIL\' | translate }}" ng-model="email">'+
-          '</label>'+
-          '<label class="item item-input">'+
-            '<input type="password" placeholder="{{ \'PASSWORD\' | translate }}" ng-model="password" ng-minlenght="3">'+
+            '<input type="text" ng-model="name" placeholder="{{ \'NAME\' | translate }}">'+
           '</label>'+
         '</form>'+
       '</ion-list>'+
@@ -304,7 +320,54 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     }
     
     $scope.closeModalNewStudentDialog = function(){
-        $scope.newStudentModal.hide();
+      $scope.newStudentModal.hide();
+    }
+
+    $scope.classrooms = $cookies.get('classrooms');
+
+    $scope.classroomName = $cookies.get('classroomName');
+
+    $scope.classroomId = $cookies.get('classroomId');
+    $scope.students = [];
+    
+    $scope.getStudents = function() {
+      $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
+        .then(function (response) {
+          $scope.students = response.data;
+        });
+    }
+
+    $scope.createStudent = function(name) {
+
+      var student = {
+        "name" : name,
+        "classroom" : $scope.classroomId
+      }
+
+      $http.post(Backand.getApiUrl()+'/1/objects/'+'teacherStudents', student)
+        .success(function(response){
+          $scope.getStudents();
+      })
+    }
+
+    $scope.studentId;
+    $scope.studentName;
+
+    $scope.setStudentId = function(value) {
+      $scope.studentId = value;
+      $cookies.put('studentId', value);
+    }
+
+    $scope.setStudentName = function(value) {
+      $scope.studentName = value;
+      $cookies.put('studentName', value);
+    }
+
+    $scope.deleteStudent = function() {
+      $http.delete(Backand.getApiUrl()+'/1/objects/'+'teacherStudents/'+$scope.studentId)
+        .success(function(response){
+          $scope.getStudents();
+        })
     }
     
 }])
@@ -507,6 +570,17 @@ function ($scope, $stateParams, $cookies) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cookies) {
 
+  $scope.teacherAvatar = $cookies.get('teacherAvatar');
+  $scope.teacherName = $cookies.get('teacherName');
+  $scope.teacherSurname = $cookies.get('teacherSurname');
+  $scope.teacherEmail = $cookies.get('teacherEmail');
+  $scope.teacherPassword = $cookies.get('teacherPassword');
+
+  $scope.editTeacher = function(name, surname, email, password, avatar) {
+
+
+
+  }
 
 }])
    
