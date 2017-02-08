@@ -9,6 +9,17 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
     var form = document.getElementById("login-form1");
     form.reset();
   }
+  $scope.loginType=false;
+  $scope.loginType2=false;
+
+  $scope.teacherForm = function(){
+   $scope.loginType=true;
+   $scope.loginType2=false;
+  }
+  $scope.studentForm = function(){
+   $scope.loginType=false;
+   $scope.loginType2=true;
+  }
 
   $scope.getTeacher = function(email, password) {
     $http.get(Backand.getApiUrl()+'/1/query/data/getTeacher'+'?parameters={ "email" : \"'+CryptoJS.SHA256(email).toString()+'\" , "password" : \"'+CryptoJS.SHA256(password).toString()+'\"}')
