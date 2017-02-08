@@ -182,6 +182,9 @@ var translationsEN = {
   LANGUAGES:'Languages',
   NEW_STUDENT:'New Student',
   AVATAR:'Avatar',
+  CODE:'Code',
+  YOUR_CODE:'Your code',
+  LOGIN:'login',
 };
  
 var translationsES= {
@@ -270,4 +273,7 @@ var translationsES= {
   LANGUAGES:'Idiomas',
   NEW_STUDENT:'Nuevo Estudiante',
   AVATAR:'Avatar',
+  CODE:'Código',
+  YOUR_CODE:'Tu código',
+  LOGIN:'Entrar',
 };
