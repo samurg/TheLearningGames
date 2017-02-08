@@ -36,7 +36,7 @@
           <input type="text" placeholder="" ng-model="avatar">
         </label>
       </ion-list>
-      <button id="signUp-button9" ng-disabled="!name || !surname || !email || !password || !passwordRepeat" id="signUp-btn9" class="button button-calm button-large button-block" ng-click="createTeacher(name, surname, email, password, avatar) ; clearForm()">{{ 'SIGN_UP' | translate }}</button>
+      <button id="signUp-button9" ng-disabled="!name || !surname || !email || !password || !passwordRepeat" id="signUp-btn9" class="button button-calm button-large button-block" ng-click="checkTeacherEmail(name, surname, email, password, avatar) ; clearForm()">{{ 'SIGN_UP' | translate }}</button>
       <a ui-sref="login" id="signUp-button11" class="button button-light  button-block button-clear icon ion-chevron-right" ng-click="clearForm()">{{ 'ALREADY_HAVE_AN_ACCOUNT' | translate }}</a>
     </form>
   </ion-content>

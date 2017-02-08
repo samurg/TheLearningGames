@@ -10,7 +10,7 @@ angular.module('app.routes', [])
     
   
 
-      .state('tabsController', {
+  .state('tabsController', {
     url: '/page1',
     templateUrl: 'templates/tabsController.html',
     abstract:true

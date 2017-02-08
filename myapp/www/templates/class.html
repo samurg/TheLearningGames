@@ -16,8 +16,9 @@
     </div>
     <h3 id="class-heading2" style="color:#FFFFFF;text-align:center;">{{classroomName}}</h3>
     <ion-list id="class-list5" class="list-elements">
-      <ion-item class="item-avatar  list-student" id="class-list-item7" ng-click="setStudentName(student.name); showModalStudentDialog()" ng-repeat="student in students" on-swipe-left="setStudentId(student.id)">
+      <ion-item class="item-avatar  list-student" id="class-list-item7" ng-click="setStudentName(student.name, student.hashCode); showModalStudentDialog()" ng-repeat="student in students" on-swipe-left="setStudentId(student.id)">
         <h2>{{student.name}}</h2>
+        <h3>{{student.hashCode}}</h3>
         <ion-option-button class="button-assertive" ng-click="deleteStudent()">{{ 'DELETE' | translate }}</ion-option-button>
       </ion-item>
     </ion-list>
