@@ -182,6 +182,7 @@ var translationsEN = {
   LANGUAGES:'Languages',
   NEW_STUDENT:'New Student',
   AVATAR:'Avatar',
+  EMAIL_ALREADY_USED: 'Email already used',
 };
  
 var translationsES= {
@@ -270,4 +271,5 @@ var translationsES= {
   LANGUAGES:'Idiomas',
   NEW_STUDENT:'Nuevo Estudiante',
   AVATAR:'Avatar',
+  EMAIL_ALREADY_USED: 'Email already used',
 };
