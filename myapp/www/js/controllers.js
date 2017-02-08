@@ -5,9 +5,26 @@ angular.module('app.controllers', ['pascalprecht.translate'])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cookies, $http, Backand,$state) {
 	
-	$scope.clearForm = function(){
+	$scope.clearForm1 = function(){
     var form = document.getElementById("login-form1");
     form.reset();
+  }
+
+  $scope.clearForm2 = function(){
+    var form = document.getElementById("login-form2");
+    form.reset();
+  }
+
+      $scope.loginType=false;
+      $scope.loginType2=false;
+
+  $scope.teacherForm = function(){
+      $scope.loginType=true;
+      $scope.loginType2=false;
+  }
+  $scope.studentForm = function(){
+      $scope.loginType=false;
+      $scope.loginType2=true;
   }
 
   $scope.getTeacher = function(email, password) {
