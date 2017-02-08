@@ -183,6 +183,9 @@ var translationsEN = {
   NEW_STUDENT:'New Student',
   AVATAR:'Avatar',
   EMAIL_ALREADY_USED: 'Email already used',
+  CODE:'Code',
+  YOUR_CODE:'Your code',
+  LOGIN:'login',
 };
  
 var translationsES= {
@@ -272,4 +275,7 @@ var translationsES= {
   NEW_STUDENT:'Nuevo Estudiante',
   AVATAR:'Avatar',
   EMAIL_ALREADY_USED: 'Email already used',
+  CODE:'Código',
+  YOUR_CODE:'Tu código',
+  LOGIN:'Entrar',
 };
