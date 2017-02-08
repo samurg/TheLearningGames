@@ -25,17 +25,6 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
   $translateProvider.fallbackLanguage('en');
   $translateProvider.useLocalStorage();
   $translateProvider.useSanitizeValueStrategy('escape');
-
-  /*
-  console.log('Encriptando: Hola y adios con contraseña 1234');
-  var  a = CryptoJS.AES.encrypt("Hola y adios", "1234").toString();
-  console.log(a);
-  console.log(CryptoJS.AES.decrypt(a, "1234").toString(CryptoJS.enc.Utf8));
-  console.log("\n")
-  var b = CryptoJS.SHA256("contraseñaEnSHA256").toString();
-  console.log("contraseña: contraseñaEnSHA256, encriptada con sha256")
-  console.log(b);
-  */
 })
 
 .run(function($ionicPlatform) {
@@ -132,7 +121,7 @@ var translationsEN = {
   REQUIREMENTS: 'Requirements: ',
   ADD_ACHIEVEMENT: 'Add achievement',
   NEW_ACHIEVEMENT: 'New Achievement',
-  NAME:'Name: ',
+  NAME:'Name ',
   DESCRIPTION:'Description: ',
   CANCEL:'Cancel',
   NEW_BADGE:'New Badge',
@@ -220,7 +209,7 @@ var translationsES= {
   REQUIREMENTS: 'Requisitos: ',
   ADD_ACHIEVEMENT: 'Añadir logro',
   NEW_ACHIEVEMENT: 'Nuevo logro',
-  NAME:'Nombre: ',
+  NAME:'Nombre ',
   DESCRIPTION:'Descripción: ',
   CANCEL:'Cancelar',
   NEW_BADGE:'Nueva medalla',

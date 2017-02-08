@@ -5,19 +5,23 @@ angular.module('app.controllers', ['pascalprecht.translate'])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cookies, $http, Backand,$state) {
 	
-	var form = document.getElementById("login-form1");
+	$scope.clearForm = function(){
+    var form = document.getElementById("login-form1");
+    form.reset();
+  }
 
   $scope.getTeacher = function(email, password) {
     $http.get(Backand.getApiUrl()+'/1/query/data/getTeacher'+'?parameters={ "email" : \"'+CryptoJS.SHA256(email).toString()+'\" , "password" : \"'+CryptoJS.SHA256(password).toString()+'\"}')
         .then(function (response) {
           if (response.data.length > 0) {
             $cookies.put('teacherId', response.data[0].id);
-            $cookies.put('teacherName', response.data[0].name);
-            $cookies.put('teacherSurname', response.data[0].surname);
+            $cookies.put('teacherName', CryptoJS.AES.decrypt(response.data[0].name, password).toString(CryptoJS.enc.Utf8));
+            $cookies.put('teacherSurname', CryptoJS.AES.decrypt(response.data[0].surname, password).toString(CryptoJS.enc.Utf8));
             $cookies.put('teacherAvatar', response.data[0].avatar);
+            $cookies.put('teacherEmail', email);
+            $cookies.put('teacherPassword', password);
             $scope.teacherId = $cookies.get('teacherId');
             $state.go('teacherHome', {teacherId: $scope.teacherId});
-			form.reset();
           } else {
             alert('Wrong credentials');
           }
@@ -31,13 +35,20 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cookies, $http, Backand, $state) {
 
-	var form = document.getElementById("signUp-form2");
+	$scope.clearForm = function(){
+    var form = document.getElementById("signUp-form2");
+    form.reset();
+  }
 
   $scope.createTeacher = function(name, surname, email, password, avatar) {
 
+    if (avatar == null) {
+      avatar = 'https://easyeda.com/assets/static/images/avatar-default.png';
+    }
+
     var teacher = {
-      "name" : name,
-      "surname" : surname,
+      "name" : CryptoJS.AES.encrypt(name,password).toString(),
+      "surname" : CryptoJS.AES.encrypt(surname,password).toString(),
       "email" : CryptoJS.SHA256(email).toString(),
       "password" : CryptoJS.SHA256(password).toString(),
       "avatar" : avatar
@@ -45,7 +56,6 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
 
     $http.post(Backand.getApiUrl()+'/1/objects/'+'teachers', teacher)
       .success(function(response){
-		form.reset();
         $state.go('login');
       })
   }
@@ -56,10 +66,17 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
+
+    $scope.clearForm = function(){
+      var form = document.getElementById("dataClassForm");
+      form.reset();
+      document.getElementById("selectClass").selectedIndex = 0;
+    }
+
     $scope.newClassModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
     '<h3 style="color:#FFFFFF;text-align:center;">{{ \'NEW_CLASS\' | translate }}</h3>'+
-    '<form class="list">'+
+    '<form id="dataClassForm" class="list">'+
       '<label class="item item-input">'+
         '<span class="input-label">{{ \'CLASS_NAME\' | translate }}</span>'+
         '<input type="text" placeholder="" ng-model="name">'+
@@ -69,15 +86,15 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
       '<form class="list">'+
         '<label class="item item-select">'+
           '<span class="input-label">{{ \'IMPORT_PREFERENCES_FROM\' | translate }}</span>'+
-          '<select>'+
+          '<select id="selectClass">'+
             '<option>{{ \'NONE\' | translate }}</option>'+
             '<option>{classroom.name}</option>'+
           '</select>'+
         '</label>'+
         '<div class="button-bar">'+
-          '<button class="button button-calm  button-block" ng-click="closeModal()">{{ \'CANCEL\' | translate }}</button>'+
+          '<button class="button button-calm  button-block" ng-click="closeModal() ; clearForm()">{{ \'CANCEL\' | translate }}</button>'+
           '<button class="button button-positive  button-block" ng-disabled="true"></button>'+
-          '<button class="button button-calm  button-block" ng-click="createClassroom(name); closeModal()">{{ \'CREATE\' | translate }}</button>'+
+          '<button class="button button-calm  button-block" ng-click="createClassroom(name) ; closeModal() ; clearForm()">{{ \'CREATE\' | translate }}</button>'+
         '</div>'+
       '</form>'+
     '</div>'+
@@ -103,6 +120,7 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
       $http.get(Backand.getApiUrl()+'/1/query/data/getClassrooms'+'?parameters={ "teacher" : \"'+$scope.teacherId+'\"}')
         .then(function (response) {
           $scope.classrooms = response.data;
+          $cookies.put('classrooms', response.data);
         });
     }
 
@@ -132,7 +150,7 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
     }
 
     $scope.deleteClassroom = function() {
-      $http.delete(Backand.getApiUrl()+'/1/objects/'+'classrooms/'+classroomId)
+      $http.delete(Backand.getApiUrl()+'/1/objects/'+'classrooms/' + $scope.classroomId)
         .success(function(response){
           $scope.getClassrooms();
         })
@@ -170,24 +188,34 @@ function ($scope, $stateParams, $cookies) {
 function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     var modalFirst;
     
+    $scope.clearFormModal = function(){
+      var selectTeam = document.getElementById("selectTeam").selectedIndex = 0;
+      var selectCopy = document.getElementById("selectCopy").selectedIndex = 0;
+    }
+
       $scope.secundaryMenuModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
     '<h3 style="color:#FFFFFF;text-align:center;">{{ \'ASSIGN_STUDENT_TO_TEAM\' | translate }}</h3>'+
     '<form class="list">'+
       '<label class="item item-select">'+
         '<span class="input-label">{{ \'SELECT\' | translate }}</span>'+
-        '<select></select>'+
+        '<select id="selectTeam">'+
+            '<option>{{ \'NONE\' | translate }}</option>'+
+        '</select>'+
       '</label>'+
       '<h3 style="color:#FFFFFF;text-align:center;">{{ \'COPY_STUDENT_TO_ANOTHER_CLASS\' | translate }}</h3>'+
       '<label class="item item-select">'+
         '<span class="input-label">{{ \'SELECT\' | translate }}</span>'+
-        '<select></select>'+
+        '<select id="selectCopy">'+
+            '<option>{{ \'NONE\' | translate }}</option>'+
+            '<option>{classroom.name}</option>'+
+        '</select>'+
       '</label>'+
     '</form>'+
     '<div class="button-bar">'+
-      '<button class="button button-calm  button-block" ng-click="closeModalSecundary()">{{ \'CANCEL\' | translate }}</button>'+
+      '<button class="button button-calm  button-block" ng-click="closeModalSecundary() ; clearFormModal()">{{ \'CANCEL\' | translate }}</button>'+
       '<button class="button button-positive  button-block" ng-disabled="true"></button>'+
-      '<button class="button button-calm  button-block" ng-click="closeModalSecundary()">{{ \'ACCEPT\' | translate }}</button>'+
+      '<button class="button button-calm  button-block" ng-click="closeModalSecundary() ; clearFormModal()">{{ \'ACCEPT\' | translate }}</button>'+
     '</div>'+
   '</ion-content>'+
     '</ion-modal-view>', {
@@ -281,6 +309,11 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     $scope.closeModalStudentDialog = function(){
         $scope.studentDialogModal.hide();
     }
+
+    $scope.clearFormStudent = function(){
+      var form = document.getElementById("nameStudentForm");
+      form.reset();
+    }
     
     $scope.newStudentModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
@@ -292,14 +325,14 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
       '<button style="font-weight:500;" class="button button-light  button-block button-outline">{{ \'TAKE_PICTURE\' | translate }}</button>'+
       '<form class="list">'+
         '<div class="button-bar">'+
-          '<button class="button button-calm  button-block" ng-click="closeModalNewStudentDialog()">{{ \'CANCEL\' | translate }}</button>'+
-          '<button class="button button-calm  button-block" ng-click="createStudent(name); closeModalNewStudentDialog()">{{ \'GENERATE\' | translate }}</button>'+
+          '<button class="button button-calm  button-block" ng-click="closeModalNewStudentDialog() ; clearFormStudent()">{{ \'CANCEL\' | translate }}</button>'+
+          '<button class="button button-calm  button-block" ng-click="createStudent(name) ; closeModalNewStudentDialog() ; clearFormStudent()">{{ \'GENERATE\' | translate }}</button>'+
         '</div>'+
       '</form>'+
     '</div>'+
     '<div class="list-team list-elements">'+
       '<ion-list>'+
-        '<form class="list">'+
+        '<form id="nameStudentForm" class="list">'+
           '<label class="item item-input">'+
             '<input type="text" ng-model="name" placeholder="{{ \'NAME\' | translate }}">'+
           '</label>'+
@@ -320,6 +353,8 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
       $scope.newStudentModal.hide();
     }
 
+    $scope.classrooms = $cookies.get('classrooms');
+
     $scope.classroomName = $cookies.get('classroomName');
 
     $scope.classroomId = $cookies.get('classroomId');
@@ -333,10 +368,12 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     }
 
     $scope.createStudent = function(name) {
-
+      var a = CryptoJS.SHA1($scope.studentName + $scope.classroomId + Date.now().toString()).toString();
+      var hash = a.substr(0, 10);
       var student = {
         "name" : name,
-        "classroom" : $scope.classroomId
+        "classroom" : $scope.classroomId,
+        "hashCode" : hash
       }
 
       $http.post(Backand.getApiUrl()+'/1/objects/'+'teacherStudents', student)
@@ -425,6 +462,11 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     $scope.closeModalTeamDialog = function(){
         $scope.teamDialogModal.hide();
     }
+
+    $scope.clearFormNewTeam = function(){
+      var form = document.getElementById("teamNameForm");
+      form.reset();
+    }
     
     $scope.newTeamDialogModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
@@ -434,13 +476,13 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
         '<i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>'+
       '</div>'+
       '<button style="font-weight:500;" class="button button-light  button-block button-outline">{{ \'UPLOAD_AVATAR\' | translate }}</button>'+
-      '<form class="list">'+
+      '<form id="teamNameForm" class="list">'+
         '<label class="item item-input list-elements">'+
           '<input type="text" placeholder="{{ \'NAME\' | translate }}">'+
         '</label>'+
         '<div class="button-bar">'+
-          '<button class="button button-calm  button-block" ng-click="closeModalNewTeamDialog()">{{ \'CANCEL\' | translate }}</button>'+
-          '<button class="button button-calm  button-block" ng-click="closeModalNewTeamDialog()">{{ \'ACCEPT\' | translate }}</button>'+
+          '<button class="button button-calm  button-block" ng-click="closeModalNewTeamDialog() ; clearFormNewTeam()">{{ \'CANCEL\' | translate }}</button>'+
+          '<button class="button button-calm  button-block" ng-click="closeModalNewTeamDialog() ; clearFormNewTeam()">{{ \'ACCEPT\' | translate }}</button>'+
         '</div>'+
       '</form>'+
     '</div>'+
@@ -487,6 +529,11 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
     $scope.closeModalAddStudent = function(){
         $scope.addStudentModal.hide();
     }
+
+    $scope.clearFormEditTeam = function(){
+      var form = document.getElementById("teamNameForm");
+      form.reset();
+    }
     
     $scope.editTeamModal = $ionicModal.fromTemplate('<ion-modal-view title="Edit Team" hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="true" class="manual-ios-statusbar-padding">'+
@@ -496,13 +543,13 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
         '<i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>'+
       '</div>'+
       '<button style="font-weight:500;" class="button button-light  button-block button-outline">{{ \'UPLOAD_AVATAR\' | translate }}</button>'+
-      '<form class="list">'+
+      '<form id="teamNameForm" class="list">'+
         '<label class="item item-input list-elements">'+
           '<input type="text" placeholder="{{ \'NAME\' | translate }}">'+
         '</label>'+
         '<div class="button-bar">'+
-          '<button class="button button-calm  button-block" ng-click="closeModalEditTeam()">{{ \'CANCEL\' | translate }}</button>'+
-          '<button class="button button-calm  button-block" ng-click="closeModalEditTeam()">{{ \'ACCEPT\' | translate }}</button>'+
+          '<button class="button button-calm  button-block" ng-click="closeModalEditTeam() ; clearFormEditTeam()">{{ \'CANCEL\' | translate }}</button>'+
+          '<button class="button button-calm  button-block" ng-click="closeModalEditTeam() ; clearFormEditTeam()">{{ \'ACCEPT\' | translate }}</button>'+
         '</div>'+
       '</form>'+
     '</div>'+
@@ -560,11 +607,57 @@ function ($scope, $stateParams, $cookies) {
 
 }])
    
-.controller('teacherProfileCtrl', ['$scope', '$stateParams', '$cookies', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('teacherProfileCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $cookies) {
+function ($scope, $stateParams, $cookies, $http, Backand ) {
 
+  $scope.teacherId = $cookies.get('teacherId');
+  $scope.teacherAvatar = $cookies.get('teacherAvatar');
+  $scope.teacherName = $cookies.get('teacherName');
+  $scope.teacherSurname = $cookies.get('teacherSurname');
+  $scope.teacherEmail = $cookies.get('teacherEmail');
+  $scope.teacherPassword = $cookies.get('teacherPassword');
+
+  $scope.getTeacherData = function() {
+      $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'/'+$scope.teacherId)
+        .then(function (response) {
+          $scope.teacherAvatar = response.data[0].avatar;
+          $scope.teacherName = response.data[0].name;
+          $scope.teacherSurname = response.data[0].surname;
+          $scope.teacherEmail = response.data[0].email;
+          $scope.teacherPassword = response.data[0].Avatar;
+          $cookies.put('teacherName', CryptoJS.AES.decrypt(response.data[0].name, password).toString(CryptoJS.enc.Utf8));
+          $cookies.put('teacherSurname', CryptoJS.AES.decrypt(response.data[0].surname, password).toString(CryptoJS.enc.Utf8));
+          $cookies.put('teacherAvatar', response.data[0].Avatar);
+        });
+  }
+
+  $scope.editTeacher = function(name, surname, email, password, avatar) {
+
+    $scope.teacherId = $cookies.get('teacherId');
+
+    if (avatar == null) {
+      avatar = $cookies.get('teacherAvatar');
+    }
+
+    var teacher = {
+      "name" : CryptoJS.AES.encrypt(name,password).toString(),
+      "surname" : CryptoJS.AES.encrypt(surname,password).toString(),
+      "email" : CryptoJS.SHA256(email).toString(),
+      "password" : CryptoJS.SHA256(password).toString(),
+      "avatar" : avatar
+    }
+
+    
+    $http.put(Backand.getApiUrl()+'/1/objects/'+'teachers/'+$scope.teacherId, teacher)
+      .success(function(response){
+        $cookies.put('teacherEmail', email);
+        $cookies.put('teacherPassword', password);
+        getTeacherData();
+      })
+
+  }
 
 }])
    
@@ -580,11 +673,16 @@ function ($scope, $stateParams, $cookies) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $ionicModal, $cookies) {
+
+  $scope.clearForm = function(){
+      var form = document.getElementById("itemDataForm");
+      form.reset();
+    }
     
     $scope.newItemModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
    '<h3 style="color:#FFFFFF;text-align:center;">{{ \'NEW_ITEM\' | translate }}</h3>'+
-    '<form class="list list-student">'+
+    '<form id="itemDataForm" class="list list-student">'+
       '<ion-list>'+
         '<label class="item item-input list-elements">'+
           '<span class="input-label">{{ \'NAME\' | translate }}</span>'+
@@ -601,8 +699,8 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
       '</ion-list>'+
     '</form>'+
     '<div class="list-student">'+
-      '<button class="button button-calm  button-block" ng-click="closeModalNewItem()">{{ \'ADD_ITEM\' | translate }}</button>'+
-      '<button class="button button-calm  button-block" ng-click="closeModalNewItem()">{{ \'CANCEL\' | translate }}</button>'+
+      '<button class="button button-calm  button-block" ng-click="closeModalNewItem() ; clearForm()">{{ \'ADD_ITEM\' | translate }}</button>'+
+      '<button class="button button-calm  button-block" ng-click="closeModalNewItem() ; clearForm()">{{ \'CANCEL\' | translate }}</button>'+
     '</div>'+
   '</ion-content>'+
 '</ion-modal-view>', {
@@ -632,11 +730,16 @@ function ($scope, $stateParams, $cookies) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $ionicModal, $cookies) {
+
+    $scope.clearForm = function(){
+      var form = document.getElementById("achievementDataForm");
+      form.reset();
+    }
     
     $scope.newAchievementModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
     '<h3 style="color:#FFFFFF;text-align:center;">{{ \'NEW_ACHIEVEMENT\' | translate }}</h3>'+
-    '<form class="list list-student">'+
+    '<form id="achievementDataForm" class="list list-student">'+
       '<ion-list>'+
         '<label class="item item-input list-elements">'+
           '<span class="input-label">{{ \'NAME\' | translate }} </span>'+
@@ -653,8 +756,8 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
       '</ion-list>'+
     '</form>'+
     '<div class="list-student">'+
-      '<button class="button button-calm  button-block" ng-click="closeModalNewAchievement()">{{ \'ADD_ACHIEVEMENT\' | translate }}</button>'+
-      '<button class="button button-calm  button-block" ng-click="closeModalNewAchievement()">{{ \'CANCEL\' | translate }}</button>'+
+      '<button class="button button-calm  button-block" ng-click="closeModalNewAchievement() ; clearForm()">{{ \'ADD_ACHIEVEMENT\' | translate }}</button>'+
+      '<button class="button button-calm  button-block" ng-click="closeModalNewAchievement() ; clearForm()">{{ \'CANCEL\' | translate }}</button>'+
     '</div>'+
   '</ion-content>'+
 '</ion-modal-view>', {
@@ -684,11 +787,16 @@ function ($scope, $stateParams, $cookies) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $ionicModal, $cookies) {
+
+    $scope.clearForm = function(){
+      var form = document.getElementById("badgeDataForm");
+      form.reset();
+    }
     
     $scope.newBadgeModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
     '<h3 style="color:#FFFFFF;text-align:center;">{{ \'NEW_BADGE\' | translate }}</h3>'+
-    '<form class="list list-student">'+
+    '<form id="badgeDataForm" class="list list-student">'+
       '<ion-list>'+
         '<label class="item item-input list-elements">'+
           '<span class="input-label">{{ \'NAME\' | translate }} </span>'+
@@ -705,8 +813,8 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
       '</ion-list>'+
     '</form>'+
     '<div class="list-student">'+
-      '<button class="button button-calm  button-block" ng-click="closeModalNewBadge()">{{ \'ADD_BADGE\' | translate }}</button>'+
-      '<button class="button button-calm  button-block" ng-click="closeModalNewBadge()">{{ \'CANCEL\' | translate }}</button>'+
+      '<button class="button button-calm  button-block" ng-click="closeModalNewBadge() ; clearForm()">{{ \'ADD_BADGE\' | translate }}</button>'+
+      '<button class="button button-calm  button-block" ng-click="closeModalNewBadge() ; clearForm()">{{ \'CANCEL\' | translate }}</button>'+
     '</div>'+
   '</ion-content>'+
 '</ion-modal-view>', {
@@ -736,10 +844,15 @@ function ($scope, $stateParams, $cookies) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $ionicModal, $cookies) {
+
+    $scope.clearForm = function(){
+      var form = document.getElementById("missionDataForm");
+      form.reset();
+    }
     
     $scope.newMissionModal = $ionicModal.fromTemplate('<ion-modal-view title="New Mission" hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
-    '<form class="list">'+
+    '<form id="missionDataForm" class="list">'+
       '<h3 style="color:#FFFFFF;text-align:center;">{{ \'NEW_MISSION\' | translate }}</h3>'+
       '<ion-list>'+
         '<label class="item item-input list-elements">'+
@@ -761,9 +874,9 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
       '</ion-list>'+
     '</form>'+
     '<div class="button-bar">'+
-      '<button ng-click="closeModalNewMission()" class="button button-calm  button-block">{{ \'CANCEL\' | translate }}</button>'+
+      '<button ng-click="closeModalNewMission() ; clearForm()" class="button button-calm  button-block">{{ \'CANCEL\' | translate }}</button>'+
       '<button ng-disabled="true" class="button button-positive  button-block"></button>'+
-      '<button ng-click="closeModalNewMission()" class="button button-calm  button-block">{{ \'ACCEPT\' | translate }}</button>'+
+      '<button ng-click="closeModalNewMission() ; clearForm()" class="button button-calm  button-block">{{ \'ACCEPT\' | translate }}</button>'+
     '</div>'+
   '</ion-content>'+
 '</ion-modal-view>',  {
