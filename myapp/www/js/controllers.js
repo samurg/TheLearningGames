@@ -37,6 +37,10 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
 
   $scope.createTeacher = function(name, surname, email, password, avatar) {
 
+    if (avatar == null) {
+      avatar = 'https://easyeda.com/assets/static/images/avatar-default.png';
+    }
+
     var teacher = {
       "name" : CryptoJS.AES.encrypt(name,password).toString(),
       "surname" : CryptoJS.AES.encrypt(surname,password).toString(),
@@ -567,20 +571,55 @@ function ($scope, $stateParams, $cookies) {
 
 }])
    
-.controller('teacherProfileCtrl', ['$scope', '$stateParams', '$cookies', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('teacherProfileCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $cookies) {
+function ($scope, $stateParams, $cookies, $http, Backand ) {
 
+  $scope.teacherId = $cookies.get('teacherId');
   $scope.teacherAvatar = $cookies.get('teacherAvatar');
   $scope.teacherName = $cookies.get('teacherName');
   $scope.teacherSurname = $cookies.get('teacherSurname');
   $scope.teacherEmail = $cookies.get('teacherEmail');
   $scope.teacherPassword = $cookies.get('teacherPassword');
 
+  $scope.getTeacherData = function() {
+      $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'/'+$scope.teacherId)
+        .then(function (response) {
+          $scope.teacherAvatar = response.data[0].avatar;
+          $scope.teacherName = response.data[0].name;
+          $scope.teacherSurname = response.data[0].surname;
+          $scope.teacherEmail = response.data[0].email;
+          $scope.teacherPassword = response.data[0].Avatar;
+          $cookies.put('teacherName', CryptoJS.AES.decrypt(response.data[0].name, password).toString(CryptoJS.enc.Utf8));
+          $cookies.put('teacherSurname', CryptoJS.AES.decrypt(response.data[0].surname, password).toString(CryptoJS.enc.Utf8));
+          $cookies.put('teacherAvatar', response.data[0].Avatar);
+        });
+  }
+
   $scope.editTeacher = function(name, surname, email, password, avatar) {
 
+    $scope.teacherId = $cookies.get('teacherId');
 
+    if (avatar == null) {
+      avatar = $cookies.get('teacherAvatar');
+    }
+
+    var teacher = {
+      "name" : CryptoJS.AES.encrypt(name,password).toString(),
+      "surname" : CryptoJS.AES.encrypt(surname,password).toString(),
+      "email" : CryptoJS.SHA256(email).toString(),
+      "password" : CryptoJS.SHA256(password).toString(),
+      "avatar" : avatar
+    }
+
+    
+    $http.put(Backand.getApiUrl()+'/1/objects/'+'teachers/'+$scope.teacherId, teacher)
+      .success(function(response){
+        $cookies.put('teacherEmail', email);
+        $cookies.put('teacherPassword', password);
+        getTeacherData();
+      })
 
   }
 
