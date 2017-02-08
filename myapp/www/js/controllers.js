@@ -15,9 +15,11 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
         .then(function (response) {
           if (response.data.length > 0) {
             $cookies.put('teacherId', response.data[0].id);
-            $cookies.put('teacherName', response.data[0].name);
-            $cookies.put('teacherSurname', response.data[0].surname);
+            $cookies.put('teacherName', CryptoJS.AES.decrypt(response.data[0].name, password).toString(CryptoJS.enc.Utf8));
+            $cookies.put('teacherSurname', CryptoJS.AES.decrypt(response.data[0].surname, password).toString(CryptoJS.enc.Utf8));
             $cookies.put('teacherAvatar', response.data[0].avatar);
+            $cookies.put('teacherEmail', email);
+            $cookies.put('teacherPassword', password);
             $scope.teacherId = $cookies.get('teacherId');
             $state.go('teacherHome', {teacherId: $scope.teacherId});
           } else {
@@ -41,8 +43,8 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
   $scope.createTeacher = function(name, surname, email, password, avatar) {
 
     var teacher = {
-      "name" : name,
-      "surname" : surname,
+      "name" : CryptoJS.AES.encrypt(name,password).toString(),
+      "surname" : CryptoJS.AES.encrypt(surname,password).toString(),
       "email" : CryptoJS.SHA256(email).toString(),
       "password" : CryptoJS.SHA256(password).toString(),
       "avatar" : avatar
@@ -114,6 +116,7 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
       $http.get(Backand.getApiUrl()+'/1/query/data/getClassrooms'+'?parameters={ "teacher" : \"'+$scope.teacherId+'\"}')
         .then(function (response) {
           $scope.classrooms = response.data;
+          $cookies.put('classrooms', response.data);
         });
     }
 
@@ -346,6 +349,8 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
       $scope.newStudentModal.hide();
     }
 
+    $scope.classrooms = $cookies.get('classrooms');
+
     $scope.classroomName = $cookies.get('classroomName');
 
     $scope.classroomId = $cookies.get('classroomId');
@@ -359,10 +364,12 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     }
 
     $scope.createStudent = function(name) {
-
+      var a = CryptoJS.SHA1($scope.studentName + $scope.classroomId + Date.now().toString()).toString();
+      var hash = a.substr(0, 10);
       var student = {
         "name" : name,
-        "classroom" : $scope.classroomId
+        "classroom" : $scope.classroomId,
+        "hashCode" : hash
       }
 
       $http.post(Backand.getApiUrl()+'/1/objects/'+'teacherStudents', student)
@@ -601,6 +608,17 @@ function ($scope, $stateParams, $cookies) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cookies) {
 
+  $scope.teacherAvatar = $cookies.get('teacherAvatar');
+  $scope.teacherName = $cookies.get('teacherName');
+  $scope.teacherSurname = $cookies.get('teacherSurname');
+  $scope.teacherEmail = $cookies.get('teacherEmail');
+  $scope.teacherPassword = $cookies.get('teacherPassword');
+
+  $scope.editTeacher = function(name, surname, email, password, avatar) {
+
+
+
+  }
 
 }])
    
