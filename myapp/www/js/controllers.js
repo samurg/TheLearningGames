@@ -45,6 +45,27 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
         });
   }
 
+  /*
+    This function returns the student's data when it is logged, 
+    decrypts personal data, saves personal data in cookies 
+    and goes to studentHome.
+  */
+  $scope.getStudent = function(hashCode) {
+    $http.get(Backand.getApiUrl()+'/1/query/data/getStudentData'+'?parameters={ "hashCode" : \"'+hashCode+'\"}')
+        .then(function (response) {
+          if (response.data.length > 0) {
+            $cookies.put('studentId', response.data[0].id);
+            $cookies.put('studentName', CryptoJS.AES.decrypt(response.data[0].name, hashCode).toString(CryptoJS.enc.Utf8));
+            $cookies.put('studentSurname', CryptoJS.AES.decrypt(response.data[0].surname, hashCode).toString(CryptoJS.enc.Utf8));
+            $cookies.put('studentAvatar', response.data[0].avatar);
+            $scope.studentId = $cookies.get('studentId');
+            $state.go('studentHome', {studentId: $scope.studentId});
+          } else {
+            alert('Wrong credentials');
+          }
+        });
+  }
+
 }])
    
 .controller('signUpCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', '$state',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
