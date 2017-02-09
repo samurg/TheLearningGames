@@ -701,17 +701,45 @@ function ($scope, $stateParams, $cookies) {
 
 }])
    
-.controller('teacherProfileCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('teacherProfileCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', '$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $cookies, $http, Backand ) {
+function ($scope, $stateParams, $cookies, $http, Backand, $state) {
 
-  $scope.teacherId = $cookies.get('teacherId');
-  $scope.teacherAvatar = $cookies.get('teacherAvatar');
-  $scope.teacherName = $cookies.get('teacherName');
-  $scope.teacherSurname = $cookies.get('teacherSurname');
-  $scope.teacherEmail = $cookies.get('teacherEmail');
-  $scope.teacherPassword = $cookies.get('teacherPassword');
+  $scope.initData = function(){
+    $scope.teacherId = $cookies.get('teacherId');
+    $scope.teacherAvatar = $cookies.get('teacherAvatar');
+    $scope.teacherName = $cookies.get('teacherName');
+    $scope.teacherSurname = $cookies.get('teacherSurname');
+    $scope.teacherEmail = $cookies.get('teacherEmail');
+    $scope.teacherPassword = $cookies.get('teacherPassword');
+
+    //Getting all the inputs for change their placeholders
+    var input1 = document.getElementById ("inputName");
+    input1.placeholder = $scope.teacherName;
+
+    var input2 = document.getElementById ("inputSurname");
+    input2.placeholder = $scope.teacherSurname;
+
+    var input3 = document.getElementById ("inputEmail");
+    input3.placeholder = $scope.teacherEmail;
+
+    var input4 = document.getElementById ("inputPassword");
+    input4.placeholder = $scope.teacherPassword;
+
+    var input5 = document.getElementById ("inputRepeatpassword");
+    input5.placeholder = $scope.teacherPassword;
+
+    var input6 = document.getElementById ("inputAvatar");
+    input6.placeholder = $scope.teacherAvatar;
+  }
+  
+
+  $scope.clearForm  = function(){
+    var form = document.getElementById('teacherProfile-form1');
+    form.reset();
+    $state.go('teacherProfile', {teacherName: $scope.teacherName});
+  }
 
   $scope.getTeacherData = function() {
       $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'/'+$scope.teacherId)
@@ -768,7 +796,11 @@ function ($scope, $stateParams, $cookies, $http, Backand ) {
       .success(function(response) {
         $cookies.put('teacherEmail', email);
         $cookies.put('teacherPassword', password);
+        $cookies.put('teacherName', name);
+        $cookies.put('teacherSurname', surname);
+        $cookies.put('teacherAvatar', avatar);
         $scope.getTeacherData();
+        $scope.clearForm();
       })
 
   }
@@ -792,6 +824,10 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
       var form = document.getElementById("itemDataForm");
       form.reset();
     }
+
+    $scope.classroomId = $cookies.get('classroomId');
+
+
     
     $scope.newItemModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
@@ -809,6 +845,14 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
         '<label class="item item-input list-elements">'+
           '<span class="input-label">{{ \'REQUIREMENTS\' | translate }}</span>'+
           '<input type="text" placeholder="{item.requirements}">'+
+        '</label>'+
+        '<label class="item item-input list-elements">'+
+          '<span class="input-label">{{ \'SCORE\' | translate }}</span>'+
+          '<input type="text" placeholder="{item.name}">'+
+        '</label>'+
+        '<label class="item item-input list-elements">'+
+          '<span class="input-label">{{ \'MAX_SCORE\' | translate }}</span>'+
+          '<input type="text" placeholder="{item.name}">'+
         '</label>'+
       '</ion-list>'+
     '</form>'+
