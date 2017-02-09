@@ -729,7 +729,7 @@ function ($scope, $stateParams, $cookies, $http, Backand ) {
 
   $scope.checkTeacherEmail = function(name, surname, email, password, avatar) {
 
-    if (email == null) {
+    if (email == null || email == $cookies.get('teacherEmail')) {
       email = $cookies.get('teacherEmail');
       $scope.editTeacher(name, surname, email, password, avatar);
       $scope.getTeacherData();
