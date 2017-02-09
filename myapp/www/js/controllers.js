@@ -211,11 +211,17 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
 
 }])
    
-.controller('studentHomeCtrl', ['$scope', '$stateParams', '$cookies', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('studentHomeCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $cookies) {
+function ($scope, $stateParams, $cookies, $http, Backand) {
 
+  $scope.studentId = $cookies.get('teacherId');
+  $scope.studentAvatar = $cookies.get('teacherAvatar');
+  $scope.studentName = $cookies.get('teacherName');
+  $scope.studentSurname = $cookies.get('teacherSurname');
+
+  $scope.getStudentData = function()
 
 }])
    
@@ -421,9 +427,9 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
         });
     }
 
-    $scope.createStudent = function(name) {
+    $scope.createStudent = function(name, surname) {
       var a = CryptoJS.SHA1($scope.studentName + $scope.classroomId + Date.now().toString()).toString();
-      var hash = a.substr(0, 10);
+      var hash = a.substr(0, 10).toUpperCase();
 
       var teacherStudent = { 
         "name" : name,
@@ -433,7 +439,8 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
       }
 
       var student = {
-        "name" : name,
+        "name" : CryptoJS.AES.encrypt(name,hash).toString(),
+        "surname": CryptoJS.AES.encrypt(surname,hash).toString(),
         "hashCode" : hash,
         "avatar" : 'https://easyeda.com/assets/static/images/avatar-default.png'
       }
