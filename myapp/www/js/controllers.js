@@ -79,6 +79,19 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
     form.reset();
   }
 
+  $scope.checkTeacherEmail = function(name, surname, email, password, avatar) {
+    $http.get(Backand.getApiUrl()+'/1/query/data/checkTeacherEmail'+'?parameters={ "email" : \"'+CryptoJS.SHA256(email).toString()+'\"}')
+        .success(function (response) {
+          if (response.length > 0) {
+            $scope.permission = false;
+            alert('Email already used');
+          } else {
+            $scope.permission = true;
+            $scope.createTeacher(name, surname, email, password, avatar);
+          }
+        });
+  }
+
   $scope.createTeacher = function(name, surname, email, password, avatar) {
 
     if (avatar == null) {
@@ -97,6 +110,7 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
       .success(function(response){
         $state.go('login');
       })
+    
   }
 
 }])
@@ -191,7 +205,7 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
     $scope.deleteClassroom = function() {
       $http.delete(Backand.getApiUrl()+'/1/objects/'+'classrooms/' + $scope.classroomId)
         .success(function(response){
-          $scope.getClassrooms();
+          $scope.getClassrooms()
         })
     }
 
@@ -284,7 +298,8 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     
     $scope.studentDialogModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
-    '<h3 style="color:#FFFFFF;text-align:center;">{{studentName}}</h3>'+
+    '<h2 style="color:#FFFFFF;text-align:center;">{{studentName}}</h2>'+
+    '<h3 style="color:#FFFFFF;text-align:center;">{{studentHashCode}}</h3>'+
     '<div class="list-student">'+
       '<div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">'+
         '<i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>'+
@@ -409,6 +424,7 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     $scope.createStudent = function(name) {
       var a = CryptoJS.SHA1($scope.studentName + $scope.classroomId + Date.now().toString()).toString();
       var hash = a.substr(0, 10);
+
       var student = {
         "name" : name,
         "classroom" : $scope.classroomId,
@@ -429,9 +445,11 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
       $cookies.put('studentId', value);
     }
 
-    $scope.setStudentName = function(value) {
-      $scope.studentName = value;
-      $cookies.put('studentName', value);
+    $scope.setStudentName = function(name, hashCode) {
+      $scope.studentName = name;
+      $scope.studentHashCode = hashCode;
+      $cookies.put('studentName', name);
+      $cookies.put('studentHashCode', hashCode);
     }
 
     $scope.deleteStudent = function() {
@@ -672,6 +690,19 @@ function ($scope, $stateParams, $cookies, $http, Backand ) {
         });
   }
 
+  $scope.checkTeacherEmail = function(name, surname, email, password, avatar) {
+    $http.get(Backand.getApiUrl()+'/1/query/data/checkTeacherEmail'+'?parameters={ "email" : \"'+CryptoJS.SHA256(email).toString()+'\"}')
+        .success(function (response) {
+          if (response.length > 0) {
+            $scope.permission = false;
+            alert('Email already used');
+          } else {
+            $scope.permission = true;
+            $scope.editTeacher(name, surname, email, password, avatar);
+          }
+        });
+  }
+
   $scope.editTeacher = function(name, surname, email, password, avatar) {
 
     $scope.teacherId = $cookies.get('teacherId');
@@ -693,7 +724,7 @@ function ($scope, $stateParams, $cookies, $http, Backand ) {
       .success(function(response){
         $cookies.put('teacherEmail', email);
         $cookies.put('teacherPassword', password);
-        getTeacherData();
+        $scope.getTeacherData();
       })
 
   }

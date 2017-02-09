@@ -44,7 +44,7 @@
             <input type="text" placeholder="{{teacherAvatar}}" ng-model="avatar"></span>
         </label>
       </ion-list>
-      <button id="signUp-button9" ng-disabled="!name || !surname || !email || !password || !passwordRepeat" id="signUp-btn9" class="button button-calm button-large button-block" ng-click="editTeacher(name, surname, email, password, avatar)">{{ 'SAVE_CHANGES' | translate }}</button>
+      <button id="signUp-button9" ng-disabled="!name || !surname || !email || !password || !passwordRepeat" id="signUp-btn9" class="button button-calm button-large button-block" ng-click="checkTeacherEmail(name, surname, email, password, avatar)">{{ 'SAVE_CHANGES' | translate }}</button>
     </form>
   </ion-content>
 </ion-view>
