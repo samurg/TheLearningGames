@@ -22,18 +22,18 @@
         <label class="item item-input list-elements" id="signUp-input3">
           <span class="inputLabelProfile">
             <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'NAME'  | translate }}
-            <input type="text" placeholder="{{teacherName}}" ng-model="name"></span>
+            <input type="text" placeholder="{{studentName}}" ng-model="name"></span>
         </label>
         <label class="item item-input list-elements" id="signUp-input3">
           <span class="inputLabelProfile">
             <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'SURNAME' | translate }}
-            <input type="text" placeholder="{{teacherSurname}}" ng-model="surname"></span>
+            <input type="text" placeholder="{{studentSurname}}" ng-model="surname"></span>
         </label>
         
         <label class="item item-input list-elements" id="signUp-input3">
           <span class="inputLabelProfile">
             <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'AVATAR' | translate }}
-            <input type="text" placeholder="{{teacherAvatar}}" ng-model="avatar"></span>
+            <input type="text" placeholder="{{studentAvatar}}" ng-model="avatar"></span>
         </label>
       </ion-list>
       <button id="signUp-button9" ng-disabled="!name || !surname || !email || !password || !passwordRepeat" id="signUp-btn9" class="button button-calm button-large button-block" ng-click="checkTeacherEmail(name, surname, email, password, avatar)">{{ 'SAVE_CHANGES' | translate }}</button>
