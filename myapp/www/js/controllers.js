@@ -700,7 +700,13 @@ function ($scope, $stateParams, $cookies, $http, Backand ) {
   }
 
   $scope.checkTeacherEmail = function(name, surname, email, password, avatar) {
-    $http.get(Backand.getApiUrl()+'/1/query/data/checkTeacherEmail'+'?parameters={ "email" : \"'+CryptoJS.SHA256(email).toString()+'\"}')
+
+    if (email == null) {
+      email = $cookies.get('teacherEmail');
+      $scope.editTeacher(name, surname, email, password, avatar);
+      $scope.getTeacherData();
+    } else {
+      $http.get(Backand.getApiUrl()+'/1/query/data/checkTeacherEmail'+'?parameters={ "email" : \"'+CryptoJS.SHA256(email).toString()+'\"}')
         .success(function (response) {
           if (response.length > 0) {
             $scope.permission = false;
@@ -711,6 +717,7 @@ function ($scope, $stateParams, $cookies, $http, Backand ) {
             $scope.getTeacherData();
           }
         });
+    }
   }
 
   $scope.editTeacher = function(name, surname, email, password, avatar) {
@@ -721,10 +728,6 @@ function ($scope, $stateParams, $cookies, $http, Backand ) {
       avatar = $cookies.get('teacherAvatar');
     }
 
-    if (email == null) {
-      email = $cookies.get('teacherEmail');
-    }
-
     var teacher = {
       "name" : CryptoJS.AES.encrypt(name,password).toString(),
       "surname" : CryptoJS.AES.encrypt(surname,password).toString(),
@@ -732,10 +735,9 @@ function ($scope, $stateParams, $cookies, $http, Backand ) {
       "password" : CryptoJS.SHA256(password).toString(),
       "avatar" : avatar
     }
-
     
     $http.put(Backand.getApiUrl()+'/1/objects/'+'teachers/'+$scope.teacherId, teacher)
-      .success(function(response){
+      .success(function(response) {
         $cookies.put('teacherEmail', email);
         $cookies.put('teacherPassword', password);
         $scope.getTeacherData();
