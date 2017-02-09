@@ -1,9 +1,14 @@
 <ion-view title="Login" hide-nav-bar="true" id="page5" class="pg5">
   <ion-content padding="false" class="manual-ios-statusbar-padding">
-    <form id="login-form1" class="list">
-      <div>
+        <div>
         <img src="img/JOKiWwG0RpmqQmRNuC0l_ownLogo.png" class="pipo">
+
       </div>
+       <div id="login-button-bar1" class="button-bar">
+        <button class="button button-calm  button-block bold-font" ng-click="teacherForm()">{{ 'LOG_TEACHER' | translate }}</button>
+        <button class="button button-calm  button-block bold-font" ng-click="studentForm()">{{ 'LOG_STUDENT' | translate }}</button>
+      </div>
+    <form id="login-form1" class="list" ng-show="loginType" >
       <ion-list id="login-list1">
         <label class="item item-input list-elements" id="login-input1">
           <span class="input-label">{{ 'EMAIL' | translate }}</span>
@@ -11,22 +16,32 @@
         </label>
         <label class="item item-input list-elements" id="login-input2">
           <span class="input-label">{{ 'PASSWORD' | translate }}</span>
-          <input type="password" placeholder="{{ 'YOUR_PASSWORD' | translate }}" ng-model="password" ng-minlenght="3">
+          <input id="passInput" type="password" placeholder="{{ 'YOUR_PASSWORD' | translate }}" ng-model="password" ng-minlenght="3" >
         </label>
-      </ion-list>
-      <div class="spacer" class="spacerLogin"></div>
+               <div class="spacer" class="spacerLogin"></div>
       <div id="login-button-bar1" class="button-bar">
-        <button id="login-button6" id="login-button6" class="button button-calm  button-block bold-font" ng-click="getTeacher(email, password) ; clearForm()">{{ 'LOG_TEACHER' | translate }}</button>
-        <button ui-sref="studentHome" id="login-button7" id="login-btn7" class="button button-calm  button-block bold-font" ng-click="clearForm()">{{ 'LOG_STUDENT' | translate }}</button>
+        <button id="login-button6" id="login-button6" class="button button-calm  button-block bold-font" ng-click="getTeacher(email, password) ; clearForm1()">{{ 'LOGIN' | translate }}</button>
       </div>
+      </ion-list>
+    
       <div id="login-button-bar3" class="button-bar">
         <button id="login-button10" class="button button-light  button-block button-clear icon ion-chevron-right"> {{ 'FORGOT_PASSWORD' | translate }}</button>
         <a ui-sref="signUp" id="login-button2" class="button button-light  button-block button-clear icon ion-chevron-right">  {{ 'DONT_HAVE_ACCOUNT' | translate }}</a>
       </div>
-    </form>
-    
+  </form>
+  <form id="login-form2" class="list" ng-show="loginType2">
+      <div>
+          <label class="item item-input list-elements" id="login-input2">
+          <span class="input-label">{{ 'CODE' | translate }}</span>
+          <input id="hashInput" type="text" placeholder="{{ 'YOUR_CODE' | translate }}" ng-model="password" ng-minlenght="3" >
+        </label>
+        <div>
+           <button ui-sref="studentHome" id="login-button7" id="login-btn7" class="button button-calm  button-block bold-font" ng-click="clearForm2()">{{ 'LOGIN' | translate }}</button>
+        </div>
+      </div>
+   </form>
+  
+
   </ion-content>
+
 </ion-view>
-
- 
-
