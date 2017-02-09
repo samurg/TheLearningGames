@@ -216,10 +216,10 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cookies, $http, Backand) {
 
-  $scope.studentId = $cookies.get('teacherId');
-  $scope.studentAvatar = $cookies.get('teacherAvatar');
-  $scope.studentName = $cookies.get('teacherName');
-  $scope.studentSurname = $cookies.get('teacherSurname');
+  $scope.studentId = $cookies.get('studentId');
+  $scope.studentAvatar = $cookies.get('studentAvatar');
+  $scope.studentName = $cookies.get('studentName');
+  $scope.studentSurname = $cookies.get('studentSurname');
 
   $scope.getStudentData = function(){}
 
