@@ -45,6 +45,28 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
         });
   }
 
+
+  /*
+    This function returns the student's data when it is logged, 
+    decrypts personal data, saves personal data in cookies 
+    and goes to studentHome.
+  */
+  $scope.getStudent = function(hashCode) {
+    $http.get(Backand.getApiUrl()+'/1/query/data/getStudentData'+'?parameters={ "hashCode" : \"'+hashCode+'\"}')
+        .then(function (response) {
+          if (response.data.length > 0) {
+            $cookies.put('studentId', response.data[0].id);
+            $cookies.put('studentName', CryptoJS.AES.decrypt(response.data[0].name, hashCode).toString(CryptoJS.enc.Utf8));
+            $cookies.put('studentSurname', CryptoJS.AES.decrypt(response.data[0].surname, hashCode).toString(CryptoJS.enc.Utf8));
+            $cookies.put('studentAvatar', response.data[0].avatar);
+            $scope.studentId = $cookies.get('studentId');
+            $state.go('studentHome', {studentId: $scope.studentId});
+          } else {
+            alert('Wrong credentials');
+          }
+        });
+  }
+
 }])
    
 .controller('signUpCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', '$state',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
@@ -189,11 +211,17 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
 
 }])
    
-.controller('studentHomeCtrl', ['$scope', '$stateParams', '$cookies', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('studentHomeCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $cookies) {
+function ($scope, $stateParams, $cookies, $http, Backand) {
 
+  $scope.studentId = $cookies.get('studentId');
+  $scope.studentAvatar = $cookies.get('studentAvatar');
+  $scope.studentName = $cookies.get('studentName');
+  $scope.studentSurname = $cookies.get('studentSurname');
+
+  $scope.getStudentData = function(){}
 
 }])
    
@@ -404,7 +432,7 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
 
     $scope.createStudent = function(name, surname) {
       var a = CryptoJS.SHA1($scope.studentName + $scope.classroomId + Date.now().toString()).toString();
-      var hash = a.substr(0, 10);
+      var hash = a.substr(0, 10).toUpperCase();
 
       var teacherStudent = { 
         "name" : name,
@@ -415,8 +443,8 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
       }
 
       var student = {
-        "name" : name,
-        "name" : surname,
+        "name" : CryptoJS.AES.encrypt(name,hash).toString(),
+        "surname": CryptoJS.AES.encrypt(surname,hash).toString(),
         "hashCode" : hash,
         "avatar" : 'https://easyeda.com/assets/static/images/avatar-default.png'
       }
