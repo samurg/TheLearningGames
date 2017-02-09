@@ -221,7 +221,7 @@ function ($scope, $stateParams, $cookies, $http, Backand) {
   $scope.studentName = $cookies.get('teacherName');
   $scope.studentSurname = $cookies.get('teacherSurname');
 
-  $scope.getStudentData = function()
+  $scope.getStudentData = function(){}
 
 }])
    
@@ -304,7 +304,7 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     
     $scope.studentDialogModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
-    '<h2 style="color:#FFFFFF;text-align:center;">{{studentName}}</h2>'+
+    '<h2 style="color:#FFFFFF;text-align:center;">{{studentName}} {{studentSurname}}</h2>'+
     '<h3 style="color:#FFFFFF;text-align:center;">{{studentHashCode}}</h3>'+
     '<div class="list-student">'+
       '<div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">'+
@@ -386,7 +386,7 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
       '<form class="list">'+
         '<div class="button-bar">'+
           '<button class="button button-calm  button-block" ng-click="closeModalNewStudentDialog() ; clearFormStudent()">{{ \'CANCEL\' | translate }}</button>'+
-          '<button class="button button-calm  button-block" ng-click="createStudent(name) ; closeModalNewStudentDialog() ; clearFormStudent()">{{ \'GENERATE\' | translate }}</button>'+
+          '<button class="button button-calm  button-block" ng-click="createStudent(name, surname) ; closeModalNewStudentDialog() ; clearFormStudent()">{{ \'GENERATE\' | translate }}</button>'+
         '</div>'+
       '</form>'+
     '</div>'+
@@ -395,6 +395,9 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
         '<form id="nameStudentForm" class="list">'+
           '<label class="item item-input">'+
             '<input type="text" ng-model="name" placeholder="{{ \'NAME\' | translate }}">'+
+          '</label>'+
+          '<label class="item item-input">'+
+            '<input type="text" ng-model="surname" placeholder="{{ \'SURNAME\' | translate }}">'+
           '</label>'+
         '</form>'+
       '</ion-list>'+
@@ -433,6 +436,7 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
 
       var teacherStudent = { 
         "name" : name,
+        "surname" : surname,
         "classroom" : $scope.classroomId,
         "hashCode" : hash,
         "avatar" : 'https://easyeda.com/assets/static/images/avatar-default.png'
@@ -466,10 +470,12 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
       $cookies.put('studentHashCode', value.hashCode);
     }
 
-    $scope.setStudentName = function(name, hashCode) {
+    $scope.setStudentName = function(name, surname, hashCode) {
       $scope.studentName = name;
+      $scope.studentSurname = surname;
       $scope.studentHashCode = hashCode;
       $cookies.put('studentName', name);
+      $cookies.put('studentSurname', surname);
       $cookies.put('studentHashCode', hashCode);
     }
 
@@ -730,6 +736,7 @@ function ($scope, $stateParams, $cookies, $http, Backand ) {
           } else {
             $scope.permission = true;
             $scope.editTeacher(name, surname, email, password, avatar);
+            $scope.getTeacherData();
           }
         });
   }
@@ -740,6 +747,10 @@ function ($scope, $stateParams, $cookies, $http, Backand ) {
 
     if (avatar == null) {
       avatar = $cookies.get('teacherAvatar');
+    }
+
+    if (email == null) {
+      email = $cookies.get('teacherEmail');
     }
 
     var teacher = {
