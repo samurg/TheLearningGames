@@ -16,12 +16,28 @@
         <i class="icon ion-image" class="iconImage41"></i>
       </div>
     </div>
-    <ion-list id="studentHome-list34" class="list-elements list-student">
-      <ion-item id="studentHome-list-item60">
-        <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'NAME' | translate }}</ion-item>
-      <ion-item id="studentHome-list-item61">
-        <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'SURNAME' | translate }}</ion-item>
-    </ion-list>
+    <form id="teacherProfile-form1" class="list list-elements list-student">
+      <ion-list id="signUp-list2">
+        
+        <label class="item item-input list-elements" id="signUp-input3">
+          <span class="inputLabelProfile">
+            <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'NAME'  | translate }}
+            <input type="text" placeholder="{{teacherName}}" ng-model="name"></span>
+        </label>
+        <label class="item item-input list-elements" id="signUp-input3">
+          <span class="inputLabelProfile">
+            <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'SURNAME' | translate }}
+            <input type="text" placeholder="{{teacherSurname}}" ng-model="surname"></span>
+        </label>
+        
+        <label class="item item-input list-elements" id="signUp-input3">
+          <span class="inputLabelProfile">
+            <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'AVATAR' | translate }}
+            <input type="text" placeholder="{{teacherAvatar}}" ng-model="avatar"></span>
+        </label>
+      </ion-list>
+      <button id="signUp-button9" ng-disabled="!name || !surname || !email || !password || !passwordRepeat" id="signUp-btn9" class="button button-calm button-large button-block" ng-click="checkTeacherEmail(name, surname, email, password, avatar)">{{ 'SAVE_CHANGES' | translate }}</button>
+    </form>
     <ion-list id="studentHome-list33">
       <ion-item id="studentHome-list-item46" class="list-student-dialog">
         <i class="icon ion-clipboard"></i>&nbsp;&nbsp;{{ 'ATTENDANCE' | translate }}
