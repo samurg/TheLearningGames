@@ -15,8 +15,8 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
     form.reset();
   }
 
-      $scope.loginType=false;
-      $scope.loginType2=false;
+  $scope.loginType=false;
+  $scope.loginType2=false;
 
   $scope.teacherForm = function(){
       $scope.loginType=true;
@@ -425,24 +425,38 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
       var a = CryptoJS.SHA1($scope.studentName + $scope.classroomId + Date.now().toString()).toString();
       var hash = a.substr(0, 10);
 
-      var student = {
+      var teacherStudent = { 
         "name" : name,
         "classroom" : $scope.classroomId,
-        "hashCode" : hash
+        "hashCode" : hash,
+        "avatar" : 'https://easyeda.com/assets/static/images/avatar-default.png'
       }
 
-      $http.post(Backand.getApiUrl()+'/1/objects/'+'teacherStudents', student)
+      var student = {
+        "name" : name,
+        "hashCode" : hash,
+        "avatar" : 'https://easyeda.com/assets/static/images/avatar-default.png'
+      }
+
+      $http.post(Backand.getApiUrl()+'/1/objects/'+'teacherStudents', teacherStudent)
         .success(function(response){
           $scope.getStudents();
       })
+
+      $http.post(Backand.getApiUrl()+'/1/objects/'+'students', student)
+        .success(function(response){
+      })
+
     }
 
     $scope.studentId;
     $scope.studentName;
 
-    $scope.setStudentId = function(value) {
-      $scope.studentId = value;
-      $cookies.put('studentId', value);
+    $scope.setStudent = function(value) {
+      $scope.studentId = value.id;
+      $scope.studentHashCode = value.hashCode;
+      $cookies.put('studentId', value.id);
+      $cookies.put('studentHashCode', value.hashCode);
     }
 
     $scope.setStudentName = function(name, hashCode) {
@@ -457,6 +471,16 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
         .success(function(response){
           $scope.getStudents();
         })
+
+      $http.get(Backand.getApiUrl()+'/1/query/data/getStudentsByHashCode'+'?parameters={ "hashCode" : \"'+$scope.studentHashCode+'\"}')
+        .then(function (response) {
+          $scope.studentForDelete = response.data[0].id;
+
+          $http.delete(Backand.getApiUrl()+'/1/objects/'+'students/'+$scope.studentForDelete)
+            .success(function(response){
+          
+          })
+        });
     }
     
 }])
