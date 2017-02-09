@@ -1,4 +1,4 @@
-<ion-view title="Teacher Profile" hide-nav-bar="true" id="page18">
+<ion-view title="Teacher Profile" hide-nav-bar="true" id="page18" ng-init="initData()">
   <ion-content padding="false" class="manual-ios-statusbar-padding">
     <div id="teacherProfile-container17">
       <div id="teacherProfile-button-bar18" class="button-bar margin-null">
@@ -16,32 +16,33 @@
         <label class="item item-input list-elements" id="signUp-input3">
           <span class="inputLabelProfile">
             <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'NAME'  | translate }}
-            <input type="text" placeholder="{{teacherName}}" ng-model="name"></span>
+            <input id="inputName" type="text" placeholder="{{teacherName}}" ng-model="name">
+            </span>
         </label>
         <label class="item item-input list-elements" id="signUp-input3">
           <span class="inputLabelProfile">
             <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'SURNAME' | translate }}
-            <input type="text" placeholder="{{teacherSurname}}" ng-model="surname"></span>
+            <input id="inputSurname" type="text" placeholder="{{teacherSurname}}" ng-model="surname"></span>
         </label>
         <label class="item item-input list-elements" id="signUp-input5">
           <span class="inputLabelProfile">
             <i class="icon ion-at"></i>&nbsp;&nbsp;{{ 'EMAIL' | translate }}
-            <input type="email" placeholder="{{teacherEmail}}" ng-model="email"></span>
+            <input id="inputEmail" type="email" placeholder="{{teacherEmail}}" ng-model="email"></span>
         </label>
         <label class="item item-input list-elements" id="signUp-input6">
           <span class="inputLabelProfile">
             <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'PASSWORD' | translate }}
-            <input type="password" placeholder="{{teacherPassword}}" ng-model="password" ng-minlenght="3"></span>
+            <input id="inputPassword" type="password" placeholder="{{teacherPassword}}" ng-model="password" ng-minlenght="3"></span>
         </label>
         <label class="item item-input list-elements" id="signUp-input7">
           <span class="inputLabelProfile">
             <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'CONFIRM_PASSWORD' | translate }}
-            <input type="password" placeholder="{{teacherPassword}}" ng-model="passwordRepeat" ng-minlenght="3"></span>
+            <input id="inputRepeatpassword" type="password" placeholder="{{teacherPassword}}" ng-model="passwordRepeat" ng-minlenght="3"></span>
         </label>
         <label class="item item-input list-elements" id="signUp-input3">
           <span class="inputLabelProfile">
             <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'AVATAR' | translate }}
-            <input type="text" placeholder="{{teacherAvatar}}" ng-model="avatar"></span>
+            <input id="inputAvatar" type="text" placeholder="{{teacherAvatar}}" ng-model="avatar"></span>
         </label>
       </ion-list>
       <button id="signUp-button9" ng-disabled="!name || !surname || !email || !password || !passwordRepeat" id="signUp-btn9" class="button button-calm button-large button-block" ng-click="checkTeacherEmail(name, surname, email, password, avatar)">{{ 'SAVE_CHANGES' | translate }}</button>
