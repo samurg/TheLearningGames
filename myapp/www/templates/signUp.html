@@ -7,8 +7,13 @@
       <ion-list id="signUp-list2">
         <label class="item item-input list-elements" id="signUp-input3">
           <span class="input-label">
-            <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'FULL_NAME' | translate }}</span>
-          <input type="text" placeholder="" ng-model="fullName">
+            <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'NAME' | translate }}</span>
+          <input type="text" placeholder="" ng-model="name">
+        </label>
+        <label class="item item-input list-elements" id="signUp-input3">
+          <span class="input-label">
+            <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'SURNAME' | translate }}</span>
+          <input type="text" placeholder="" ng-model="surname">
         </label>
         <label class="item item-input list-elements" id="signUp-input5">
           <span class="input-label">
@@ -25,9 +30,14 @@
             <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'CONFIRM_PASSWORD' | translate }}</span>
           <input type="password" placeholder="" ng-model="passwordRepeat" ng-minlenght="3">
         </label>
+        <label class="item item-input list-elements" id="signUp-input3">
+          <span class="input-label">
+            <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'AVATAR' | translate }}</span>
+          <input type="text" placeholder="" ng-model="avatar">
+        </label>
       </ion-list>
-      <button id="signUp-button9" ng-disabled="!name || !surname || !email || !password || !passwordRepeat" id="signUp-btn9" class="button button-calm button-large button-block" ng-click="createTeacher(name, surname, email, password, avatar)">{{ 'SIGN_UP' | translate }}</button>
-      <a ui-sref="login" id="signUp-button11" class="button button-light  button-block button-clear icon ion-chevron-right">{{ 'ALREADY_HAVE_AN_ACCOUNT' | translate }}</a>
+      <button id="signUp-button9" ng-disabled="!name || !surname || !email || !password || !passwordRepeat" id="signUp-btn9" class="button button-calm button-large button-block" ng-click="checkTeacherEmail(name, surname, email, password, avatar) ; clearForm()">{{ 'SIGN_UP' | translate }}</button>
+      <a ui-sref="login" id="signUp-button11" class="button button-light  button-block button-clear icon ion-chevron-right" ng-click="clearForm()">{{ 'ALREADY_HAVE_AN_ACCOUNT' | translate }}</a>
     </form>
   </ion-content>
 </ion-view>
