@@ -34,8 +34,8 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
         .then(function (response) {
           if (response.data.length > 0) {
             $cookies.put('teacherId', response.data[0].id);
-            $cookies.put('teacherName', CryptoJS.AES.decrypt(response.data[0].name, password).toString(CryptoJS.enc.Utf8));
-            $cookies.put('teacherSurname', CryptoJS.AES.decrypt(response.data[0].surname, password).toString(CryptoJS.enc.Utf8));
+            $cookies.put('teacherName', CryptoJS.AES.decrypt(response.data[0].name, email).toString(CryptoJS.enc.Utf8));
+            $cookies.put('teacherSurname', CryptoJS.AES.decrypt(response.data[0].surname, email).toString(CryptoJS.enc.Utf8));
             $cookies.put('teacherAvatar', response.data[0].avatar);
             $cookies.put('teacherEmail', email);
             $cookies.put('teacherPassword', password);
@@ -101,8 +101,8 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
     }
 
     var teacher = {
-      "name" : CryptoJS.AES.encrypt(name,password).toString(),
-      "surname" : CryptoJS.AES.encrypt(surname,password).toString(),
+      "name" : CryptoJS.AES.encrypt(name,email).toString(),
+      "surname" : CryptoJS.AES.encrypt(surname,email).toString(),
       "email" : CryptoJS.SHA256(email).toString(),
       "password" : CryptoJS.SHA256(password).toString(),
       "avatar" : avatar
@@ -751,8 +751,8 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
           $scope.teacherSurname = response.data[0].surname;
           $scope.teacherEmail = response.data[0].email;
           $scope.teacherPassword = response.data[0].Avatar;
-          $cookies.put('teacherName', CryptoJS.AES.decrypt(response.data[0].name, password).toString(CryptoJS.enc.Utf8));
-          $cookies.put('teacherSurname', CryptoJS.AES.decrypt(response.data[0].surname, password).toString(CryptoJS.enc.Utf8));
+          $cookies.put('teacherName', CryptoJS.AES.decrypt(response.data[0].name, email).toString(CryptoJS.enc.Utf8));
+          $cookies.put('teacherSurname', CryptoJS.AES.decrypt(response.data[0].surname, email).toString(CryptoJS.enc.Utf8));
           $cookies.put('teacherAvatar', response.data[0].Avatar);
         });
   }
@@ -787,8 +787,8 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
     }
 
     var teacher = {
-      "name" : CryptoJS.AES.encrypt(name,password).toString(),
-      "surname" : CryptoJS.AES.encrypt(surname,password).toString(),
+      "name" : CryptoJS.AES.encrypt(name,email).toString(),
+      "surname" : CryptoJS.AES.encrypt(surname,email).toString(),
       "email" : CryptoJS.SHA256(email).toString(),
       "password" : CryptoJS.SHA256(password).toString(),
       "avatar" : avatar
