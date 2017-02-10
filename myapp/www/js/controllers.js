@@ -21,10 +21,12 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
   $scope.teacherForm = function(){
       $scope.loginType=true;
       $scope.loginType2=false;
+      $scope.clearForm2();
   }
   $scope.studentForm = function(){
       $scope.loginType=false;
       $scope.loginType2=true;
+      $scope.clearForm1();
   }
 
   $scope.getTeacher = function(email, password) {
