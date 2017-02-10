@@ -750,7 +750,7 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
           $scope.teacherName = response.data[0].name;
           $scope.teacherSurname = response.data[0].surname;
           $scope.teacherEmail = response.data[0].email;
-          $scope.teacherPassword = response.data[0].Avatar;
+          $scope.teacherPassword = response.data[0].password;
           $cookies.put('teacherName', CryptoJS.AES.decrypt(response.data[0].name, email).toString(CryptoJS.enc.Utf8));
           $cookies.put('teacherSurname', CryptoJS.AES.decrypt(response.data[0].surname, email).toString(CryptoJS.enc.Utf8));
           $cookies.put('teacherAvatar', response.data[0].Avatar);
