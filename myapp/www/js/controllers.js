@@ -506,11 +506,23 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
 function ($scope, $stateParams, $cookies) {
 }])
    
-.controller('attendanceCtrl', ['$scope', '$stateParams', '$cookies', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('attendanceCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $cookies) {
+function ($scope, $stateParams, $cookies, $http, Backand) {
 
+
+  $scope.classroomName = $cookies.get('classroomName');
+  $scope.classroomId = $cookies.get('classroomId');
+  $scope.studentsAttendance = [];
+    
+    $scope.getStudentsAttendance = function() {
+      $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
+        .then(function (response) {
+          $scope.studentsAttendance = response.data;
+          $cookies.put('studentsAttendance',response.data);
+        });
+    }
 
 }])
    
