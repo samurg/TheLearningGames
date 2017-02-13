@@ -296,7 +296,7 @@ var translationsIT= {
   PASSWORD: 'Password',
   LOG_TEACHER: 'Entra come professore',
   LOG_STUDENT: 'Entra come studente',
-  FORGOT_PASSWORD: 'Hai dimenticato la passowrd?',
+  FORGOT_PASSWORD: 'Hai dimenticato la password?',
   DONT_HAVE_ACCOUNT: 'Non hai un account?',
   EMAIL_EXAMPLE: 'esempio@esempio.com',
   YOUR_PASSWORD: 'La tua password',
