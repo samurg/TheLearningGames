@@ -14,7 +14,7 @@
       <a ui-sref="rules" id="class-button27" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'RULES' | translate }}</a>
       <a ui-sref="missions" id="class-button28" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
     </div>
-    <h3 id="class-heading2" style="color:#FFFFFF;text-align:center;">{{classroomName}}</h3>
+    <h3 id="class-heading2">{{classroomName}}</h3>
     <ion-list id="class-list5" class="list-elements">
       <ion-item class="list-student" id="class-list-item7" ng-click="setStudentName(student.name, student.surname, student.hashCode); showModalStudentDialog()" ng-repeat="student in students" on-swipe-left="setStudent(student)">
         <h2>{{student.name}} {{student.surname}}</h2>
