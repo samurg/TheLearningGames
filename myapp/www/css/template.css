@@ -1,0 +1,61 @@
+/*
+ * GENERAL STYLES
+ */
+.button{
+	border-radius: 10px !important;
+	margin: 1%; border: none !important; background: none !important;
+}
+
+/*
+ * LOGIN SCREEN
+ */
+.login_screen .button{ border: none !important; background: none !important; }
+
+#login-button2{ border: none !important; background: none !important;}
+.button.button-calm {
+	background-color: rgba(17, 193, 243, .7) !important;
+}
+.button.button-calm:hover, .button.button-calm:focus {
+	background-color: rgba(17, 193, 243, 1) !important;
+}
+
+/*
+ * TOP MENU 
+ */
+.button.button-light{ 
+	border-radius: 0 !important; margin: 0 !important;
+}
+.button-bar a, .button-bar button{ 
+	background-color: #17498B !important; border: none !important;
+	font-size: 1.1em !important;
+	border-bottom: 2px solid #f9f9f9 !important;
+}
+.button-bar a:hover, button:hover{ 
+	background-color: #153E74 !important;
+}
+
+/* 
+ * LISTS
+ */
+.list-elements {
+    background: rgba(255, 255, 255, 0.8) none repeat scroll 0 0;
+    border-radius: 10px;
+    border-width: 0;
+    margin-bottom: 8px;
+}
+.list-elements:hover, .list-elements:focus {
+    background: rgba(255, 255, 255, 1) none repeat scroll 0 0;
+}
+.button#login-button6, .button#login-button7{ background-color: rgba(224,133,15,1) !important; }
+
+.item {
+    border-radius: 10px !important;
+    margin: 1%;
+}
+
+h3{ 
+	background: rgba(255,255,255,.2); 
+	margin: 0 !important; padding: 10px 0; font-size: 1.5em;
+	font-weight: 100; color: white; text-align: center;
+}
+
