@@ -377,7 +377,7 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
       form.reset();
     }
     
-    $scope.newStudentModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
+    $scope.newStudentModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" class="fondo" >'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
     '<h3 style="color:#FFFFFF;text-align:center;">{{ \'NEW_STUDENT\' | translate }}</h3>'+
     '<div class="list-student list-elements">'+
