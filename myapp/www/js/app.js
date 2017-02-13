@@ -185,7 +185,9 @@ var translationsEN = {
   EMAIL_ALREADY_USED: 'Email already used',
   CODE:'Code',
   YOUR_CODE:'Your code',
-  LOGIN:'login',
+  LOGIN:'Log in',
+  SCORE:'Score',
+  MAX_SCORE:'Max score',
 };
  
 var translationsES= {
@@ -278,4 +280,6 @@ var translationsES= {
   CODE:'Código',
   YOUR_CODE:'Tu código',
   LOGIN:'Entrar',
+  SCORE:'Puntuación',
+  MAX_SCORE:'Puntuación máxima',
 };
