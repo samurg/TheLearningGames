@@ -53,7 +53,7 @@ angular.module('app.routes', [])
   })
 
   .state('class', {
-    url: '/class/{className}',
+    url: '/class/{teacherId}/{className}',
     templateUrl: 'templates/class.html',
     controller: 'classCtrl'
   })
@@ -113,7 +113,7 @@ angular.module('app.routes', [])
   })
 
   .state('teacherSettings', {
-    url: '/teacherSettings',
+    url: '/teacherSettings/{teacherId}',
     templateUrl: 'templates/teacherSettings.html',
     controller: 'teacherSettingsCtrl'
   })
