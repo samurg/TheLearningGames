@@ -122,6 +122,9 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
 
+  //Variables used either for stateParams or for queries to the database
+  $scope.teacherId = $cookies.get('teacherId');
+
   $cookies.put('attendanceModal', '<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
     '<h3 id="attendance-heading3" class="attendance-hdg3">{{classroomName}}</h3>'+
@@ -161,6 +164,7 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
           $scope.students = response.data;
         });
     }
+
 
     $scope.clearForm = function(){
       var form = document.getElementById("dataClassForm");
@@ -207,8 +211,7 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
       $scope.newClassModal.hide();
         
     }
-
-    $scope.teacherId = $cookies.get('teacherId');
+    
     $scope.classrooms = [];
     
     $scope.getClassrooms = function() {
@@ -332,6 +335,12 @@ function ($scope, $stateParams, $cookies) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
+
+  //Variables used either for stateParams or for queries to the database
+  $scope.teacherId = $cookies.get('teacherId');
+  $scope.classroomName = $cookies.get('classroomName');
+  $scope.classroomId = $cookies.get('classroomId');
+
     var modalFirst;
 
     $scope.attendanceModal = $ionicModal.fromTemplate($cookies.get('attendanceModal'), {
@@ -520,9 +529,6 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
 
     $scope.classrooms = $cookies.get('classrooms');
 
-    $scope.classroomName = $cookies.get('classroomName');
-
-    $scope.classroomId = $cookies.get('classroomId');
     $scope.students = [];
     
     $scope.getStudents = function() {
@@ -672,8 +678,11 @@ function ($scope, $stateParams, $cookies) {
 .controller('teamsCtrl', ['$scope', '$stateParams', '$ionicModal', '$cookies', '$http', 'Backand', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
 
+function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
+    //Variables used either for stateParams or for the queries to the database
+    $scope.teacherId = $cookies.get('teacherId');
+    $scope.classroomName = $cookies.get('classroomName');
     $scope.attendanceModal = $ionicModal.fromTemplate($cookies.get('attendanceModal'), {
         scope: $scope,
         animation: 'slide-in-up'
@@ -698,7 +707,7 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
           $scope.students = response.data;
         });
     }
-    
+
     $scope.teamDialogModal = $ionicModal.fromTemplate('<ion-modal-view title="Team Dialog" hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
     '<h3 style="color:#FFFFFF;text-align:center;">{team.name}</h3>'+
@@ -1011,6 +1020,9 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cookies) {
 
+  //Variables used for stateParams
+  $scope.teacherId = $cookies.get('teacherId');
+
 
 }])
    
@@ -1226,6 +1238,10 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
           $scope.students = response.data;
         });
     }
+
+  //Variables used either for stateParams or for queries to the database
+  $scope.teacherId = $cookies.get('teacherId');
+  $scope.classroomName = $cookies.get('classroomName');
 
     $scope.clearForm = function(){
       var form = document.getElementById("missionDataForm");

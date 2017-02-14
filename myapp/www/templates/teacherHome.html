@@ -7,12 +7,12 @@
       <div id="teacherHome-button-bar2" class="button-bar">
         <button id="teacherHome-button16" style="font-weight:500;color:#FFFFFF;font-size:20px;border-radius:0px 0px 0px 0px;" class="button button-light  button-outline">{{ 'HOME' | translate }}</button>
         <a ui-sref="teacherProfile" id="teacherHome-button17" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</a>
-        <a ui-sref="teacherSettings" id="teacherHome-button18" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
+        <a ui-sref="teacherSettings({teacherId: teacherId})" id="teacherHome-button18" style="color:#FFFFFF;" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
       </div>
     </div>
     <h3 id="teacherHome-heading1" style="color:#FFFFFF;text-align:center;" class="margin-top-null">{{ 'SELECT_YOUR_CLASS' | translate }}</h3>
     <ion-list id="teacherHome-list16" class="list-elements align-text-center">
-      <ion-item id="teacherHome-list-item47" ui-sref="class({className: class.name})" ng-repeat="class in classrooms" on-swipe-left="setClassroomId(class.id)" ng-click="setClassroomName(class.name); setClassroomId(class.id) ; showModalAttendance();">{{class.name}}
+      <ion-item id="teacherHome-list-item47" ui-sref="class({teacherId: teacherId, className: class.name})" ng-repeat="class in classrooms" on-swipe-left="setClassroomId(class.id)" ng-click="setClassroomName(class.name); setClassroomId(class.id) ; showModalAttendance();">{{class.name}}
         <ion-option-button class="button-assertive" ng-click="deleteClassroom()">{{ 'DELETE' | translate }}</ion-option-button>
         <ion-option-button class="button-calm">{{ 'EXPORT' | translate }}</ion-option-button>
         <ion-option-button class="button-calm">{{ 'IMPORT' | translate }}</ion-option-button>
