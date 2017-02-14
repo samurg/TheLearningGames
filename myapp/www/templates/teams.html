@@ -9,7 +9,7 @@
     </div>
     <div id="teams-button-bar10" class="button-bar">
       <a ui-sref="class({teacherId: teacherId, className: classroomName})" id="teams-button39" id="teams-btn39" class="button button-light  button-outline">{{ 'CLASS' | translate }}</a>
-      <a ui-sref="attendance" id="teams-button40" id="teams-btn40" class="button button-light  button-outline">{{ 'ATTENDANCE' | translate }}</a>
+      <a id="teams-button40" ng-click="showModalAttendance()" id="teams-btn40" class="button button-light  button-outline">{{ 'ATTENDANCE' | translate }}</a>
       <button id="teams-button41" id="teams-btn41" class="button button-light  button-outline">{{ 'TEAMS' | translate }}</button>
       <a ui-sref="rules" id="teams-button42" id="teams-btn42" class="button button-light  button-outline">{{ 'RULES' | translate }}</a>
       <a ui-sref="missions({teacherId: teacherId, className: classroomName})" id="teams-button43" id="teams-btn43" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
