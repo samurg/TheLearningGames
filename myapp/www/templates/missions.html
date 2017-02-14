@@ -8,9 +8,9 @@
       </div>
     </div>
     <div id="missions-button-bar25" class="button-bar">
-      <a ui-sref="class" id="missions-button108" id="missions-btn108" class="button button-light  button-outline">{{ 'CLASS' | translate }}</a>
+      <a ui-sref="class({teacherId: teacherId, className: classroomName})" id="missions-button108" id="missions-btn108" class="button button-light  button-outline">{{ 'CLASS' | translate }}</a>
       <a ui-sref="attendance" id="missions-button109" id="missions-btn109" class="button button-light  button-outline">{{ 'ATTENDANCE' | translate }}</a>
-      <a ui-sref="teams" id="missions-button110" id="missions-btn110" class="button button-light  button-outline">{{ 'TEAMS' | translate }}</a>
+      <a ui-sref="teams({teacherId: teacherId, className: classroomName})" id="missions-button110" id="missions-btn110" class="button button-light  button-outline">{{ 'TEAMS' | translate }}</a>
       <a ui-sref="rules" id="missions-button111" id="missions-btn111" class="button button-light  button-outline">{{ 'RULES' | translate }}</a>
       <button id="missions-button112" id="missions-btn112" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</button>
     </div>

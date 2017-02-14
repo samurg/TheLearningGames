@@ -546,6 +546,7 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
 
   //Variables used either for stateParams or for the queries to the database
   $scope.teacherId = $cookies.get('teacherId');
+  $scope.classroomName = $cookies.get('classroomName');
     
     $scope.teamDialogModal = $ionicModal.fromTemplate('<ion-modal-view title="Team Dialog" hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
@@ -1030,6 +1031,7 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
 
   //Variables used either for stateParams or for queries to the database
   $scope.teacherId = $cookies.get('teacherId');
+  $scope.classroomName = $cookies.get('classroomName');
 
     $scope.clearForm = function(){
       var form = document.getElementById("missionDataForm");

@@ -10,9 +10,9 @@
     <div id="class-button-bar5" class="button-bar">
       <button id="class-button26" style="color:#FFFFFF;font-size:15px;" class="button button-light  button-outline">{{ 'CLASS' | translate }}</button>
       <a ui-sref="attendance" id="class-button30" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'ATTENDANCE' | translate }}</a>
-      <a ui-sref="teams" id="class-button29" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'TEAMS' | translate }}</a>
+      <a ui-sref="teams({teacherId: teacherId, className: classroomName})" id="class-button29" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'TEAMS' | translate }}</a>
       <a ui-sref="rules" id="class-button27" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'RULES' | translate }}</a>
-      <a ui-sref="missions" id="class-button28" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
+      <a ui-sref="missions({teacherId: teacherId, className: classroomName})" id="class-button28" style="color:#FFFFFF;font-size:11px;" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
     </div>
     <h3 id="class-heading2">{{classroomName}}</h3>
     <ion-list id="class-list5" class="list-elements">

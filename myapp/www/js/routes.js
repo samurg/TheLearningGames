@@ -77,7 +77,7 @@ angular.module('app.routes', [])
   })
 
   .state('teams', {
-    url: '/teams',
+    url: '/teams/{teacherId}/{className}',
     templateUrl: 'templates/teams.html',
     controller: 'teamsCtrl'
   })
@@ -155,7 +155,7 @@ angular.module('app.routes', [])
   })
 
   .state('missions', {
-    url: '/missions',
+    url: '/missions/{teacherId}/{className}',
     templateUrl: 'templates/missions.html',
     controller: 'missionsCtrl'
   })
