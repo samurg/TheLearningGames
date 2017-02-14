@@ -515,14 +515,49 @@ function ($scope, $stateParams, $cookies, $http, Backand) {
   $scope.classroomName = $cookies.get('classroomName');
   $scope.classroomId = $cookies.get('classroomId');
   $scope.studentsAttendance = [];
-    
+  var checked = [];
     $scope.getStudentsAttendance = function() {
       $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
         .then(function (response) {
           $scope.studentsAttendance = response.data;
+          for(var i = 0; i< $scope.studentsAttendance.length; i++){
+            checked.push(response.data[i].hashCode);
+          }
           $cookies.put('studentsAttendance',response.data);
         });
     }
+
+    /*funcion que comprueba si el hashCode esta en el vector.
+    Si esta en el vector lo borra y si no lo añade*/
+    $scope.checkAttendance = function(hashCode){
+        var pos = checked.indexOf(hashCode); //-> posicion(existe) o -1(no existe);
+        if(pos != -1){
+         var vectorHashCode = []; //variable local temporal para guardar los hashCode buenos.
+         for(var i=0;i<checked.length;i++){
+          if(checked[i] != hashCode){//Si no es el hashCode que hay que borrar lo añado
+            vectorHashCode.push(checked[i]);
+          }
+         }
+         checked = []
+         
+         for(var j=0; j<vectorHashCode.length;j++){
+          checked[j] = vectorHashCode[j];
+         }
+        }
+        else{
+          checked.push(hashCode);//Si no exite, lo añado
+        }
+        console.log("Numero de elementos en checked: "+ checked.length)
+        for(var i=0;i<checked.length;i++){
+          console.log(i+" - "+checked[i]);
+          
+        }
+    }
+
+    /*Cunado fijo la asistencia hay que comprobar que no la haya fijado ya,
+    la fecha para comparar estará en la tabla resultante n:m estudiantes-items
+
+    */
 
 }])
    
