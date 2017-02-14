@@ -125,6 +125,10 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
   $cookies.put('attendanceModal', '<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
     '<h3 id="attendance-heading3" class="attendance-hdg3">{{classroomName}}</h3>'+
+    '<div class="date_controller">'+
+    '<button id="subtract_7">'+
+    '< 7d</button><button id="subtract_1">'+
+    '<1d</button><input id="date_input" type="text" value="{{date | date:\'dd-MM-yyyy\'}}"><button id="add_1">1d ></button><button id="add_7">7d >></button></div>'+
     '<ion-list id="attendance-list7" class="list-elements">'+
       '<ion-checkbox id="attendance-checkbox2" name="checkStudent" ng-checked="true" class="list-student" ng-repeat="student in studentsAttendance" ng-click="checkAttendance(student.hashCode)">{{student.name}}</ion-checkbox>'+
     '</ion-list>'+
@@ -144,6 +148,7 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
 
     $scope.showModalAttendance = function(){
       $scope.classroomName = $cookies.get('classroomName');
+      $scope.date = Date.now();
       $scope.getStudentsAttendance();
       $scope.getStudents();
       $scope.attendanceModal.show();  
