@@ -58,6 +58,7 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
             $cookies.put('studentId', response.data[0].id);
             $cookies.put('studentName', CryptoJS.AES.decrypt(response.data[0].name, hashCode).toString(CryptoJS.enc.Utf8));
             $cookies.put('studentSurname', CryptoJS.AES.decrypt(response.data[0].surname, hashCode).toString(CryptoJS.enc.Utf8));
+            $cookies.put('hashCode', response.data[0].hashCode)
             $cookies.put('studentAvatar', response.data[0].avatar);
             $scope.studentId = $cookies.get('studentId');
             $state.go('studentHome', {studentId: $scope.studentId});
@@ -298,17 +299,61 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
 
 }])
    
-.controller('studentHomeCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('studentHomeCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', '$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $cookies, $http, Backand) {
+function ($scope, $stateParams, $cookies, $http, Backand, $state) {
 
-  $scope.studentId = $cookies.get('studentId');
+  /*$scope.studentId = $cookies.get('studentId');
   $scope.studentAvatar = $cookies.get('studentAvatar');
   $scope.studentName = $cookies.get('studentName');
-  $scope.studentSurname = $cookies.get('studentSurname');
+  $scope.studentSurname = $cookies.get('studentSurname');*/
 
-  $scope.getStudentData = function(){}
+  $scope.initData = function(){
+    $scope.studentAvatar = $cookies.get('studentAvatar');
+    $scope.studentName = $cookies.get('studentName');
+    $scope.studentSurname = $cookies.get('studentSurname');
+    $scope.hashCode = $cookies.get('hashCode');
+
+      //Getting all the inputs for change their placeholders
+      var input1 = document.getElementById ("inputName");
+      input1.placeholder = $scope.studentName;
+
+      var input2 = document.getElementById ("inputSurname");
+      input2.placeholder = $scope.studentSurname;
+
+      var input6 = document.getElementById ("inputAvatar");
+      input6.placeholder = $scope.studentAvatar;
+  }
+
+  $scope.clearForm  = function(){
+    var form = document.getElementById('studentHome-form1');
+    form.reset();
+    $state.go('studentHome', {"studentFullName": $scope.studentName + $scope.studentSurname});
+  }
+
+  $scope.editStudent = function(name, surname, avatar) {
+
+    $scope.studentId = $cookies.get('studentId');
+
+    if (avatar == null) {
+      avatar = $cookies.get('studentAvatar');
+    }
+
+    var student = {
+      "name" : CryptoJS.AES.encrypt(name, $scope.hashCode).toString(),
+      "surname" : CryptoJS.AES.encrypt(surname, $scope.hashCode).toString(),
+      "avatar" : avatar
+    }
+
+    $http.put(Backand.getApiUrl()+'/1/objects/'+'students/'+$scope.studentId, student)
+      .success(function(response) {
+        $cookies.put('studentName', name);
+        $cookies.put('studentSurname', surname);
+        $cookies.put('studentAvatar', avatar);
+        $scope.clearForm();
+      })
+    }
 
 }])
    

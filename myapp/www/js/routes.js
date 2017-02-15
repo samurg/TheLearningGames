@@ -27,7 +27,7 @@ angular.module('app.routes', [])
   })
 
   .state('studentHome', {
-    url: '/studentHome',
+    url: '/studentHome/{studentFullName}',
     templateUrl: 'templates/studentHome.html',
     controller: 'studentHomeCtrl'
   })

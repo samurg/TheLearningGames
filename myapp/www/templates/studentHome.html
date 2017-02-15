@@ -1,4 +1,4 @@
-<ion-view title="Student Home" hide-nav-bar="true" id="page31">
+<ion-view title="Student Home" hide-nav-bar="true" id="page31" ng-init="initData()">
   <ion-nav-buttons side="right">
     <button class="button button-icon icon No Icon"></button>
   </ion-nav-buttons>
@@ -12,31 +12,29 @@
     </div>
     <h3 id="studentHome-heading25" class="studentHome-hdg25">{student.name}</h3>
     <div id="studentHome-container28" class="list-student">
-      <div class="divStudentHome">
-        <i class="icon ion-image" class="iconImage41"></i>
-      </div>
+      <img class="icon ion-image" class="list-student" src="{{studentAvatar}}"></img>
     </div>
-    <form id="teacherProfile-form1" class="list list-elements list-student">
+    <form id="studentHome-form1" class="list list-elements list-student">
       <ion-list id="signUp-list2">
         
         <label class="item item-input list-elements" id="signUp-input3">
           <span class="inputLabelProfile">
             <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'NAME'  | translate }}
-            <input type="text" placeholder="{{studentName}}" ng-model="name"></span>
+            <input id="inputName" type="text" placeholder="{{studentName}}" ng-model="name"></span>
         </label>
         <label class="item item-input list-elements" id="signUp-input3">
           <span class="inputLabelProfile">
             <i class="icon ion-person"></i>&nbsp;&nbsp;{{ 'SURNAME' | translate }}
-            <input type="text" placeholder="{{studentSurname}}" ng-model="surname"></span>
+            <input id="inputSurname" type="text" placeholder="{{studentSurname}}" ng-model="surname"></span>
         </label>
         
         <label class="item item-input list-elements" id="signUp-input3">
           <span class="inputLabelProfile">
             <i class="icon ion-locked"></i>&nbsp;&nbsp;{{ 'AVATAR' | translate }}
-            <input type="text" placeholder="{{studentAvatar}}" ng-model="avatar"></span>
+            <input id="inputAvatar" type="text" placeholder="{{studentAvatar}}" ng-model="avatar"></span>
         </label>
       </ion-list>
-      <button id="signUp-button9" ng-disabled="!name || !surname || !email || !password || !passwordRepeat" id="signUp-btn9" class="button button-calm button-large button-block" ng-click="checkTeacherEmail(name, surname, email, password, avatar)">{{ 'SAVE_CHANGES' | translate }}</button>
+      <button id="signUp-button9" ng-disabled="!name || !surname" id="signUp-btn9" class="button button-calm button-large button-block" ng-click="editStudent(name, surname, avatar)">{{ 'SAVE_CHANGES' | translate }}</button>
     </form>
     <ion-list id="studentHome-list33">
       <ion-item id="studentHome-list-item46" class="list-student-dialog">
