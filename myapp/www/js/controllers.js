@@ -1,4 +1,4 @@
-angular.module('app.controllers', ['pascalprecht.translate']) 
+angular.module('app.controllers', ['pascalprecht.translate'])
      
 .controller('loginCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', '$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
@@ -129,13 +129,11 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
   $cookies.put('attendanceModal', '<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
     '<h3 id="attendance-heading3" class="attendance-hdg3">{{classroomName}}</h3>'+
-    '<div class="date_controller">'+
-    '<input id="date_input" type="text" value="{{date | date:\'dd-MM-yyyy\'}}" readonly></div>'+
     '<ion-list id="attendance-list7" class="list-elements">'+
       '<ion-checkbox id="attendance-checkbox2" name="checkStudent" ng-checked="true" class="list-student" ng-repeat="student in studentsAttendance" ng-click="checkAttendance(student.hashCode)">{{student.name}}</ion-checkbox>'+
     '</ion-list>'+
     '<button id="attendance-button123" ng-click="closeModalAttendance()" id="attendance-btn123" class="button button-calm  button-block">{{ \'SET_ATTENDANCE_FOR_TODAY\' | translate }}</button>'+
-    '<button class="button button-calm  button-block" ng-click="closeModalAttendance()">{{ \'CANCEL\' | translate }}</button>'+
+    '<button class="button button-calm  button-block" ng-click="closeAttedanceModal()">{{ \'CANCEL\' | translate }}</button>'+
     '</ion-contentw>'+
     '</ion-modal-view>');
 
@@ -143,64 +141,28 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
         scope: $scope,
         animation: 'slide-in-up'
     })
+    $scope.closeAttedanceModal = function(){
+      $scope.attendanceModal.hide();
+        
+    }
 
     $scope.showModalAttendance = function(){
       $scope.classroomName = $cookies.get('classroomName');
       $scope.getStudentsAttendance();
       $scope.getStudents();
-      $scope.attendanceModal.show(); 
-      $scope.date = Date.now(); 
+      $scope.attendanceModal.show();  
     }
-
-    /* 
-      Functions dateTime --------------------------
-    */
-    $scope.subtract1 = function(){
-      console.log($scope.date);
-      $scope.date = ($scope.date - 86400000);
-      console.log($scope.date);
-    }
-
-    $scope.add1 = function(){
-      console.log($scope.date);
-      $scope.date = ($scope.date + 86400000); 
-      console.log($scope.date);
-    }
-
-    $scope.subtract7 = function(){
-      console.log($scope.date);
-      $scope.date = ($scope.date - (86400000*7));  
-      console.log($scope.date);
-    }
-
-    $scope.add7 = function(){
-      console.log($scope.date);
-      $scope.date = ($scope.date + (86400000*7));
-      console.log($scope.date);  
-    }
-
-    //---------------------------------------------
     
     $scope.closeModalAttendance = function(){
       $scope.attendanceModal.hide();
     }
 
     $scope.students = [];
-    var teacherEmail = $cookies.get('teacherEmail');
+    
     $scope.getStudents = function() {
       $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
-        .success(function (response) {
-          for(var i=0; i<response.length; i++){
-              var teacherStudent = { 
-                "name" : CryptoJS.AES.decrypt(response[i].name, teacherEmail).toString(CryptoJS.enc.Utf8),
-                "surname" : CryptoJS.AES.decrypt(response[i].surname, teacherEmail).toString(CryptoJS.enc.Utf8),
-                "classroom" : response[i].classroom,
-                "hashCode" : response[i].hashCode,  
-                "avatar" : response[i].avatar
-              }
-              $scope.students.push(teacherStudent);
-            }
-        
+        .then(function (response) {
+          $scope.students = response.data;
         });
     }
 
@@ -297,23 +259,12 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
      $scope.studentsAttendance = [];
   var checked = [];
     $scope.getStudentsAttendance = function() {
-      var teacherEmail = $cookies.get('teacherEmail');
       checked = [];
       $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
-        .success(function (response) {
-          for(var i=0; i<response.length; i++){
-              var teacherStudent = { 
-                "name" : CryptoJS.AES.decrypt(response[i].name, teacherEmail).toString(CryptoJS.enc.Utf8),
-                "surname" : CryptoJS.AES.decrypt(response[i].surname, teacherEmail).toString(CryptoJS.enc.Utf8),
-                "classroom" : response[i].classroom,
-                "hashCode" : response[i].hashCode,  
-                "avatar" : response[i].avatar
-              }
-              $scope.studentsAttendance.push(teacherStudent);
-            }
-          
+        .then(function (response) {
+          $scope.studentsAttendance = response.data;
           for(var i = 0; i< $scope.studentsAttendance.length; i++){
-            checked.push(response[i].hashCode);
+            checked.push(response.data[i].hashCode);
           }
           $cookies.put('studentsAttendance',response.data);
         });
@@ -626,30 +577,19 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     $scope.students = [];
     
     $scope.getStudents = function() {
-      var teacherEmail = $cookies.get('teacherEmail');
       $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
-        .success(function (response) {
-          for(var i=0; i<response.length; i++){
-              var teacherStudent = { 
-                "name" : CryptoJS.AES.decrypt(response[i].name, teacherEmail).toString(CryptoJS.enc.Utf8),
-                "surname" : CryptoJS.AES.decrypt(response[i].surname, teacherEmail).toString(CryptoJS.enc.Utf8),
-                "classroom" : response[i].classroom,
-                "hashCode" : response[i].hashCode,  
-                "avatar" : response[i].avatar
-              }
-              $scope.students.push(teacherStudent);
-            }
+        .then(function (response) {
+          $scope.students = response.data;
         });
     }
 
     $scope.createStudent = function(name, surname) {
-      var teacherEmail = $cookies.get('teacherEmail');
       var a = CryptoJS.SHA1($scope.studentName + $scope.classroomId + Date.now().toString()).toString();
       var hash = a.substr(0, 10).toUpperCase();
 
       var teacherStudent = { 
-        "name" : CryptoJS.AES.encrypt(name,teacherEmail).toString(),
-        "surname" : CryptoJS.AES.encrypt(surname,teacherEmail).toString(),
+        "name" : name,
+        "surname" : surname,
         "classroom" : $scope.classroomId,
         "hashCode" : hash,
         "avatar" : 'https://easyeda.com/assets/static/images/avatar-default.png'
@@ -807,19 +747,9 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     $scope.students = [];
     
     $scope.getStudents = function() {
-      var teacherEmail = $cookies.get('teacherEmail');
       $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
-        .success(function (response) {
-          for(var i=0; i<response.length; i++){
-              var teacherStudent = { 
-                "name" : CryptoJS.AES.decrypt(response[i].name, teacherEmail).toString(CryptoJS.enc.Utf8),
-                "surname" : CryptoJS.AES.decrypt(response[i].surname, teacherEmail).toString(CryptoJS.enc.Utf8),
-                "classroom" : response[i].classroom,
-                "hashCode" : response[i].hashCode,  
-                "avatar" : response[i].avatar
-              }
-              $scope.students.push(teacherStudent);
-            }
+        .then(function (response) {
+          $scope.students = response.data;
         });
     }
 
@@ -1015,19 +945,9 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     $scope.students = [];
     
     $scope.getStudents = function() {
-      var teacherEmail = $cookies.get('teacherEmail');
       $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
-        .success(function (response) {
-          for(var i=0; i<response.length; i++){
-              var teacherStudent = { 
-                "name" : CryptoJS.AES.decrypt(response[i].name, teacherEmail).toString(CryptoJS.enc.Utf8),
-                "surname" : CryptoJS.AES.decrypt(response[i].surname, teacherEmail).toString(CryptoJS.enc.Utf8),
-                "classroom" : response[i].classroom,
-                "hashCode" : response[i].hashCode,  
-                "avatar" : response[i].avatar
-              }
-              $scope.students.push(teacherStudent);
-            }
+        .then(function (response) {
+          $scope.students = response.data;
         });
     }
 
@@ -1358,19 +1278,9 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     $scope.students = [];
     
     $scope.getStudents = function() {
-      var teacherEmail = $cookies.get('teacherEmail');
       $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
-        .success(function (response) {
-          for(var i=0; i<response.length; i++){
-              var teacherStudent = { 
-                "name" : CryptoJS.AES.decrypt(response[i].name, teacherEmail).toString(CryptoJS.enc.Utf8),
-                "surname" : CryptoJS.AES.decrypt(response[i].surname, teacherEmail).toString(CryptoJS.enc.Utf8),
-                "classroom" : response[i].classroom,
-                "hashCode" : response[i].hashCode,  
-                "avatar" : response[i].avatar
-              }
-              $scope.students.push(teacherStudent);
-            }
+        .then(function (response) {
+          $scope.students = response.data;
         });
     }
 
