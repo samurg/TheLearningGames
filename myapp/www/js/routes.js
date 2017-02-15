@@ -75,7 +75,7 @@ angular.module('app.routes', [])
   })
 
   .state('teacherProfile', {
-    url: '/teacherProfile',
+    url: '/teacherProfile/{teacherName}',
     templateUrl: 'templates/teacherProfile.html',
     controller: 'teacherProfileCtrl'
   })

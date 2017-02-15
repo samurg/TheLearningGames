@@ -5,13 +5,6 @@
 	border-radius: 10px !important;
 	margin: 1%; border: none !important; background: none !important;
 }
-.action_buttons .button{ border: none !important; }
-
-.logoContainer{ text-align: center; }
-.logoOwn{ width: 25%; }
-
-.float_right{ float: right; }
-.float_left{ float: left; }
 
 /*
  * LOGIN SCREEN
@@ -25,8 +18,6 @@
 .button.button-calm:hover, .button.button-calm:focus {
 	background-color: rgba(17, 193, 243, 1) !important;
 }
-
-.verPass{ font-size: 25px; margin-right: 20px;}
 
 /*
  * TOP MENU 
@@ -68,32 +59,3 @@ h3{
 	font-weight: 100; color: white; text-align: center;
 }
 
-/*
- * SETTINGS 
- */
-
-#teacherSettings-btn81{ position: absolute !important; bottom: 0 !important; }
-
-/*
- * TEACHER PROFILE
- */
- .teacherAvatar{ background: none; border: none; text-align: center; }
- .teacherAvatar img{ border-radius: 100%; }
-
-/*
-* STUDENT
-*/
-.list-student{ background: none; float:left; margin-top: 20px;}
-.list-student+.list-student{ float:right; }
-.list-student:hover{ background: none; }
-
-/*
-* MISSIONS
-*/
-.list-mission{ background: #f9f9f9; width: 47.5%; margin: 1% !important;}
-.list-mission-header{ width: 100%; margin: 0; }
-
-/*
-* RULES > ITEMS, MEDALS, ACHIEVEMENTS
-*/
-#page20 .item, #page22 .item, #page24 .item{ width: 30% !important; }
