@@ -130,7 +130,11 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
     '<h3 id="attendance-heading3" class="attendance-hdg3">{{classroomName}}</h3>'+
     '<div class="date_controller">'+
-    '<input id="date_input" type="text" value="{{date | date:\'dd-MM-yyyy\'}}" readonly></div>'+
+    '<button id="subtract_7" ng-click="subtract7()">< 7d</button>'+
+    '<button id="subtract_1" ng-click="subtract1()"><1d</button>'+
+    '<input id="date_input" type="text" value="{{date | date:\'dd-MM-yyyy\'}}" readonly>'+
+    '<button id="add_1" ng-click="add1()">1d ></button>'+
+    '<button id="add_7" ng-click="add7()">7d >></button></div>'+
     '<ion-list id="attendance-list7" class="list-elements">'+
       '<ion-checkbox id="attendance-checkbox2" name="checkStudent" ng-checked="true" class="list-student" ng-repeat="student in studentsAttendance" ng-click="checkAttendance(student.hashCode)">{{student.name}}</ion-checkbox>'+
     '</ion-list>'+
