@@ -2,17 +2,17 @@
   <ion-content padding="false" class="manual-ios-statusbar-padding">
     <div id="teams-container14">
       <div id="teams-button-bar9" class="button-bar margin-null">
-        <a ui-sref="teacherHome" id="teams-button36" id="teams-btn36" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
+        <a ui-sref="teacherHome({teacherId: teacherId})" id="teams-button36" id="teams-btn36" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
         <a ui-sref="teacherProfile" id="teams-button37" id="teams-btn37" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</a>
-        <a ui-sref="teacherSettings" id="teams-button38" id="teams-btn38" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
+        <a ui-sref="teacherSettings({teacherId: teacherId})" id="teams-button38" id="teams-btn38" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
       </div>
     </div>
     <div id="teams-button-bar10" class="button-bar">
-      <a ui-sref="class" id="teams-button39" id="teams-btn39" class="button button-light  button-outline">{{ 'CLASS' | translate }}</a>
-      <a ui-sref="attendance" id="teams-button40" id="teams-btn40" class="button button-light  button-outline">{{ 'ATTENDANCE' | translate }}</a>
+      <a ui-sref="class({teacherId: teacherId, className: classroomName})" id="teams-button39" id="teams-btn39" class="button button-light  button-outline">{{ 'CLASS' | translate }}</a>
+      <a id="teams-button40" ng-click="showModalAttendance()" id="teams-btn40" class="button button-light  button-outline">{{ 'ATTENDANCE' | translate }}</a>
       <button id="teams-button41" id="teams-btn41" class="button button-light  button-outline">{{ 'TEAMS' | translate }}</button>
       <a ui-sref="rules" id="teams-button42" id="teams-btn42" class="button button-light  button-outline">{{ 'RULES' | translate }}</a>
-      <a ui-sref="missions" id="teams-button43" id="teams-btn43" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
+      <a ui-sref="missions({teacherId: teacherId, className: classroomName})" id="teams-button43" id="teams-btn43" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
     </div>
     <h3 id="teams-heading5" class="teams-hdg5">{classroom.name}</h3>
     <ion-list id="teams-list10" class="list-elements">

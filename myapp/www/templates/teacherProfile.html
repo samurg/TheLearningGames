@@ -2,9 +2,9 @@
   <ion-content padding="false" class="manual-ios-statusbar-padding">
     <div id="teacherProfile-container17">
       <div id="teacherProfile-button-bar18" class="button-bar margin-null">
-        <a ui-sref="teacherHome" id="teacherProfile-button74" id="teacherProfile-btn74" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
+        <a ui-sref="teacherHome({teacherId: teacherId})" id="teacherProfile-button74" id="teacherProfile-btn74" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
         <button id="teacherProfile-button75" id="teacherProfile-btn75" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</button>
-        <a ui-sref="teacherSettings" id="teacherProfile-button76" id="teacherProfile-btn76" class="button button-light  button-outline">{{'SETTINGS' | translate }}</a>
+        <a ui-sref="teacherSettings({teacherId: teacherId})" id="teacherProfile-button76" id="teacherProfile-btn76" class="button button-light  button-outline">{{'SETTINGS' | translate }}</a>
       </div>
       <div class="spacer" class="spacer"></div>
     </div>

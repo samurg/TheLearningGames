@@ -2,17 +2,17 @@
   <ion-content padding="false" class="manual-ios-statusbar-padding">
     <div id="class-container10">
       <div id="class-button-bar4" class="button-bar margin-null">
-        <a ui-sref="teacherHome" id="class-button20" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
+        <a ui-sref="teacherHome({teacherId: teacherId})" id="class-button20" class="button button-light  button-outline">{{ 'HOME' | translate }}</a>
         <a ui-sref="teacherProfile" id="class-button21" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</a>
-        <a ui-sref="teacherSettings" id="class-button22" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
+        <a ui-sref="teacherSettings({teacherId: teacherId})" id="class-button22" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</a>
       </div>
     </div>
     <div id="class-button-bar5" class="button-bar">
       <button id="class-button26" class="button button-light  button-outline">{{ 'CLASS' | translate }}</button>
-      <a ui-sref="attendance" id="class-button30"  class="button button-light  button-outline">{{ 'ATTENDANCE' | translate }}</a>
-      <a ui-sref="teams" id="class-button29"  class="button button-light  button-outline">{{ 'TEAMS' | translate }}</a>
+      <a ng-click="showModalAttendance()" id="class-button30"  class="button button-light  button-outline" >{{ 'ATTENDANCE' | translate }}</a>
+      <a ui-sref="teams({teacherId: teacherId, className: classroomName})" id="class-button29"  class="button button-light  button-outline">{{ 'TEAMS' | translate }}</a>
       <a ui-sref="rules" id="class-button27"  class="button button-light  button-outline">{{ 'RULES' | translate }}</a>
-      <a ui-sref="missions" id="class-button28"  class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
+      <a ui-sref="missions({teacherId: teacherId, className: classroomName})" id="class-button28"  class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
     </div>
     <h3 id="class-heading2">{{classroomName}}</h3>
     <ion-list id="class-list5" class="list-elements">
