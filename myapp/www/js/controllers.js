@@ -1,4 +1,4 @@
-angular.module('app.controllers', ['pascalprecht.translate'])
+angular.module('app.controllers', ['pascalprecht.translate']) 
      
 .controller('loginCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', '$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
