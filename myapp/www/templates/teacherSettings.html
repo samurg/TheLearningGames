@@ -6,8 +6,9 @@
         <a ui-sref="teacherProfile" id="teacherSettings-button79" id="teacherSettings-btn79" class="button button-light  button-outline">{{ 'PROFILE' | translate }}</a>
         <button id="teacherSettings-button80" id="teacherSettings-btn80" class="button button-light  button-outline">{{ 'SETTINGS' | translate }}</button>
       </div>
+      <div class="spacer" class="spacer"></div>
     </div>
-	<h3>{{'LANGUAGES' | translate}}</h3>
+	<h3 class="teacherSettings-h3">{{'LANGUAGES' | translate}}</h3>
 	<div ng-controller="changeLanguageCtrl">
 		<ion-lis class="list-elements align-text-center">
 		  <ion-item ng-click="changeLanguage('es')" >
@@ -16,10 +17,11 @@
 		  <ion-item ng-click="changeLanguage('en')">
 			  {{ 'BUTTON_LANG_EN' | translate }} 
 		  </ion-item>
+            <ion-item ng-click="changeLanguage('it')">
+			  {{ 'BUTTON_LANG_IT' | translate }} 
+		  </ion-item>
 		</ion-list>
     </div>
-    
     <a ui-sref="login" id="teacherSettings-button81" id="teacherSettings-btn81" class="button button-assertive  button-block button-clear icon ion-chevron-right">&nbsp;{{ 'LOG_OUT' | translate }}</a>
-    
   </ion-content>
 </ion-view>
