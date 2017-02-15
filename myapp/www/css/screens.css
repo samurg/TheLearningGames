@@ -1,0 +1,821 @@
+/* ACHIEVEMENTS */
+
+.achievements-btn83{
+	font-weight:500;color:#FFFFFF;
+	font-size:20px;
+	border-radius:0px 0px 0px 0px;
+}
+.achievements-btn84{
+	color:#FFFFFF; 
+}
+.achievements-btn85{
+	color:#FFFFFF;
+}
+.achievements-btn86, .achievements-btn87, .achievements-btn88{
+	color:#FFFFFF;
+	font-size:11px;
+}
+
+.achievements-btn89{
+	 font-weight:500;
+	 color:#FFFFFF;
+	 font-size:14px;
+}
+.achievements-btn90{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.achievements-hdg13{
+	color:#FFFFFF;
+	text-align: center;
+}
+
+/* ADD ACHIEVEMENTS */
+
+.addAchievement{
+	background-color:#387EF5;
+}
+.addAchievemtn-hdg18{
+	color:#FFFFFF;
+	text-align:center;
+}
+.newAchievementBack{
+	background-color:#387EF5;
+}
+.newAchievementH3{
+	color:#FFFFFF;
+	text-align:center;
+}
+
+/* ADD BADGE */
+
+.pg25{
+	background-color:#387EF5;
+}
+.addBadge-hdg20{
+	color:#FFFFFF;
+	text-align:center;
+}
+
+.newBadgeH3{
+	color:#FFFFFF;
+	text-align:center;
+}
+
+/* ADD ITEM */
+
+.pg21{
+	background-color:#387EF5;
+}
+.addItem-hdg16{
+	color:#FFFFFF;text-align:center;
+} 
+.newItemBack{
+	background-color:#387EF5;
+}
+.newItemH3{
+	color:#FFFFFF;
+	text-align:center;
+}
+
+/* ADD STUDENT */
+
+.addStudent-btn132{
+	font-weight:500;
+}
+.addStudentBack{
+	background-color:#387EF5;
+}
+.addStudentH3{
+	color:#FFFFFF;
+	text-align:center;
+}
+
+/* ATTENDANCE */
+
+.attendance-btn33{
+	font-weight:500;
+	color:#FFFFFF;
+	font-size:20px;
+	border-radius:0px 0px 0px 0px;"
+}
+.attendance-btn34{
+	color:#FFFFFF;
+}
+.attendance-btn35{
+	color:#FFFFFF;
+}
+.attendance-btn13{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.attendance-btn14{
+	font-weight:500;
+	color:#FFFFFF;
+	font-size:14px;
+}
+.attendance-btn15{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.attendance-btn25{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.attendance-btn32{
+	color:#FFFFFF;font-size:11px;
+}
+.attendance-hdg3{
+	color:#FFFFFF;
+	text-align:center;
+}
+.attendance-btn123{
+	font-weight:500;
+}
+
+/* BADGES */
+
+.badges-btn94{
+	font-weight:500;
+	color:#FFFFFF;
+	font-size:20px;
+	border-radius:0px 0px 0px 0px;
+}
+.badges-btn95, .badges-btn96{
+	color:#FFFFFF;
+}
+.badges-btn97, .badges-btn98, .badges-btn99, .badges-btn101{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.badges-btn100{
+	 font-weight:500;
+	 color:#FFFFFF;
+	 font-size:14px;
+}
+.badges-hdg14{
+	color:#FFFFFF;
+	text-align:center;
+}
+
+
+/* EDIT TEAM */
+
+.editTeam-hdg23{
+	color:#FFFFFF;
+	text-align:center;
+}
+.div-1{
+	margin: 0px;
+	 line-height: 250px;
+	  background-color: rgb(232, 235, 239);
+	   text-align: center;
+}
+.icon-ion1{
+	font-size: 64px;
+	 color: rgb(136, 136, 136);
+	  vertical-align: middle;
+}
+.editTeam-btn125{
+	font-weight:500;
+}
+
+/* ITEMS */
+
+.items-btn45{
+	font-weight:500;
+	color:#FFFFFF;
+	font-size:20px;
+	border-radius:0px 0px 0px 0px;
+}
+.items-btn46{
+	color:#FFFFFF;
+}
+.items-btn47{
+	 color:#FFFFFF;
+}
+.items-btn48{
+	 color:#FFFFFF;font-size:11px;
+}
+.items-btn49{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.items-btn50{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.items-btn65{
+	font-weight:500;
+	color:#FFFFFF;
+	font-size:14px;
+}
+.items-btn66{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.items-hdg12{
+	color:#FFFFFF;
+	text-align:center;
+}   
+
+/* LOGIN */
+
+.pg5{
+	background-color:#387EF5;
+}
+
+.spacerLogin{
+	width: 300px; height: 40px;
+}
+
+.login-btn7{
+	font-weight:500;
+}
+.pipo{
+	display: block; width: 25% !important; height: auto;margin-left: auto; margin-right: auto;	
+}
+
+.login-btn6{
+	font-weight:500;
+}
+
+/* MISSIONS */
+
+.missions-btn105{
+	font-weight:500;
+	color:#FFFFFF;
+	font-size:20px;
+	border-radius:0px 0px 0px 0px;
+}
+.missions-btn106{
+	color:#FFFFFF;
+}
+.missions-btn107{
+	color:#FFFFFF;
+}
+.missions-btn108{
+	 color:#FFFFFF;
+	 font-size:11px;
+}
+.missions-btn109{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.missions-btn110{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.missions-btn111{
+	font-weight:500;color:#FFFFFF;font-size:11px;
+}
+.missions-btn112{
+	color:#FFFFFF;
+	font-size:14px;
+}
+.missions-hdg17{
+	color:#FFFFFF;text-align:center;
+}
+
+/* CLASS */
+
+.class-btn20{
+font-weight:500;
+color:#FFFFFF;font-size:20px;
+border-radius:0px 0px 0px 0px;
+}
+.class-btn21{
+	color:#FFFFFF;
+}
+.class-btn22{
+	color:#FFFFFF;
+}
+.class-btn26{
+	color:#FFFFFF;
+	font-size:15px;
+}
+.class-btn30{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.class-btn29{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.class-btn27{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.class-btn28{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.class-hdg2{
+	color:#FFFFFF;text-align:center;
+}
+.class-btn31{
+	font-weight:500;
+}
+.classH3{
+	color:#FFFFFF;text-align:center;
+}
+
+
+/* NEW CLASS */
+
+.pg10{
+	background-color:#387EF5;
+}
+.newClass-hdg10{
+	color:#FFFFFF;
+	text-align:center;
+}
+
+/* NEW MISSION */
+
+.pg27{
+	background-color:#387EF5;
+}
+.newMission-hdg21{
+	color:#FFFFFF;text-align:center;
+}
+.newMissionBack{
+	background-color:#387EF5;
+}
+.newMissionH3{
+	color:#FFFFFF;
+	text-align:center;
+}
+
+/* NEW STUDENT DIALOG */
+
+.pg15{
+	background-color:#387EF5;
+}
+.newStudentDialog-hdg9{
+	color:#FFFFFF;text-align:center;
+}
+.divnewStudentDialog{
+	margin: 0px;
+	 line-height: 250px;
+	 background-color: rgb(232, 235, 239);
+	 text-align: center;
+}
+.iconimage2{
+	font-size: 64px;
+	 color: rgb(136, 136, 136);
+	  vertical-align: middle;
+}
+.newStudentDialog-btn135{
+	font-weight:500;
+}
+.newStudentBack{
+	background-color:#387EF5;
+}
+.newStudentH3{
+	color:#FFFFFF;
+	text-align:center;
+}
+.imageNewStudent{
+	font-size: 64px;
+	color: rgb(136, 136, 136);
+	vertical-align: middle;
+}
+.newStudent-btn003{
+	font-weight:500;
+}
+.fondo{ background-color:#387EF5;}
+
+/* NEW TEAM */
+
+.pg16{
+	background-color:#387EF5;
+}
+.newTeam-hdg15{
+	color:#FFFFFF;
+	text-align:center;
+}
+.divnewTeam{
+margin: 0px;
+ line-height: 250px;
+ background-color: rgb(232, 235, 239);
+  text-align: center;
+}
+.iconImage3{
+	 font-size: 64px;
+	 color: rgb(136, 136, 136);
+	 vertical-align: middle;
+}
+.newTeam128{
+	font-weight:500;
+}
+
+
+/* RULES */
+
+.rules-btn57{
+	font-weight:500;
+	color:#FFFFFF;
+	font-size:20px;
+	border-radius:0px 0px 0px 0px;
+}
+.rules-btn58{
+	color:#FFFFFF;
+}
+.rules-btn59{
+	color:#FFFFFF;
+}
+.rules-btn60{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.rules-btn61{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.rules-btn62{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.rules-btn63{
+font-weight:500;
+color:#FFFFFF;
+font-size:14px;
+}
+.rules-btn64{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.rules-hdg11{
+	color:#FFFFFF;text-align:center;
+}
+.rules-btn71{
+	font-weight:500;
+}
+.rules-btn72{
+	font-weight:500;
+}
+.rules-btn73{
+	font-weight:500;
+}
+
+/* SECONDARY MENU */
+
+.secundaryMenu-hdg19{
+	color:#FFFFFF;text-align:center;
+}
+.secundaryMenu-hdg22{
+	 color:#FFFFFF;text-align:center;
+
+    
+/* SIGN UP */
+    
+.logoOwn{
+	display: block;
+	width: 20%;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+.signUp-btn9{
+	font-weight:500;
+}
+    
+/* STUDENT ACHIEVEMENTS */
+    
+.studentAchievements-btn163{
+	font-weight:500;
+	color:#FFFFFF;
+	border-radius:0px 0px 0px 0px;
+}
+.studentAchievements-btn164{
+	color:#FFFFFF;font-size:20px;
+}
+.studentAchievements-btn165{
+	color:#FFFFFF;
+}
+.studentAchievements-hdg27{
+	color:#FFFFFF;text-align:center;
+}
+
+/* STUDENT BADGES */
+    
+.studentBadges-btn167{
+	font-weight:500;
+	color:#FFFFFF;
+	border-radius:0px 0px 0px 0px;
+}
+.studentBadges-btn168{
+	color:#FFFFFF;
+}
+.studentBadges-btn169{
+	color:#FFFFFF;
+	font-size:20px;
+}
+.studentBadges-hdg28{
+	color:#FFFFFF;
+	text-align:center;
+}
+    
+/* STUDENT DIALOG */
+    
+.pg12{
+	background-color:#387EF5;
+}
+.studentDialog{
+	color:#FFFFFF;text-align:center;
+}
+.divstudentDialog{
+	margin: 0px;
+	line-height: 250px;
+	background-color: rgb(232, 235, 239);
+	text-align: center;
+}
+.iconImage32{
+	font-size: 64px;
+	color: rgb(136, 136, 136);
+	vertical-align: middle;
+}
+.studentDialog-btn119{
+	font-weight:500;
+}
+.studentDialog-btn120{
+	font-weight:500;
+}
+.studentDialogBack{
+	background-color:#387EF5;
+}
+.studentDialogH3{
+	color:#FFFFFF;
+	text-align:center;
+}
+.divstudentDialog{
+	margin: 0px;
+	 line-height: 250px;
+	 background-color: rgb(232, 235, 239);
+	 text-align: center;
+}
+.studentDialogIcon{
+	font-size: 64px;
+	color: rgb(136, 136, 136);
+	vertical-align: middle;
+}
+.studentDialog001{
+	font-weight:500;
+}
+.studentDialog002{
+	font-weight:500;
+}
+    
+/* STUDENT HOME */
+    
+.studentHome-btn131{
+	font-weight:500;color:#FFFFFF;font-size:20px;border-radius:0px 0px 0px 0px;
+}
+.studentHome-btn133{
+	color:#FFFFFF;
+}
+.studentHome-btn134{
+	color:#FFFFFF;
+}
+.studentHome-hdg25{
+	color:#FFFFFF;text-align:center;
+}
+.divStudentHome{
+	margin: 0px;
+	line-height: 250px;
+	background-color: rgb(232, 235, 239);
+	text-align: center;
+}
+.iconImage41{
+	font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;
+}
+.studentHome-btn162{
+	font-weight:500;
+	font-size:20px;
+}
+    
+/* TEACHER HOME */
+    
+.teacherHome-btn16{
+	font-weight:500;
+	color:#FFFFFF;
+	font-size:20px;
+	border-radius:0px 0px 0px 0px;
+}
+.teacherHome-btn17{
+	color:#FFFFFF;
+}
+.teacherHome-btn18{
+	color:#FFFFFF;
+}
+.teacherHome-hdg1{
+	color:#FFFFFF;text-align:center;
+}
+.teacherHome-btn12{
+	font-weight:500;
+}
+
+.teacherHomeH3{
+	color:#FFFFFF;
+	text-align:center;
+}
+.teacherHomeBack{
+	background-color:#387EF5;
+}
+    
+/* TEACHER PROFILE */
+
+.teacherProfile-btn74{
+	color:#FFFFFF;
+	border-radius:0px 0px 0px 0px;
+}
+.teacherProfile-btn75{
+	font-weight:500;
+	color:#FFFFFF;
+	font-size:20px;
+}
+.teacherProfile-btn76{
+	color:#FFFFFF;
+}
+.spacer{
+	width: 300px;
+	height: 10px;
+}
+.teacherProfile-btn77{
+	font-weight:500;
+}
+
+.teacherAvatar{
+	background-color: #387EF5;
+	border:0px;
+}
+
+.avatar{
+	display: block; width: 30%;height: auto;margin-left: auto; margin-right: auto; border-radius: 50%; border: 2px;
+}
+
+.inputLabelProfile {
+  color: #444;
+  font-size: 16px;
+  width: 100%
+}
+    
+/* TEACHER SETTINGS */
+    
+.teacherSettings-btn78{
+	color:#FFFFFF;
+	border-radius:0px 0px 0px 0px;
+}
+.teacherSettings-btn79{
+	color:#FFFFFF;
+}
+.teacherSettings-btn80{
+	font-weight:500;
+	color:#FFFFFF;
+	font-size:20px;
+}
+.spacer{
+	width: 300px;
+	height: 10px;
+}
+.teacherSettings-btn81{
+	font-weight:500;
+}
+.teacherSettings-h3{
+	color:#FFFFFF;
+	text-align:center;
+}
+    
+/* TEAM DIALOG */
+    
+.title{
+	background-color:#387EF5;
+}
+.teamDialog-hdg6{
+	color:#FFFFFF;
+	text-align:center;
+}
+.divteamDialog{
+	margin: 0px;
+	line-height: 250px;
+	background-color: rgb(232, 235, 239);
+	text-align: center;
+}
+.iconImage65{
+	font-size: 64px;
+	color: rgb(136, 136, 136);
+	vertical-align: middle;
+}
+.teamDialog-btn118{
+	font-weight:500;
+}
+.teamDialog-btn122{
+	font-weight:500;
+}
+.teamDialog-btn117{
+	color:#FFFFFF;
+}
+.teamDialogBack{
+	background-color:#387EF5;
+}
+.divteamDialog{
+	style="margin: 0px;
+	line-height: 250px;
+	background-color: rgb(232, 235, 239);
+	text-align: center;
+}
+.imageteamDialog{
+	font-size: 64px;
+	color: rgb(136, 136, 136);
+	vertical-align: middle;
+}
+.teamDialog-btn005{
+	font-weight:500;
+}
+.teamDialog-btn006{
+	font-weight:500;
+}
+.newTeamDialogBack{
+	background-color:#387EF5;
+}
+.newTeamDialogH3{
+	color:#FFFFFF;
+	text-align:center;
+}
+.newTeamDialogDiv{
+	margin: 0px;
+	line-height: 250px;
+	background-color: rgb(232, 235, 239);
+	text-align: center;
+}
+.imageNewTeamDialog{
+	font-size: 64px;
+	color:rgb(136, 136, 136);
+	vertical-align: middle;
+}
+.newTeamDialog-btn007{
+	font-weight:500;
+}
+
+/* TEAMS */
+    
+.teams-btn36{
+	font-weight:500;
+	color:#FFFFFF;
+	font-size:20px;
+	border-radius:0px 0px 0px 0px;
+}
+.teams-btn37{
+	color:#FFFFFF;
+}
+.teams-btn38{
+	color:#FFFFFF;
+}
+.teams-btn39{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.teams-btn40{
+	color:#FFFFFF;font-size:11px;
+}
+.teams-btn41{
+	font-weight:500;
+	color:#FFFFFF;
+	font-size:14px;
+}
+.teams-btn42{
+	color:#FFFFFF;
+	font-size:11px;
+}
+.teams-btn43{
+	color:#FFFFFF;font-size:11px;
+}
+.teams-hdg5{
+	color:#FFFFFF;
+	text-align:center;
+}
+.teams-btn44{
+	font-weight:500;
+}
+.editTeamBack{
+	background-color:#387EF5;
+}
+.editTeamH3{
+	color:#FFFFFF;
+	text-align:center;
+}
+.editTeamDiv{
+	margin: 0px;
+	line-height: 250px;
+	background-color: rgb(232, 235, 239);
+	text-align: center;
+}
+.editTeamImage{
+	font-size: 64px;
+	color: rgb(136, 136, 136);
+	vertical-align: middle;
+}
+.editTeam-btn011{
+	font-weight:500;
+}

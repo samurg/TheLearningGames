@@ -21,12 +21,10 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
   $scope.teacherForm = function(){
       $scope.loginType=true;
       $scope.loginType2=false;
-      $scope.clearForm2();
   }
   $scope.studentForm = function(){
       $scope.loginType=false;
       $scope.loginType2=true;
-      $scope.clearForm1();
   }
 
   $scope.getTeacher = function(email, password) {
@@ -34,8 +32,8 @@ function ($scope, $stateParams, $cookies, $http, Backand,$state) {
         .then(function (response) {
           if (response.data.length > 0) {
             $cookies.put('teacherId', response.data[0].id);
-            $cookies.put('teacherName', CryptoJS.AES.decrypt(response.data[0].name, email).toString(CryptoJS.enc.Utf8));
-            $cookies.put('teacherSurname', CryptoJS.AES.decrypt(response.data[0].surname, email).toString(CryptoJS.enc.Utf8));
+            $cookies.put('teacherName', CryptoJS.AES.decrypt(response.data[0].name, password).toString(CryptoJS.enc.Utf8));
+            $cookies.put('teacherSurname', CryptoJS.AES.decrypt(response.data[0].surname, password).toString(CryptoJS.enc.Utf8));
             $cookies.put('teacherAvatar', response.data[0].avatar);
             $cookies.put('teacherEmail', email);
             $cookies.put('teacherPassword', password);
@@ -101,8 +99,8 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
     }
 
     var teacher = {
-      "name" : CryptoJS.AES.encrypt(name,email).toString(),
-      "surname" : CryptoJS.AES.encrypt(surname,email).toString(),
+      "name" : CryptoJS.AES.encrypt(name,password).toString(),
+      "surname" : CryptoJS.AES.encrypt(surname,password).toString(),
       "email" : CryptoJS.SHA256(email).toString(),
       "password" : CryptoJS.SHA256(password).toString(),
       "avatar" : avatar
@@ -190,10 +188,9 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
             '<option>{classroom.name}</option>'+
           '</select>'+
         '</label>'+
-        '<div class="button-bar">'+
-          '<button class="button button-calm  button-block" ng-click="closeModalNewClass() ; clearForm()">{{ \'CANCEL\' | translate }}</button>'+
-          '<button class="button button-positive  button-block" ng-disabled="true"></button>'+
-          '<button class="button button-calm  button-block" ng-click="createClassroom(name) ; closeModalNewClass() ; clearForm()">{{ \'CREATE\' | translate }}</button>'+
+        '<div class="button-bar action_buttons">'+
+          '<button class="button button-calm  button-block" ng-click="; closeModalNewClass() ; clearForm()">{{ \'CANCEL\' | translate }}</button>'+
+          '<button class="button button-calm  button-block float_right" ng-click="createClassroom(name) ; ; closeModalNewClass()  ; clearForm()">{{ \'CREATE\' | translate }}</button>'+
         '</div>'+
       '</form>'+
     '</div>'+
@@ -382,9 +379,9 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
         '</select>'+
       '</label>'+
     '</form>'+
-    '<div class="button-bar">'+
+    '<div class="button-bar action_buttons">'+
       '<button class="button button-calm  button-block" ng-click="closeModalSecundary() ; clearFormModal()">{{ \'CANCEL\' | translate }}</button>'+
-      '<button class="button button-positive  button-block" ng-disabled="true"></button>'+
+      ''+
       '<button class="button button-calm  button-block" ng-click="closeModalSecundary() ; clearFormModal()">{{ \'ACCEPT\' | translate }}</button>'+
     '</div>'+
   '</ion-content>'+
@@ -488,20 +485,20 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     
     $scope.newStudentModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" class="fondo" >'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
-    '<h3 style="color:#FFFFFF;text-align:center;">{{ \'NEW_STUDENT\' | translate }}</h3>'+
+    '<h3>{{ \'NEW_STUDENT\' | translate }}</h3>'+
     '<div class="list-student list-elements">'+
       '<div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">'+
         '<i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>'+
       '</div>'+
       '<button style="font-weight:500;" class="button button-light  button-block button-outline">{{ \'TAKE_PICTURE\' | translate }}</button>'+
       '<form class="list">'+
-        '<div class="button-bar">'+
+        '<div class="button-bar action_buttons">'+
           '<button class="button button-calm  button-block" ng-click="closeModalNewStudentDialog() ; clearFormStudent()">{{ \'CANCEL\' | translate }}</button>'+
           '<button class="button button-calm  button-block" ng-click="createStudent(name, surname) ; closeModalNewStudentDialog() ; clearFormStudent()">{{ \'GENERATE\' | translate }}</button>'+
         '</div>'+
       '</form>'+
     '</div>'+
-    '<div class="list-team list-elements">'+
+    '<div class="list-team list-elements list-student">'+
       '<ion-list>'+
         '<form id="nameStudentForm" class="list">'+
           '<label class="item item-input">'+
@@ -612,12 +609,10 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
 function ($scope, $stateParams, $cookies) {
 }])
    
-.controller('attendanceCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('attendanceCtrl', ['$scope', '$stateParams', '$cookies', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $cookies, $http, Backand) {
-
-
+function ($scope, $stateParams, $cookies) {
   $scope.classroomName = $cookies.get('classroomName');
   $scope.classroomId = $cookies.get('classroomId');
   $scope.studentsAttendance = [];
@@ -909,45 +904,17 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
 
 }])
    
-.controller('teacherProfileCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', '$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('teacherProfileCtrl', ['$scope', '$stateParams', '$cookies', '$http', 'Backand', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $cookies, $http, Backand, $state) {
+function ($scope, $stateParams, $cookies, $http, Backand ) {
 
-  $scope.initData = function(){
-    $scope.teacherId = $cookies.get('teacherId');
-    $scope.teacherAvatar = $cookies.get('teacherAvatar');
-    $scope.teacherName = $cookies.get('teacherName');
-    $scope.teacherSurname = $cookies.get('teacherSurname');
-    $scope.teacherEmail = $cookies.get('teacherEmail');
-    $scope.teacherPassword = $cookies.get('teacherPassword');
-
-    //Getting all the inputs for change their placeholders
-    var input1 = document.getElementById ("inputName");
-    input1.placeholder = $scope.teacherName;
-
-    var input2 = document.getElementById ("inputSurname");
-    input2.placeholder = $scope.teacherSurname;
-
-    var input3 = document.getElementById ("inputEmail");
-    input3.placeholder = $scope.teacherEmail;
-
-    var input4 = document.getElementById ("inputPassword");
-    input4.placeholder = $scope.teacherPassword;
-
-    var input5 = document.getElementById ("inputRepeatpassword");
-    input5.placeholder = $scope.teacherPassword;
-
-    var input6 = document.getElementById ("inputAvatar");
-    input6.placeholder = $scope.teacherAvatar;
-  }
-  
-
-  $scope.clearForm  = function(){
-    var form = document.getElementById('teacherProfile-form1');
-    form.reset();
-    $state.go('teacherProfile', {teacherName: $scope.teacherName});
-  }
+  $scope.teacherId = $cookies.get('teacherId');
+  $scope.teacherAvatar = $cookies.get('teacherAvatar');
+  $scope.teacherName = $cookies.get('teacherName');
+  $scope.teacherSurname = $cookies.get('teacherSurname');
+  $scope.teacherEmail = $cookies.get('teacherEmail');
+  $scope.teacherPassword = $cookies.get('teacherPassword');
 
   $scope.getTeacherData = function() {
       $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'/'+$scope.teacherId)
@@ -956,9 +923,9 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
           $scope.teacherName = response.data[0].name;
           $scope.teacherSurname = response.data[0].surname;
           $scope.teacherEmail = response.data[0].email;
-          $scope.teacherPassword = response.data[0].password;
-          $cookies.put('teacherName', CryptoJS.AES.decrypt(response.data[0].name, email).toString(CryptoJS.enc.Utf8));
-          $cookies.put('teacherSurname', CryptoJS.AES.decrypt(response.data[0].surname, email).toString(CryptoJS.enc.Utf8));
+          $scope.teacherPassword = response.data[0].Avatar;
+          $cookies.put('teacherName', CryptoJS.AES.decrypt(response.data[0].name, password).toString(CryptoJS.enc.Utf8));
+          $cookies.put('teacherSurname', CryptoJS.AES.decrypt(response.data[0].surname, password).toString(CryptoJS.enc.Utf8));
           $cookies.put('teacherAvatar', response.data[0].Avatar);
         });
   }
@@ -993,8 +960,8 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
     }
 
     var teacher = {
-      "name" : CryptoJS.AES.encrypt(name,email).toString(),
-      "surname" : CryptoJS.AES.encrypt(surname,email).toString(),
+      "name" : CryptoJS.AES.encrypt(name,password).toString(),
+      "surname" : CryptoJS.AES.encrypt(surname,password).toString(),
       "email" : CryptoJS.SHA256(email).toString(),
       "password" : CryptoJS.SHA256(password).toString(),
       "avatar" : avatar
@@ -1004,11 +971,7 @@ function ($scope, $stateParams, $cookies, $http, Backand, $state) {
       .success(function(response) {
         $cookies.put('teacherEmail', email);
         $cookies.put('teacherPassword', password);
-        $cookies.put('teacherName', name);
-        $cookies.put('teacherSurname', surname);
-        $cookies.put('teacherAvatar', avatar);
         $scope.getTeacherData();
-        $scope.clearForm();
       })
 
   }
@@ -1035,10 +998,6 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
       var form = document.getElementById("itemDataForm");
       form.reset();
     }
-
-    $scope.classroomId = $cookies.get('classroomId');
-
-
     
     $scope.newItemModal = $ionicModal.fromTemplate('<ion-modal-view hide-nav-bar="true" style="background-color:#387EF5;">'+
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
@@ -1056,14 +1015,6 @@ function ($scope, $stateParams, $ionicModal, $cookies) {
         '<label class="item item-input list-elements">'+
           '<span class="input-label">{{ \'REQUIREMENTS\' | translate }}</span>'+
           '<input type="text" placeholder="{item.requirements}">'+
-        '</label>'+
-        '<label class="item item-input list-elements">'+
-          '<span class="input-label">{{ \'SCORE\' | translate }}</span>'+
-          '<input type="text" placeholder="{item.name}">'+
-        '</label>'+
-        '<label class="item item-input list-elements">'+
-          '<span class="input-label">{{ \'MAX_SCORE\' | translate }}</span>'+
-          '<input type="text" placeholder="{item.name}">'+
         '</label>'+
       '</ion-list>'+
     '</form>'+
@@ -1271,10 +1222,10 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
         '</label>'+
       '</ion-list>'+
     '</form>'+
-    '<div class="button-bar">'+
+    '<div class="button-bar action_buttons">'+
       '<button ng-click="closeModalNewMission() ; clearForm()" class="button button-calm  button-block">{{ \'CANCEL\' | translate }}</button>'+
-      '<button ng-disabled="true" class="button button-positive  button-block"></button>'+
-      '<button ng-click="closeModalNewMission() ; clearForm()" class="button button-calm  button-block">{{ \'ACCEPT\' | translate }}</button>'+
+      ''+
+      '<button ng-click="closeModalNewMission() ; clearForm()" class="button button-calm  button-block float_right">{{ \'ACCEPT\' | translate }}</button>'+
     '</div>'+
   '</ion-content>'+
 '</ion-modal-view>',  {
