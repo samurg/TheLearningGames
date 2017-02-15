@@ -129,14 +129,16 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
   '<ion-content padding="false" class="manual-ios-statusbar-padding">'+
     '<h3 id="attendance-heading3" class="attendance-hdg3">{{classroomName}}</h3>'+
     '<div class="date_controller">'+
-    '<button id="subtract_7">'+
-    '< 7d</button><button id="subtract_1">'+
-    '<1d</button><input id="date_input" type="text" value="{{date | date:\'dd-MM-yyyy\'}}"><button id="add_1">1d ></button><button id="add_7">7d >></button></div>'+
+    '<button id="subtract_7" ng-click="subtract7()">< 7d</button>'+
+    '<button id="subtract_1" ng-click="subtract1()"><1d</button>'+
+    '<input id="date_input" type="text" value="{{date | date:\'dd-MM-yyyy\'}}" readonly>'+
+    '<button id="add_1" ng-click="add1()">1d ></button>'+
+    '<button id="add_7" ng-click="add7()">7d >></button></div>'+
     '<ion-list id="attendance-list7" class="list-elements">'+
       '<ion-checkbox id="attendance-checkbox2" name="checkStudent" ng-checked="true" class="list-student" ng-repeat="student in studentsAttendance" ng-click="checkAttendance(student.hashCode)">{{student.name}}</ion-checkbox>'+
     '</ion-list>'+
     '<button id="attendance-button123" ng-click="closeModalAttendance()" id="attendance-btn123" class="button button-calm  button-block">{{ \'SET_ATTENDANCE_FOR_TODAY\' | translate }}</button>'+
-    '<button class="button button-calm  button-block" ng-click="closeAttedanceModal()">{{ \'CANCEL\' | translate }}</button>'+
+    '<button class="button button-calm  button-block" ng-click="closeModalAttendance()">{{ \'CANCEL\' | translate }}</button>'+
     '</ion-contentw>'+
     '</ion-modal-view>');
 
@@ -144,18 +146,43 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
         scope: $scope,
         animation: 'slide-in-up'
     })
-    $scope.closeAttedanceModal = function(){
-      $scope.attendanceModal.hide();
-        
-    }
 
     $scope.showModalAttendance = function(){
       $scope.classroomName = $cookies.get('classroomName');
-      $scope.date = Date.now();
       $scope.getStudentsAttendance();
       $scope.getStudents();
-      $scope.attendanceModal.show();  
+      $scope.attendanceModal.show(); 
+      $scope.date = Date.now(); 
     }
+
+    /* 
+      Functions dateTime --------------------------
+    */
+    $scope.subtract1 = function(){
+      console.log($scope.date);
+      $scope.date = ($scope.date - 86400000);
+      console.log($scope.date);
+    }
+
+    $scope.add1 = function(){
+      console.log($scope.date);
+      $scope.date = ($scope.date + 86400000); 
+      console.log($scope.date);
+    }
+
+    $scope.subtract7 = function(){
+      console.log($scope.date);
+      $scope.date = ($scope.date - (86400000*7));  
+      console.log($scope.date);
+    }
+
+    $scope.add7 = function(){
+      console.log($scope.date);
+      $scope.date = ($scope.date + (86400000*7));
+      console.log($scope.date);  
+    }
+
+    //---------------------------------------------
     
     $scope.closeModalAttendance = function(){
       $scope.attendanceModal.hide();
