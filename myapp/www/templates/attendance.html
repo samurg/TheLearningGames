@@ -1,4 +1,4 @@
-<ion-view title="Attendance" hide-nav-bar="true" id="page11" ng-init="getStudentsAttendance()">
+<ion-view title="Attendance" hide-nav-bar="true" id="page11">
   <ion-content padding="false" class="manual-ios-statusbar-padding">
     <div id="attendance-container12">
       <div id="attendance-button-bar8" class="button-bar margin-null">
@@ -14,11 +14,13 @@
       <a ui-sref="rules" id="attendance-button25" id="attendance-btn25" class="button button-light  button-outline">{{ 'RULES' | translate }}</a>
       <a ui-sref="missions" id="attendance-button32" id="attendance-btn32" class="button button-light  button-outline">{{ 'MISSIONS' | translate }}</a>
     </div>
-    <h3 id="attendance-heading3" class="attendance-hdg3">{{classroomName}}</h3>
+    <h3 id="attendance-heading3" class="attendance-hdg3">{classroom.name}</h3>
     <ion-list id="attendance-list7" class="list-elements">
-      <ion-checkbox id="attendance-checkbox2" name="checkStudent" ng-checked="true" class="list-student" ng-repeat=" student in studentsAttendance">{{student.name}}</ion-checkbox>
-      
+      <ion-checkbox id="attendance-checkbox2" name="checkStudent" ng-checked="true" class="list-student">{students.name}</ion-checkbox>
+      <ion-checkbox id="attendance-checkbox3" name="checkStudent" ng-checked="true" class="list-student">{students.name}</ion-checkbox>
     </ion-list>
+    <div class="button-bar action_buttons">
     <button id="attendance-button123" id="attendance-btn123" class="button button-calm  button-block">{{ 'SET_ATTENDANCE_FOR_TODAY' | translate }}</button>
+    </div>
   </ion-content>
 </ion-view>

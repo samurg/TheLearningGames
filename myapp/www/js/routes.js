@@ -107,7 +107,7 @@ angular.module('app.routes', [])
   })
 
   .state('teacherProfile', {
-    url: '/teacherProfile/{teacherName}',
+    url: '/teacherProfile',
     templateUrl: 'templates/teacherProfile.html',
     controller: 'teacherProfileCtrl'
   })
