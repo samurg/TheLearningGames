@@ -13,6 +13,10 @@
 .float_right{ float: right; }
 .float_left{ float: left; }
 
+.logout{ color: rgba(255, 255, 255, 0.8) !important; }
+
+.alumnoAvatar{ border-radius: 100%; width: 80%; margin: 5% 0 0 10%; }
+
 /*
  * LOGIN SCREEN
  */
@@ -69,6 +73,15 @@ h3{
 }
 
 /*
+ * TEACHERS
+ */
+#teacherHome-list16 ion-item{
+}
+#teacherHome-list16 ion-item span{
+	font-size: 30px;
+}
+
+/*
  * SETTINGS 
  */
 
@@ -97,3 +110,18 @@ h3{
 * RULES > ITEMS, MEDALS, ACHIEVEMENTS
 */
 #page20 .item, #page22 .item, #page24 .item{ width: 30% !important; }
+
+/*
+ * DATE CONTROLLER
+ */
+.date_controller{
+	
+}
+	.date_controller button{
+		width: 10%; float: left;
+		
+	}
+	.date_controller input{
+		width: 70%; float: left;
+		
+	}

@@ -12,7 +12,7 @@
     </div>
     <h3 id="studentHome-heading25" class="studentHome-hdg25">{student.name}</h3>
     <div id="studentHome-container28" class="list-student">
-      <img class="icon ion-image" class="list-student" src="{{studentAvatar}}"></img>
+      <img class="icon ion-image alumnoAvatar" class="list-student" src="{{studentAvatar}}"></img>
     </div>
     <form id="studentHome-form1" class="list list-elements list-student">
       <ion-list id="signUp-list2">
@@ -75,6 +75,8 @@
         </ion-option-button>
       </ion-item>
     </ion-list>
-    <a ui-sref="login" id="studentHome-button162" id="studentHome-btn162" class="button button-assertive  button-block button-clear icon ion-chevron-right">{{ 'LOG_OUT' | translate }} </a>
+    <div class="button-bar action_buttons">
+    <a ui-sref="login" id="studentHome-button162" id="studentHome-btn162" class="button button-assertive  button-block button-clear icon ion-ios-arrow-forward logout">{{ 'LOG_OUT' | translate }} </a>
+    </div>
   </ion-content>
 </ion-view>
