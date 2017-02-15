@@ -233,9 +233,9 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
             '<option>{classroom.name}</option>'+
           '</select>'+
         '</label>'+
-        '<div class="button-bar">'+
+        '<div class="button-bar action_buttons">'+
           '<button class="button button-calm  button-block" ng-click="closeModalNewClass() ; clearForm()">{{ \'CANCEL\' | translate }}</button>'+
-          '<button class="button button-positive  button-block" ng-disabled="true"></button>'+
+          ''+
           '<button class="button button-calm  button-block" ng-click="createClassroom(name) ; closeModalNewClass() ; clearForm()">{{ \'CREATE\' | translate }}</button>'+
         '</div>'+
       '</form>'+
@@ -480,9 +480,9 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
         '</select>'+
       '</label>'+
     '</form>'+
-    '<div class="button-bar">'+
+    '<div class="button-bar action_buttons">'+
       '<button class="button button-calm  button-block" ng-click="closeModalSecundary() ; clearFormModal()">{{ \'CANCEL\' | translate }}</button>'+
-      '<button class="button button-positive  button-block" ng-disabled="true"></button>'+
+      ''+
       '<button class="button button-calm  button-block" ng-click="closeModalSecundary() ; clearFormModal()">{{ \'ACCEPT\' | translate }}</button>'+
     '</div>'+
   '</ion-content>'+
@@ -1410,9 +1410,9 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
         '</label>'+
       '</ion-list>'+
     '</form>'+
-    '<div class="button-bar">'+
+    '<div class="button-bar action_buttons">'+
       '<button ng-click="closeModalNewMission() ; clearForm()" class="button button-calm  button-block">{{ \'CANCEL\' | translate }}</button>'+
-      '<button ng-disabled="true" class="button button-positive  button-block"></button>'+
+      ''+
       '<button ng-click="closeModalNewMission() ; clearForm()" class="button button-calm  button-block">{{ \'ACCEPT\' | translate }}</button>'+
     '</div>'+
   '</ion-content>'+
