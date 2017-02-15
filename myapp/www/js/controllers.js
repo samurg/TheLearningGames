@@ -162,11 +162,21 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
     }
 
     $scope.students = [];
-    
+    var teacherEmail = $cookies.get('teacherEmail');
     $scope.getStudents = function() {
       $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
-        .then(function (response) {
-          $scope.students = response.data;
+        .success(function (response) {
+          for(var i=0; i<response.length; i++){
+              var teacherStudent = { 
+                "name" : CryptoJS.AES.decrypt(response[i].name, teacherEmail).toString(CryptoJS.enc.Utf8),
+                "surname" : CryptoJS.AES.decrypt(response[i].surname, teacherEmail).toString(CryptoJS.enc.Utf8),
+                "classroom" : response[i].classroom,
+                "hashCode" : response[i].hashCode,  
+                "avatar" : response[i].avatar
+              }
+              $scope.students.push(teacherStudent);
+            }
+        
         });
     }
 
@@ -263,12 +273,23 @@ function ($scope, $stateParams, $ionicModal, $http, Backand, $cookies) {
      $scope.studentsAttendance = [];
   var checked = [];
     $scope.getStudentsAttendance = function() {
+      var teacherEmail = $cookies.get('teacherEmail');
       checked = [];
       $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
-        .then(function (response) {
-          $scope.studentsAttendance = response.data;
+        .success(function (response) {
+          for(var i=0; i<response.length; i++){
+              var teacherStudent = { 
+                "name" : CryptoJS.AES.decrypt(response[i].name, teacherEmail).toString(CryptoJS.enc.Utf8),
+                "surname" : CryptoJS.AES.decrypt(response[i].surname, teacherEmail).toString(CryptoJS.enc.Utf8),
+                "classroom" : response[i].classroom,
+                "hashCode" : response[i].hashCode,  
+                "avatar" : response[i].avatar
+              }
+              $scope.studentsAttendance.push(teacherStudent);
+            }
+          
           for(var i = 0; i< $scope.studentsAttendance.length; i++){
-            checked.push(response.data[i].hashCode);
+            checked.push(response[i].hashCode);
           }
           $cookies.put('studentsAttendance',response.data);
         });
@@ -537,19 +558,30 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     $scope.students = [];
     
     $scope.getStudents = function() {
+      var teacherEmail = $cookies.get('teacherEmail');
       $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
-        .then(function (response) {
-          $scope.students = response.data;
+        .success(function (response) {
+          for(var i=0; i<response.length; i++){
+              var teacherStudent = { 
+                "name" : CryptoJS.AES.decrypt(response[i].name, teacherEmail).toString(CryptoJS.enc.Utf8),
+                "surname" : CryptoJS.AES.decrypt(response[i].surname, teacherEmail).toString(CryptoJS.enc.Utf8),
+                "classroom" : response[i].classroom,
+                "hashCode" : response[i].hashCode,  
+                "avatar" : response[i].avatar
+              }
+              $scope.students.push(teacherStudent);
+            }
         });
     }
 
     $scope.createStudent = function(name, surname) {
+      var teacherEmail = $cookies.get('teacherEmail');
       var a = CryptoJS.SHA1($scope.studentName + $scope.classroomId + Date.now().toString()).toString();
       var hash = a.substr(0, 10).toUpperCase();
 
       var teacherStudent = { 
-        "name" : name,
-        "surname" : surname,
+        "name" : CryptoJS.AES.encrypt(name,teacherEmail).toString(),
+        "surname" : CryptoJS.AES.encrypt(surname,teacherEmail).toString(),
         "classroom" : $scope.classroomId,
         "hashCode" : hash,
         "avatar" : 'https://easyeda.com/assets/static/images/avatar-default.png'
@@ -707,9 +739,19 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     $scope.students = [];
     
     $scope.getStudents = function() {
+      var teacherEmail = $cookies.get('teacherEmail');
       $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
-        .then(function (response) {
-          $scope.students = response.data;
+        .success(function (response) {
+          for(var i=0; i<response.length; i++){
+              var teacherStudent = { 
+                "name" : CryptoJS.AES.decrypt(response[i].name, teacherEmail).toString(CryptoJS.enc.Utf8),
+                "surname" : CryptoJS.AES.decrypt(response[i].surname, teacherEmail).toString(CryptoJS.enc.Utf8),
+                "classroom" : response[i].classroom,
+                "hashCode" : response[i].hashCode,  
+                "avatar" : response[i].avatar
+              }
+              $scope.students.push(teacherStudent);
+            }
         });
     }
 
@@ -905,9 +947,19 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     $scope.students = [];
     
     $scope.getStudents = function() {
+      var teacherEmail = $cookies.get('teacherEmail');
       $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
-        .then(function (response) {
-          $scope.students = response.data;
+        .success(function (response) {
+          for(var i=0; i<response.length; i++){
+              var teacherStudent = { 
+                "name" : CryptoJS.AES.decrypt(response[i].name, teacherEmail).toString(CryptoJS.enc.Utf8),
+                "surname" : CryptoJS.AES.decrypt(response[i].surname, teacherEmail).toString(CryptoJS.enc.Utf8),
+                "classroom" : response[i].classroom,
+                "hashCode" : response[i].hashCode,  
+                "avatar" : response[i].avatar
+              }
+              $scope.students.push(teacherStudent);
+            }
         });
     }
 
@@ -1238,9 +1290,19 @@ function ($scope, $stateParams, $ionicModal, $cookies, $http, Backand) {
     $scope.students = [];
     
     $scope.getStudents = function() {
+      var teacherEmail = $cookies.get('teacherEmail');
       $http.get(Backand.getApiUrl()+'/1/query/data/getStudents'+'?parameters={ "classroomId" : \"'+$scope.classroomId+'\"}')
-        .then(function (response) {
-          $scope.students = response.data;
+        .success(function (response) {
+          for(var i=0; i<response.length; i++){
+              var teacherStudent = { 
+                "name" : CryptoJS.AES.decrypt(response[i].name, teacherEmail).toString(CryptoJS.enc.Utf8),
+                "surname" : CryptoJS.AES.decrypt(response[i].surname, teacherEmail).toString(CryptoJS.enc.Utf8),
+                "classroom" : response[i].classroom,
+                "hashCode" : response[i].hashCode,  
+                "avatar" : response[i].avatar
+              }
+              $scope.students.push(teacherStudent);
+            }
         });
     }
 
