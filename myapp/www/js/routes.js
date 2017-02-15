@@ -1,4 +1,4 @@
-angular.module('app.routes', [])
+angular.module('app.routes', []) 
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -27,7 +27,7 @@ angular.module('app.routes', [])
   })
 
   .state('studentHome', {
-    url: '/studentHome',
+    url: '/studentHome/{studentFullName}',
     templateUrl: 'templates/studentHome.html',
     controller: 'studentHomeCtrl'
   })
